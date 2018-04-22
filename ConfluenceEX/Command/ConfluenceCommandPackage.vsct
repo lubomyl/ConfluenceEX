@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <Extern href="stdidcmd.h" />
+  <Extern href="vsshlids.h" />
+
+  <Commands package="guidConfluencePackage">
+
+    <Groups>
+      <Group guid="guidConfluenceMenuGroup" id="ConfluenceMenuGroup" priority="0x000">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_VIEW" />
+      </Group>
+    </Groups>
+
+    <Buttons>
+      <Button guid="guidConfluenceCommand" id="ConfluenceCommand" priority="0x0100" type="Button">
+        <Parent guid="guidConfluenceMenuGroup" id="ConfluenceMenuGroup" />
+        <Strings>
+          <ButtonText>Confluence</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+
+  </Commands>
+
+  <Symbols>
+    <GuidSymbol name="guidConfluencePackage" value="{1b707c1d-1af7-4e9e-8efb-6af8e4d465b7}" />
+
+    <GuidSymbol name="guidConfluenceMenuGroup" value="{199a9e3d-1eb2-44c8-84b7-d1f8a001eb19}">
+      <IDSymbol name="ConfluenceMenuGroup" value="0x1000" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidConfluenceCommand" value="{41B9DDCE-7D88-4F3B-828B-B94CB6BCD659}">
+      <IDSymbol name="ConfluenceCommand" value="0x0101" />
+    </GuidSymbol>
+
+  </Symbols>
+</CommandTable>
