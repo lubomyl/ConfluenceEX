@@ -6,6 +6,7 @@ using System.ComponentModel.Design;
 using Microsoft.VisualStudio.Shell;
 using ConfluenceEX.Main;
 using System;
+using System.Collections.ObjectModel;
 
 namespace ConfluenceEX.ViewModel
 {
@@ -18,6 +19,8 @@ namespace ConfluenceEX.ViewModel
 
         private Content _content;
 
+        public ObservableCollection<Content> ContentList { get; private set; }
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -26,20 +29,34 @@ namespace ConfluenceEX.ViewModel
             _contentService = new ContentService();
             _content = _contentService.GetContentById(CONTENT_ID);
 
-           
+            this.ContentList = new ObservableCollection<Content>();
+            this.ContentList.Add(_content);
 
             OleMenuCommandService service = ConfluenceCommandPackage.Mcs;
-            CommandID toolbarMenuTestCommandID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand1Id);
-            MenuCommand onToolbarMenuClickTest = new MenuCommand(TestOnPropertyChanged, toolbarMenuTestCommandID);
 
-            MenuCommand command = service.FindCommand(new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand1Id));
+            CommandID toolbarMenuCommand1ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand1Id);
+            CommandID toolbarMenuCommand2ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand2Id);
 
-            service.AddCommand(onToolbarMenuClickTest);
+            MenuCommand onToolbarMenuCommand1Click = new MenuCommand(TestOnPropertyChanged, toolbarMenuCommand1ID);
+            MenuCommand onToolbarMenuCommand2Click = new MenuCommand(TestOnCollectionAdd, toolbarMenuCommand2ID);
+
+            service.AddCommand(onToolbarMenuCommand1Click);
+            service.AddCommand(onToolbarMenuCommand2Click);
         }
 
         private void TestOnPropertyChanged(object sender, EventArgs e)
         {
-            Title = "Test OnPropertyChanged";
+            Random random = new Random();
+
+            Title = "Nový titul" + random.Next();
+        }
+
+        private void TestOnCollectionAdd(object sender, EventArgs e)
+        {
+            Content cnt = new Content();
+            cnt.Title = "TEST";
+
+            ContentList.Add(cnt);
         }
 
         public Content Content
