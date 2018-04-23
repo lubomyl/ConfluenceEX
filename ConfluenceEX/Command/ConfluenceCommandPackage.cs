@@ -39,18 +39,19 @@ namespace ConfluenceEX
     [PackageRegistration(UseManagedResourcesOnly = true)]
     [InstalledProductRegistration("#1110", "#1112", "1.0", IconResourceID = 1400)] // Info on this package for Help/About
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [Guid(ConfluenceCommandPackage.PackageGuidString)]
+    [Guid(Guids.guidConfluencePackageString)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
     [ProvideToolWindow(typeof(ContentListToolWindow), Style = VsDockStyle.Tabbed, Window = "3ae79031-e1bc-11d0-8f78-00a0c9110057")]
     public sealed class ConfluenceCommandPackage : Package
     {
-        /// <summary>
-        /// ConfluenceCommandPackage GUID string.
-        /// </summary>
-        public const string PackageGuidString = "1b707c1d-1af7-4e9e-8efb-6af8e4d465b7";
 
-        public const int CommandId = 0x0101;
+        private static OleMenuCommandService _mcs;
 
+        public static OleMenuCommandService Mcs
+        {
+            get { return _mcs; }
+            private set { _mcs = value; }
+        }
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfluenceCommand"/> class.
         /// </summary>
@@ -84,14 +85,16 @@ namespace ConfluenceEX
             base.Initialize();
 
             // Add our command handlers for menu (commands must exist in the .vsct file)
-            OleMenuCommandService mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
-            if (null != mcs)
+            _mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            if (null != _mcs)
             {
                 // Create the command for the tool window
-                CommandID menuCommandID = new CommandID(Guids.guidConfluenceCmdSet, CommandId);
-                MenuCommand menuToolWin = new MenuCommand(ShowContentListToolWindow, menuCommandID);
-                mcs.AddCommand(menuToolWin);
-            }
+                CommandID menuCommandID = new CommandID(Guids.guidConfluenceCommand, Guids.ConfluenceCommandId);
+
+                MenuCommand onMenuCommandClickShowToolWindow = new MenuCommand(ShowContentListToolWindow, menuCommandID);
+                
+                _mcs.AddCommand(onMenuCommandClickShowToolWindow);
+               }
         }
 
         #endregion

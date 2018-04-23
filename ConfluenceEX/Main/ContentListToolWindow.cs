@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Shell;
 using ConfluenceEX.Main;
 using ConfluenceEX.View;
+using System.ComponentModel.Design;
 
 namespace ConfluenceEX
 {
@@ -21,6 +22,7 @@ namespace ConfluenceEX
 
             _view = new ContentListView();
             base.Content = _view;
+            this.ToolBar = new CommandID(Guids.guidConfluencePackage, Guids.ConfluenceToolbar);
         }
 
         protected override void Dispose(bool disposing)
