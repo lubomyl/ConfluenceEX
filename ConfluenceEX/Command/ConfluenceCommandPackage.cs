@@ -44,8 +44,6 @@ namespace ConfluenceEX
     [ProvideToolWindow(typeof(ContentListToolWindow), Style = VsDockStyle.Tabbed, Window = "3ae79031-e1bc-11d0-8f78-00a0c9110057")]
     public sealed class ConfluenceCommandPackage : Package
     {
-        public const int CommandId = 0x0101;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfluenceCommand"/> class.
         /// </summary>
@@ -67,6 +65,11 @@ namespace ConfluenceEX
             ErrorHandler.ThrowOnFailure(windowFrame.Show());
         }
 
+        private void TestOnPropertyChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine("Test button clicked.");
+        }
+
         #region Package Members
 
         /// <summary>
@@ -83,9 +86,14 @@ namespace ConfluenceEX
             if (null != mcs)
             {
                 // Create the command for the tool window
-                CommandID menuCommandID = new CommandID(Guids.guidConfluenceCommand, CommandId);
-                MenuCommand menuToolWin = new MenuCommand(ShowContentListToolWindow, menuCommandID);
-                mcs.AddCommand(menuToolWin);
+                CommandID menuCommandID = new CommandID(Guids.guidConfluenceCommand, Guids.ConfluenceCommandId);
+                CommandID toolbarMenuTestCommandID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand1Id);
+
+                MenuCommand onMenuCommandClickShowToolWindow = new MenuCommand(ShowContentListToolWindow, menuCommandID);
+                MenuCommand onToolbarMenuClickTest = new MenuCommand(TestOnPropertyChanged, toolbarMenuTestCommandID);
+
+                mcs.AddCommand(onMenuCommandClickShowToolWindow);
+                mcs.AddCommand(onToolbarMenuClickTest);
             }
         }
 

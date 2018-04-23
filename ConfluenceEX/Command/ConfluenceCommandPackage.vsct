@@ -23,7 +23,6 @@
       <Group guid="guidConfluencePackage" id="ConfluenceToolbarGroup" priority="0x0000">
         <Parent guid="guidConfluencePackage" id="ConfluenceToolbar" />
       </Group>
-
     </Groups>
 
     <Buttons>
@@ -40,6 +39,14 @@
           <ButtonText>Confluence</ButtonText>
         </Strings>
       </Button>
+      <Button guid="guidConfluenceToolbarMenu" id="ToolbarCommand1" priority="0x0000" type="Button" >
+        <Parent guid="guidConfluencePackage" id="ConfluenceToolbarGroup" />
+        <CommandFlag>IconAndText</CommandFlag>
+        <Strings>
+          <ButtonText>TestOnPropertyChanged</ButtonText>
+          <CommandName>Test</CommandName>
+        </Strings>
+      </Button>
     </Buttons>
 
   </Commands>
@@ -48,6 +55,10 @@
     <GuidSymbol name="guidConfluencePackage" value="{1b707c1d-1af7-4e9e-8efb-6af8e4d465b7}">
       <IDSymbol name="ConfluenceToolbar" value="0x1000" />
       <IDSymbol name="ConfluenceToolbarGroup" value="0x1050" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidConfluenceToolbarMenu" value="{1E127E55-FDD7-4091-AA9F-AD0465FAF33F}">
+      <IDSymbol name="ToolbarCommand1" value="0x0130" />
     </GuidSymbol>
 
     <GuidSymbol name="guidConfluenceMenuGroup" value="{199a9e3d-1eb2-44c8-84b7-d1f8a001eb19}">
