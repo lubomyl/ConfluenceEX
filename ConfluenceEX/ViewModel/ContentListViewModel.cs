@@ -30,6 +30,7 @@ namespace ConfluenceEX.ViewModel
             _content = _contentService.GetContentById(CONTENT_ID);
 
             this.ContentList = new ObservableCollection<Content>();
+
             this.ContentList.Add(_content);
 
             OleMenuCommandService service = ConfluenceCommandPackage.Mcs;
@@ -54,10 +55,14 @@ namespace ConfluenceEX.ViewModel
         private void TestOnCollectionAdd(object sender, EventArgs e)
         {
             Content cnt = new Content();
-            cnt.Title = "TEST";
+            Random random = new Random();
+
+            cnt.Title = "Nový titul" + random.Next();
 
             ContentList.Add(cnt);
         }
+
+        #region ContentListViewModel Members
 
         public Content Content
         {
@@ -77,5 +82,7 @@ namespace ConfluenceEX.ViewModel
                 OnPropertyChanged("Title");
             }
         }
+
+        #endregion
     }
 }
