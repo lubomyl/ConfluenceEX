@@ -3,9 +3,14 @@
 Visual Studio extension integrating Atlassian Confluence.
 
 ##### How to debug
-Mark `ConfluenceEX` as StartUp Project  
-Set Debug mode  
-Build&Start  
+- Mark `ConfluenceEX` as StartUp Project  
+- Set Debug mode  
+- In order to load project as VSPackage in Experimental instance of VS follow [CodeProject](https://www.codeproject.com/Tips/832362/Resetting-the-Visual-Studio-Experimental-Instance) or do following:  
+  1. Right-click on `ConfluenceEX project|Properties`
+  2. Select `Debug` bookmark
+  3. As external program navigate to: `"MicrosoftVS installation location"\Common7\IDE\devenv.exe`
+  4. As command line argument on  start-up add `/RootSuffix Exp`
+- Build&Start  
 
 ##### What does it demonstrate?
 REST Client integrated into ToolWindow  
