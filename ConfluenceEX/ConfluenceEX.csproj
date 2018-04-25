@@ -65,7 +65,7 @@
     <Compile Include="Main\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Main\ContentListToolWindow.cs" />
+    <Compile Include="Main\ConfluenceToolWindow.cs" />
     <Compile Include="Main\Guids.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

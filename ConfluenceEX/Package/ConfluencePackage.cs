@@ -41,7 +41,7 @@ namespace ConfluenceEX
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(Guids.guidConfluencePackageString)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
-    [ProvideToolWindow(typeof(ContentListToolWindow), Style = VsDockStyle.Tabbed, Window = "3ae79031-e1bc-11d0-8f78-00a0c9110057")]
+    [ProvideToolWindow(typeof(ConfluenceToolWindow))]
     public sealed class ConfluenceCommandPackage : Package
     {
 
@@ -68,7 +68,7 @@ namespace ConfluenceEX
             // Get the instance number 0 of this tool window. This window is single instance so this instance
             // is actually the only one.
             // The last flag is set to true so that if the tool window does not exists it will be created.
-            ToolWindowPane window = this.FindToolWindow(typeof(ContentListToolWindow), 0, true);
+            ToolWindowPane window = this.FindToolWindow(typeof(ConfluenceToolWindow), 0, true);
             IVsWindowFrame windowFrame = (IVsWindowFrame)window.Frame;
             ErrorHandler.ThrowOnFailure(windowFrame.Show());
         }

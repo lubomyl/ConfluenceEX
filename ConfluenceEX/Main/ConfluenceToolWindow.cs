@@ -8,15 +8,15 @@ using System.ComponentModel.Design;
 namespace ConfluenceEX
 {
 
-    [Guid(Guids.guidContentListToolWindow)]
-    public class ContentListToolWindow : ToolWindowPane
+    [Guid(Guids.guidConfluenceToolWindow)]
+    public class ConfluenceToolWindow : ToolWindowPane
     {
         private readonly ContentListView _view;
 
         /// <summary>
         /// Standard constructor for the tool window.
         /// </summary>
-        public ContentListToolWindow() : base(null)
+        public ConfluenceToolWindow() : base(null)
         {
             this.Caption = Resources.ConflueceToolWindowTitle;
 
