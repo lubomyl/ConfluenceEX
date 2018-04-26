@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.Shell;
 using ConfluenceEX.Main;
 using ConfluenceEX.View;
 using System.ComponentModel.Design;
+using ConfluenceEX.ViewModel;
 
 namespace ConfluenceEX
 {
@@ -11,7 +12,8 @@ namespace ConfluenceEX
     [Guid(Guids.guidConfluenceToolWindow)]
     public class ConfluenceToolWindow : ToolWindowPane
     {
-        private readonly ContentListView _view;
+        private readonly object _view;
+        private NavigationViewModel _navigation { get; set; }
 
         /// <summary>
         /// Standard constructor for the tool window.
@@ -20,14 +22,24 @@ namespace ConfluenceEX
         {
             this.Caption = Resources.ConflueceToolWindowTitle;
 
-            _view = new ContentListView();
+            this._navigation = new NavigationViewModel();
+            this._navigation.ShowContent();
+
+            this._view = new ConfluenceToolWindowNavigator(this._navigation);
             base.Content = _view;
+
             this.ToolBar = new CommandID(Guids.guidConfluencePackage, Guids.ConfluenceToolbar);
         }
 
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
+        }
+
+        public NavigationViewModel Navigation
+        {
+            get { return this._navigation; }
+            set { this._navigation = value; }
         }
     }
 }
