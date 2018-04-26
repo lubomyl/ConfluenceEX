@@ -22,7 +22,7 @@ namespace ConfluenceEX
         {
             this.Caption = Resources.ConflueceToolWindowTitle;
 
-            this._navigation = new NavigationViewModel();
+            this._navigation = new NavigationViewModel(this);
             this._navigation.ShowContent();
 
             this._view = new ConfluenceToolWindowNavigator(this._navigation);

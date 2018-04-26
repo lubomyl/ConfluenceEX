@@ -11,6 +11,24 @@ namespace ConfluenceEX.ViewModel
     {
 
         private object _selectedView;
+        private ConfluenceToolWindow _parent;
+
+        public NavigationViewModel(ConfluenceToolWindow parent)
+        {
+            this._parent = parent;
+        }
+
+        public void ShowContent()
+        {
+            _parent.Caption = "Confluence";
+            SelectedView = new ContentListView();
+        }
+
+        public void ShowTest()
+        {
+            _parent.Caption = "Confluence - Connect";
+            SelectedView = new TestView();
+        }
 
         public object SelectedView
         {
@@ -20,20 +38,6 @@ namespace ConfluenceEX.ViewModel
                 _selectedView = value;
                 OnPropertyChanged("SelectedView");
             }
-        }
-
-        public NavigationViewModel()
-        { 
-        }
-
-        public void ShowContent()
-        {
-            SelectedView = new ContentListView();
-        }
-
-        public void ShowTest()
-        {
-            SelectedView = new TestView();
         }
 
     }
