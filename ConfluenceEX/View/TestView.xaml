@@ -4,9 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ConfluenceEX.View"
+             xmlns:vsp="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.14.0"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBlock Text="TEST"/>
+    <Grid Margin="10">
+        <TextBlock Text="TEST" Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}"/>
     </Grid>
+    
+    
 </UserControl>

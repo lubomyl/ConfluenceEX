@@ -43,6 +43,7 @@
         <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
           <CommandName>Home</CommandName>
+          <ButtonText>Home</ButtonText>
         </Strings>
       </Button>
       <Button guid="guidConfluenceToolbarMenu" id="ToolbarCommand1" priority="0x0000" type="Button" >
@@ -71,6 +72,7 @@
         <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
           <CommandName>Connect</CommandName>
+          <ButtonText>Connect</ButtonText>
         </Strings>
       </Button>
     </Buttons>
