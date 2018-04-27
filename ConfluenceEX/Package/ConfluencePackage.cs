@@ -73,11 +73,18 @@ namespace ConfluenceEX
             ErrorHandler.ThrowOnFailure(windowFrame.Show());
         }
 
-        private void ChangeContent(object sender, EventArgs e)
+        private void ChangeContentTest(object sender, EventArgs e)
         {
             ConfluenceToolWindow toolWindow = (ConfluenceToolWindow) this.FindToolWindow(typeof(ConfluenceToolWindow), 0, false);
 
             toolWindow.Navigation.ShowTest();
+        }
+
+        private void ChangeContentHome(object sender, EventArgs e)
+        {
+            ConfluenceToolWindow toolWindow = (ConfluenceToolWindow)this.FindToolWindow(typeof(ConfluenceToolWindow), 0, false);
+
+            toolWindow.Navigation.ShowContent();
         }
 
 
@@ -97,12 +104,15 @@ namespace ConfluenceEX
             {
                 CommandID menuCommandID = new CommandID(Guids.guidConfluenceCommand, Guids.ConfluenceCommandId);
                 CommandID toolbarMenuCommand3ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand3Id);
+                CommandID toolbarMenuCommandHomeID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandHome);
 
                 MenuCommand onMenuCommandClickShowToolWindow = new MenuCommand(ShowContentListToolWindow, menuCommandID);
-                MenuCommand onToolbarMenuCommand3Click = new MenuCommand(ChangeContent, toolbarMenuCommand3ID);
+                MenuCommand onToolbarMenuCommand3Click = new MenuCommand(ChangeContentTest, toolbarMenuCommand3ID);
+                MenuCommand onToolbarMenuCommandHomeClick = new MenuCommand(ChangeContentHome, toolbarMenuCommandHomeID);
 
                 _mcs.AddCommand(onMenuCommandClickShowToolWindow);
                 _mcs.AddCommand(onToolbarMenuCommand3Click);
+                _mcs.AddCommand(onToolbarMenuCommandHomeClick);
             }
         }
 

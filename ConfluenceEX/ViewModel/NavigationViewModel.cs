@@ -13,21 +13,26 @@ namespace ConfluenceEX.ViewModel
         private object _selectedView;
         private ConfluenceToolWindow _parent;
 
+        private ContentListView _contentListView;
+        private TestView _testView;
+
         public NavigationViewModel(ConfluenceToolWindow parent)
         {
             this._parent = parent;
+            this._contentListView = new ContentListView();
+            this._testView = new TestView();
         }
 
         public void ShowContent()
         {
             _parent.Caption = "Confluence";
-            SelectedView = new ContentListView();
+            SelectedView = _contentListView;
         }
 
         public void ShowTest()
         {
             _parent.Caption = "Confluence - Connect";
-            SelectedView = new TestView();
+            SelectedView = _testView;
         }
 
         public object SelectedView

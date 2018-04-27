@@ -35,6 +35,14 @@ namespace ConfluenceEX.ViewModel
 
             OleMenuCommandService service = ConfluencePackage.Mcs;
 
+            if (service.FindCommand(new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand1Id)) == null)
+            {
+                InitializeCommands(service);
+            }
+        }
+
+        private void InitializeCommands(OleMenuCommandService service)
+        {
             if (service != null)
             {
                 CommandID toolbarMenuCommand1ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand1Id);
