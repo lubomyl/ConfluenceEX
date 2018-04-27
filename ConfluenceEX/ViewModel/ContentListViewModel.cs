@@ -33,16 +33,27 @@ namespace ConfluenceEX.ViewModel
 
             this.ContentList.Add(_content);
 
-            OleMenuCommandService service = ConfluenceCommandPackage.Mcs;
+            OleMenuCommandService service = ConfluencePackage.Mcs;
 
-            CommandID toolbarMenuCommand1ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand1Id);
-            CommandID toolbarMenuCommand2ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand2Id);
+            if (service.FindCommand(new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand1Id)) == null)
+            {
+                InitializeCommands(service);
+            }
+        }
 
-            MenuCommand onToolbarMenuCommand1Click = new MenuCommand(TestOnPropertyChanged, toolbarMenuCommand1ID);
-            MenuCommand onToolbarMenuCommand2Click = new MenuCommand(TestOnCollectionAdd, toolbarMenuCommand2ID);
+        private void InitializeCommands(OleMenuCommandService service)
+        {
+            if (service != null)
+            {
+                CommandID toolbarMenuCommand1ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand1Id);
+                CommandID toolbarMenuCommand2ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand2Id);
 
-            service.AddCommand(onToolbarMenuCommand1Click);
-            service.AddCommand(onToolbarMenuCommand2Click);
+                MenuCommand onToolbarMenuCommand1Click = new MenuCommand(TestOnPropertyChanged, toolbarMenuCommand1ID);
+                MenuCommand onToolbarMenuCommand2Click = new MenuCommand(TestOnCollectionAdd, toolbarMenuCommand2ID);
+
+                service.AddCommand(onToolbarMenuCommand1Click);
+                service.AddCommand(onToolbarMenuCommand2Click);
+            }
         }
 
         private void TestOnPropertyChanged(object sender, EventArgs e)

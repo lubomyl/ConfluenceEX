@@ -16,6 +16,8 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.Win32;
 using ConfluenceEX.Main;
+using ConfluenceEX.View;
+using ConfluenceEX.ViewModel;
 
 namespace ConfluenceEX
 {
@@ -42,7 +44,7 @@ namespace ConfluenceEX
     [Guid(Guids.guidConfluencePackageString)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
     [ProvideToolWindow(typeof(ConfluenceToolWindow))]
-    public sealed class ConfluenceCommandPackage : Package
+    public sealed class ConfluencePackage : Package
     {
 
         private static OleMenuCommandService _mcs;
@@ -55,7 +57,7 @@ namespace ConfluenceEX
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfluenceCommand"/> class.
         /// </summary>
-        public ConfluenceCommandPackage()
+        public ConfluencePackage()
         {
             // Inside this method you can place any initialization code that does not require
             // any Visual Studio service because at this point the package object is created but
@@ -65,13 +67,26 @@ namespace ConfluenceEX
 
         private void ShowContentListToolWindow(object sender, EventArgs e)
         {
-            // Get the instance number 0 of this tool window. This window is single instance so this instance
-            // is actually the only one.
-            // The last flag is set to true so that if the tool window does not exists it will be created.
-            ToolWindowPane window = this.FindToolWindow(typeof(ConfluenceToolWindow), 0, true);
-            IVsWindowFrame windowFrame = (IVsWindowFrame)window.Frame;
+            ConfluenceToolWindow toolWindow = (ConfluenceToolWindow) this.FindToolWindow(typeof(ConfluenceToolWindow), 0, true);
+
+            IVsWindowFrame windowFrame = (IVsWindowFrame) toolWindow.Frame;
             ErrorHandler.ThrowOnFailure(windowFrame.Show());
         }
+
+        private void ChangeContentTest(object sender, EventArgs e)
+        {
+            ConfluenceToolWindow toolWindow = (ConfluenceToolWindow) this.FindToolWindow(typeof(ConfluenceToolWindow), 0, false);
+
+            toolWindow.Navigation.ShowTest();
+        }
+
+        private void ChangeContentHome(object sender, EventArgs e)
+        {
+            ConfluenceToolWindow toolWindow = (ConfluenceToolWindow)this.FindToolWindow(typeof(ConfluenceToolWindow), 0, false);
+
+            toolWindow.Navigation.ShowContent();
+        }
+
 
         #region Package Members
 
@@ -84,17 +99,21 @@ namespace ConfluenceEX
             Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
             base.Initialize();
 
-            // Add our command handlers for menu (commands must exist in the .vsct file)
             _mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if (null != _mcs)
             {
-                // Create the command for the tool window
                 CommandID menuCommandID = new CommandID(Guids.guidConfluenceCommand, Guids.ConfluenceCommandId);
+                CommandID toolbarMenuCommand3ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand3Id);
+                CommandID toolbarMenuCommandHomeID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandHome);
 
                 MenuCommand onMenuCommandClickShowToolWindow = new MenuCommand(ShowContentListToolWindow, menuCommandID);
-                
+                MenuCommand onToolbarMenuCommand3Click = new MenuCommand(ChangeContentTest, toolbarMenuCommand3ID);
+                MenuCommand onToolbarMenuCommandHomeClick = new MenuCommand(ChangeContentHome, toolbarMenuCommandHomeID);
+
                 _mcs.AddCommand(onMenuCommandClickShowToolWindow);
-               }
+                _mcs.AddCommand(onToolbarMenuCommand3Click);
+                _mcs.AddCommand(onToolbarMenuCommandHomeClick);
+            }
         }
 
         #endregion

@@ -11,8 +11,11 @@ namespace ConfluenceEX.Main
 
         public const int ConfluenceToolbar = 0x1000;
         public const int ConfluenceCommandId = 0x0101;
+
+        public const int TestCommandHome = 0x0129;
         public const int TestCommand1Id = 0x0130;
         public const int TestCommand2Id = 0x0131;
+        public const int TestCommand3Id = 0x0132;
 
         public static readonly Guid guidConfluenceCommand = new Guid(guidConfluenceCommandString);
         public static readonly Guid guidConfluencePackage = new Guid(guidConfluencePackageString);

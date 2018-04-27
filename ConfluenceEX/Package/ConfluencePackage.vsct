@@ -21,6 +21,8 @@
       <Group guid="guidConfluenceMenuGroup" id="ConfluenceMenuGroup" priority="0x000">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_VIEW" />
       </Group>
+      
+      <!--ToolWindow - ToolBar - Menu Group-->
       <Group guid="guidConfluencePackage" id="ConfluenceToolbarGroup" priority="0x0000">
         <Parent guid="guidConfluencePackage" id="ConfluenceToolbar" />
       </Group>
@@ -33,7 +35,16 @@
           <ButtonText>Confluence</ButtonText>
         </Strings>
       </Button>
-      
+
+      <!--ToolWindow - ToolBar - Menu Buttons-->
+      <Button guid="guidConfluenceToolbarMenu" id="ToolbarCommandHome" priority="0x0000" type="Button" >
+        <Parent guid="guidConfluencePackage" id="ConfluenceToolbarGroup" />
+        <Icon guid="ImageCatalogGuid" id="Home" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <CommandName>Home</CommandName>
+        </Strings>
+      </Button>
       <Button guid="guidConfluenceToolbarMenu" id="ToolbarCommand1" priority="0x0000" type="Button" >
         <Parent guid="guidConfluencePackage" id="ConfluenceToolbarGroup" />
         <CommandFlag>IconAndText</CommandFlag>
@@ -44,7 +55,7 @@
           <CommandName>Change</CommandName>
         </Strings>
       </Button>
-      <Button guid="guidConfluenceToolbarMenu" id="ToolbarCommand2" priority="0x0100" type="Button" >
+      <Button guid="guidConfluenceToolbarMenu" id="ToolbarCommand2" priority="0x0000" type="Button" >
         <Parent guid="guidConfluencePackage" id="ConfluenceToolbarGroup" />
         <CommandFlag>IconAndText</CommandFlag> 
         <Icon guid="ImageCatalogGuid" id="AddBuildToQueue" />
@@ -52,6 +63,14 @@
         <Strings>
           <ButtonText>AddTest</ButtonText>
           <CommandName>Add</CommandName>
+        </Strings>
+      </Button>
+      <Button guid="guidConfluenceToolbarMenu" id="ToolbarCommand3" priority="0x0000" type="Button" >
+        <Parent guid="guidConfluencePackage" id="ConfluenceToolbarGroup" />
+        <Icon guid="ImageCatalogGuid" id="AddConnection" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <CommandName>Connect</CommandName>
         </Strings>
       </Button>
     </Buttons>
@@ -65,8 +84,10 @@
     </GuidSymbol>
 
     <GuidSymbol name="guidConfluenceToolbarMenu" value="{1E127E55-FDD7-4091-AA9F-AD0465FAF33F}">
+      <IDSymbol name="ToolbarCommandHome" value="0x0129" />
       <IDSymbol name="ToolbarCommand1" value="0x0130" />
       <IDSymbol name="ToolbarCommand2" value="0x0131" />
+      <IDSymbol name="ToolbarCommand3" value="0x0132" />
     </GuidSymbol>
 
     <GuidSymbol name="guidConfluenceMenuGroup" value="{199a9e3d-1eb2-44c8-84b7-d1f8a001eb19}">
