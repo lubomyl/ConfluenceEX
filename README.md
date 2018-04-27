@@ -14,9 +14,11 @@ Visual Studio extension integrating Atlassian Confluence.
 
 ##### What does it demonstrate?
 REST Client integrated into ToolWindow  
-After project start-up goto and click on `Tool|Confluence`  
+After project start-up goto and click on `Tool|Confluence` if the Confluence Toolbar is not already shown    
 New ToolWindow with ToolBar should show up  
 On ToolBar click on `Change` / `Add` to test MVVM functionality of change on binding  
+On ToolBar click on `Connect` icon to switch on test view  
+On ToolBar click on `Home` icon to switch back    
 
 ## Solution structure
 - ConfluenceEX *(main)*
