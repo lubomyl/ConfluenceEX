@@ -1,4 +1,5 @@
 ﻿using ConfluenceRestClient.Model;
+using ConfluenceRESTClient.Service;
 
 namespace ConfluenceRestClient.Service
 {
