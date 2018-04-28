@@ -55,10 +55,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helper\GetOperation.cs" />
     <Compile Include="Model\Content.cs" />
     <Compile Include="Model\ContentResults.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\BaseService.cs" />
     <Compile Include="Service\IContentService.cs" />
     <Compile Include="Service\Implementation\ContentService.cs" />
   </ItemGroup>

@@ -4,15 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ConfluenceRestClient.Model;
-using ConfluenceRestClient.Helper;
 using RestSharp;
+using ConfluenceRESTClient.Service;
 
 namespace ConfluenceRestClient.Service.Implementation
 {
-    public class ContentService : IContentService
+    public class ContentService : BaseService, IContentService
     {
 
-        private const string ENDPOINT_URL = "https://lubomyl1.atlassian.net/wiki/rest/api/content/";
+        private const string RestUrl = "https://lubomyl1.atlassian.net/wiki/rest/api/";
+
+        public ContentService() : base(RestUrl) { }
 
         public void CreateContent(Content content)
         {
@@ -22,9 +24,9 @@ namespace ConfluenceRestClient.Service.Implementation
         public ContentResults GetAllContent()
         {
             ContentResults ret = new ContentResults();
-            var request = new RestRequest();
+            var request = new RestRequest("/content");
 
-            ret = GetOperation.Execute<ContentResults>(request, ENDPOINT_URL);
+            ret = Get<ContentResults>(request);
 
             return ret;
         }
@@ -32,11 +34,10 @@ namespace ConfluenceRestClient.Service.Implementation
         public Content GetContentById(int id)
         {
             Content ret;
-            var request = new RestRequest();
+            var request = new RestRequest("content/{id}");
+            request.AddUrlSegment("id", id.ToString());
 
-            request.Resource = string.Format("/{0}", id);
-
-            ret = GetOperation.Execute<Content>(request, ENDPOINT_URL);
+            ret = Get<Content>(request);
 
             return ret;
 
