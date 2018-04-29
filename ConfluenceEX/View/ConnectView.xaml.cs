@@ -1,4 +1,5 @@
-﻿using ConfluenceEX.ViewModel;
+﻿using ConfluenceEX.Common;
+using ConfluenceEX.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace ConfluenceEX.View
         {
             InitializeComponent();
 
-            _viewModel = new ConnectViewModel("lubomyl@gmail.com", "Ostrava111");
+            _viewModel = new ConnectViewModel(SignedInUser.Username, SignedInUser.Password);
             this.DataContext = _viewModel;
         }
     }

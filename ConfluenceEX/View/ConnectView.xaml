@@ -17,14 +17,18 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Pass in login credentials:" Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}"/>
 
         <Label Grid.Column="0" Grid.Row="1" Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}">Username:</Label>
         <Label Grid.Column="0" Grid.Row="2" Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}">Password:</Label>
-        <TextBox Name="username" Grid.Column="1" Grid.Row="1" Width="150px"/>
+        <TextBox Name="Username" Text="{Binding Username}" Grid.Column="1" Grid.Row="1" Width="150px"/>
         <PasswordBox Name="password" Grid.Column="1" Grid.Row="2" Width="150px"/>
+        <Button Command="{Binding SignInCommand}" Content="Sign in" Grid.Column="0" Grid.Row="3" Height="25" Name="singInButton" Width="75" />
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="{Binding IsAuthenticated}" Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}"/>
     </Grid>
     
     

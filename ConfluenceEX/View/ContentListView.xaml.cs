@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using ConfluenceEX.ViewModel;
+using ConfluenceEX.Common;
 
 namespace ConfluenceEX.View
 {
@@ -15,7 +16,7 @@ namespace ConfluenceEX.View
         {
             InitializeComponent();
 
-            _viewModel = new ContentListViewModel();
+            _viewModel = new ContentListViewModel(SignedInUser.Username, SignedInUser.Password);
             this.DataContext = _viewModel;
         }
     }
