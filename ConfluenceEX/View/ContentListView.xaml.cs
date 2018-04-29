@@ -14,6 +14,7 @@ namespace ConfluenceEX.View
         public ContentListView()
         {
             InitializeComponent();
+
             _viewModel = new ContentListViewModel();
             this.DataContext = _viewModel;
         }

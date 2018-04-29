@@ -23,6 +23,11 @@ namespace ConfluenceEX
             this.Caption = Resources.ConflueceToolWindowTitle;
 
             this._navigation = new NavigationViewModel(this);
+
+            //TODO authenticate with stored credentials
+            //if not null and authentication ok -> show content
+            //else
+            //show login form
             this._navigation.ShowContent();
 
             this._view = new ConfluenceToolWindowNavigator(this._navigation);

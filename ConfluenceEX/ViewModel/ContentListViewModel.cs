@@ -24,9 +24,9 @@ namespace ConfluenceEX.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public ContentListViewModel()
+        public ContentListViewModel(string username, string password)
         {
-            _contentService = new ContentService();
+            _contentService = new ContentService(username, password);
             _content = _contentService.GetContentById(CONTENT_ID);
 
             this.ContentList = new ObservableCollection<Content>();

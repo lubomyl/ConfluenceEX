@@ -13,13 +13,18 @@ namespace ConfluenceRESTClient.Service
     public class BaseService : RestSharp.RestClient
     {
 
-        private const string USERNAME = "lubomyl@gmail.com";
-        private const string API_KEY = "PJrGnoLMM92u0ywHF4kR1748";
+        private string _username = string.Empty;
+        private string _password = string.Empty;
 
-        public BaseService(string baseUrl)
+        private const string RestUrl = "https://lubomyl1.atlassian.net/wiki/rest/api";
+
+        public BaseService(string username, string password)
         {
-            this.BaseUrl = new Uri(baseUrl);
-            this.Authenticator = new HttpBasicAuthenticator(USERNAME, API_KEY);
+            this.BaseUrl = new Uri(RestUrl);
+            this._username = username;
+            this._password = password;
+
+            this.Authenticator = new HttpBasicAuthenticator(_username, _password);
         }
 
         public T Get<T> (IRestRequest request) where T : new()
@@ -35,6 +40,34 @@ namespace ConfluenceRESTClient.Service
                 return default(T);
             }
         }
+
+        #region BaseService Members
+
+        public string Username
+        {
+            get
+            {
+                return this._username;
+            }
+            set
+            {
+                this._username = value;
+            }
+        }
+
+        public string Password
+        {
+            get
+            {
+                return this._password;
+            }
+            set
+            {
+                this._password = value;
+            }
+        }
+
+        #endregion
 
     }
 }
