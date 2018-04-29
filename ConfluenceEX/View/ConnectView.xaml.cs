@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConfluenceEX.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,17 @@ namespace ConfluenceEX.View
     /// <summary>
     /// Interaction logic for TestView.xaml
     /// </summary>
-    public partial class TestView : UserControl
+    public partial class ConnectView : UserControl
     {
-        public TestView()
+
+        private ConnectViewModel _viewModel;
+
+        public ConnectView()
         {
             InitializeComponent();
+
+            _viewModel = new ConnectViewModel("lubomyl@gmail.com", "Ostrava111");
+            this.DataContext = _viewModel;
         }
     }
 }

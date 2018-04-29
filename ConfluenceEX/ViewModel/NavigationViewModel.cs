@@ -14,7 +14,7 @@ namespace ConfluenceEX.ViewModel
         private ConfluenceToolWindow _parent;
 
         private ContentListView _contentListView;
-        private TestView _testView;
+        private ConnectView _connectView;
 
         public NavigationViewModel(ConfluenceToolWindow parent)
         {
@@ -36,18 +36,18 @@ namespace ConfluenceEX.ViewModel
             }
         }
 
-        public void ShowTest()
+        public void ShowConnect()
         {
             _parent.Caption = "Confluence - Connect";
 
-            if(this._testView == null)
+            if(this._connectView == null)
             {
-                this._testView = new TestView();
-                SelectedView = this._testView;
+                this._connectView = new ConnectView();
+                SelectedView = this._connectView;
             }
             else
             {
-                SelectedView = _testView;
+                SelectedView = _connectView;
             }
             
         }
