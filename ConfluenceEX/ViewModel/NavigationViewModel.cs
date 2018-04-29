@@ -27,7 +27,8 @@ namespace ConfluenceEX.ViewModel
 
             if(this._contentListView == null)
             {
-                SelectedView = new ContentListView();
+                this._contentListView = new ContentListView();
+                SelectedView = this._contentListView;
             }
             else
             {
@@ -41,7 +42,8 @@ namespace ConfluenceEX.ViewModel
 
             if(this._testView == null)
             {
-                SelectedView = new TestView();
+                this._testView = new TestView();
+                SelectedView = this._testView;
             }
             else
             {
