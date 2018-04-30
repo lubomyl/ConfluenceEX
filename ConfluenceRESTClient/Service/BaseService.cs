@@ -18,6 +18,11 @@ namespace ConfluenceRESTClient.Service
 
         private const string RestUrl = "https://lubomyl1.atlassian.net/wiki/rest/api";
 
+        public BaseService()
+        {
+            this.BaseUrl = new Uri(RestUrl);
+        }
+
         public BaseService(string username, string password)
         {
             this.BaseUrl = new Uri(RestUrl);

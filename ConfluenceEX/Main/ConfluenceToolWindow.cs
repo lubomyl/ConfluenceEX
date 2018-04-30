@@ -29,7 +29,7 @@ namespace ConfluenceEX
             AuthenticatedUser authenticatedUser;
 
             this.Caption = Resources.ConflueceToolWindowTitle;
-            this._authenticationService = new AuthenticationService(SignedInUser.Username, SignedInUser.Password);
+            this._authenticationService = new AuthenticationService();
             this._navigation = new NavigationViewModel(this);
 
             authenticatedUser = _authenticationService.Authenticate(SignedInUser.Username, SignedInUser.Password);

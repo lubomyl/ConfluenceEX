@@ -27,7 +27,7 @@ namespace ConfluenceEX.ViewModel
 
         public ConnectViewModel(string username, string password)
         {
-            this._authenticationService = new AuthenticationService(username, password);
+            this._authenticationService = new AuthenticationService();
 
             this.IsAuthenticated = _authenticationService.IsAuthenticated(_authenticationService.Authenticate(username, password));
 
