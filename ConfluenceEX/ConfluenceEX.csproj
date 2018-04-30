@@ -63,6 +63,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AfterSignInViewModel.cs" />
     <Compile Include="ViewModel\BeforeSignInViewModel.cs" />
     <Compile Include="ViewModel\ContentListViewModel.cs" />
     <Compile Include="ViewModel\ConfluenceToolWindowNavigatorViewModel.cs" />
@@ -205,6 +206,7 @@
   <ItemGroup>
     <VSCTCompile Include="Package\ConfluencePackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
+      <SubType>Designer</SubType>
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>

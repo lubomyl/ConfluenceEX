@@ -21,9 +21,15 @@ namespace ConfluenceEX.View
     /// </summary>
     public partial class AfterSignInView : UserControl
     {
+
+        private AfterSignInViewModel _viewModel;
+
         public AfterSignInView(SignInNavigatorViewModel parent)
         {
             InitializeComponent();
+
+            _viewModel = new AfterSignInViewModel(parent);
+            this.DataContext = _viewModel;
         }
     }
 }

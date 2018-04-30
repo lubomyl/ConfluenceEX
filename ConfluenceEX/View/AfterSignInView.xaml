@@ -12,5 +12,7 @@
 
         <TextBlock Text="Succesfully signed in." Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}"/>
 
+        <Button Command="{Binding SignOutCommand}" Content="Sign out" Grid.Column="0" Grid.Row="3" Height="25" x:Name="SignIn" Width="75" />
+
     </Grid>
 </UserControl>
