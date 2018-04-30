@@ -5,6 +5,10 @@ using ConfluenceEX.Main;
 using ConfluenceEX.View;
 using System.ComponentModel.Design;
 using ConfluenceEX.ViewModel;
+using ConfluenceRESTClient.Service.Implementation;
+using ConfluenceRESTClient.Service;
+using ConfluenceRESTClient.Model;
+using ConfluenceEX.Common;
 
 namespace ConfluenceEX
 {
@@ -13,17 +17,32 @@ namespace ConfluenceEX
     public class ConfluenceToolWindow : ToolWindowPane
     {
         private readonly object _view;
-        private NavigationViewModel _navigation { get; set; }
+        private NavigationViewModel _navigation;
+        private bool _isAuthenticated;
+        private IAuthenticationService _authenticationService;
 
         /// <summary>
         /// Standard constructor for the tool window.
         /// </summary>
         public ConfluenceToolWindow() : base(null)
         {
-            this.Caption = Resources.ConflueceToolWindowTitle;
+            AuthenticatedUser authenticatedUser;
 
+            this.Caption = Resources.ConflueceToolWindowTitle;
+            this._authenticationService = new AuthenticationService();
             this._navigation = new NavigationViewModel(this);
-            this._navigation.ShowContent();
+
+            authenticatedUser = _authenticationService.Authenticate(SignedInUser.Username, SignedInUser.Password);
+
+            //TODO try to authenticate with stored credentials first
+            if (_authenticationService.IsAuthenticated(authenticatedUser))
+            {
+                this._navigation.ShowContent();
+            } 
+            else
+            {
+                this._navigation.ShowConnect();
+            }
 
             this._view = new ConfluenceToolWindowNavigator(this._navigation);
             base.Content = _view;
@@ -40,6 +59,12 @@ namespace ConfluenceEX
         {
             get { return this._navigation; }
             set { this._navigation = value; }
+        }
+
+        public bool IsAuthenticated
+        {
+            get { return this._isAuthenticated; }
+            private set { this._isAuthenticated = value; }
         }
     }
 }

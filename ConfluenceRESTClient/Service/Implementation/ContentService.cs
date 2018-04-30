@@ -12,9 +12,7 @@ namespace ConfluenceRestClient.Service.Implementation
     public class ContentService : BaseService, IContentService
     {
 
-        private const string RestUrl = "https://lubomyl1.atlassian.net/wiki/rest/api/";
-
-        public ContentService() : base(RestUrl) { }
+        public ContentService(string username, string password) : base(username, password) { }
 
         public void CreateContent(Content content)
         {
@@ -24,7 +22,7 @@ namespace ConfluenceRestClient.Service.Implementation
         public ContentResults GetAllContent()
         {
             ContentResults ret = new ContentResults();
-            var request = new RestRequest("/content");
+            var request = new RestRequest("content");
 
             ret = Get<ContentResults>(request);
 

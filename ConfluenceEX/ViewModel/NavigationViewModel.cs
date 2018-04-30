@@ -14,25 +14,42 @@ namespace ConfluenceEX.ViewModel
         private ConfluenceToolWindow _parent;
 
         private ContentListView _contentListView;
-        private TestView _testView;
+        private ConnectView _connectView;
 
         public NavigationViewModel(ConfluenceToolWindow parent)
         {
             this._parent = parent;
-            this._contentListView = new ContentListView();
-            this._testView = new TestView();
         }
 
         public void ShowContent()
         {
             _parent.Caption = "Confluence";
-            SelectedView = _contentListView;
+
+            if(this._contentListView == null)
+            {
+                this._contentListView = new ContentListView();
+                SelectedView = this._contentListView;
+            }
+            else
+            {
+                SelectedView = _contentListView;
+            }
         }
 
-        public void ShowTest()
+        public void ShowConnect()
         {
             _parent.Caption = "Confluence - Connect";
-            SelectedView = _testView;
+
+            if(this._connectView == null)
+            {
+                this._connectView = new ConnectView();
+                SelectedView = this._connectView;
+            }
+            else
+            {
+                SelectedView = _connectView;
+            }
+            
         }
 
         public object SelectedView

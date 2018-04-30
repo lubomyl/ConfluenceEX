@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ConfluenceEX.Common;
+using ConfluenceEX.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +20,25 @@ namespace ConfluenceEX.View
     /// <summary>
     /// Interaction logic for TestView.xaml
     /// </summary>
-    public partial class TestView : UserControl
+    public partial class ConnectView : UserControl, IHavePassword
     {
-        public TestView()
+
+        private ConnectViewModel _viewModel;
+
+        public ConnectView()
         {
             InitializeComponent();
+
+            _viewModel = new ConnectViewModel(SignedInUser.Username, SignedInUser.Password);
+            this.DataContext = _viewModel;
+        }
+
+        public System.Security.SecureString Password
+        {
+            get
+            {
+                return UserPassword.SecurePassword;
+            }
         }
     }
 }
