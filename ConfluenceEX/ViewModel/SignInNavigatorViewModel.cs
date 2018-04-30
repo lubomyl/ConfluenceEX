@@ -14,17 +14,17 @@ namespace ConfluenceEX.ViewModel
         private ConfluenceToolWindow _parent;
 
         private AfterSignInView _afterSignInView;
-        private ConnectView _connectView;
+        private BeforeSignInView _beforeSignInView;
 
         public SignInNavigatorViewModel(ConfluenceToolWindow parent)
         {
             this._parent = parent;
-            this.ShowConnect();
+            this.ShowBeforeSignIn();
         }
 
         public void ShowAfterSignIn()
         {
-            _parent.Caption = "Confluence - Connect";
+            _parent.Caption = "Confluence - Spaces";
 
             if (this._afterSignInView == null)
             {
@@ -37,18 +37,18 @@ namespace ConfluenceEX.ViewModel
             }
         }
 
-        public void ShowConnect()
+        public void ShowBeforeSignIn()
         {
-            _parent.Caption = "Confluence - Connected";
+            _parent.Caption = "Confluence - Signed-in";
 
-            if (this._connectView == null)
+            if (this._beforeSignInView == null)
             {
-                this._connectView = new ConnectView(this);
-                SelectedView = this._connectView;
+                this._beforeSignInView = new BeforeSignInView(this);
+                SelectedView = this._beforeSignInView;
             }
             else
             {
-                SelectedView = _connectView;
+                SelectedView = _beforeSignInView;
             }
 
         }

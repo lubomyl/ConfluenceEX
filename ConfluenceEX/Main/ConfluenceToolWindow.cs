@@ -41,7 +41,7 @@ namespace ConfluenceEX
             } 
             else
             {
-                this._navigator.ShowConnect();
+                this._navigator.ShowSignInNavigatorView();
             }
 
             this._view = new ConfluenceToolWindowNavigator(this._navigator);

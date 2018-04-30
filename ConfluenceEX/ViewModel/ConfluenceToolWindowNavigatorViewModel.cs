@@ -36,9 +36,9 @@ namespace ConfluenceEX.ViewModel
             }
         }
 
-        public void ShowConnect()
+        public void ShowSignInNavigatorView()
         {
-            _parent.Caption = "Confluence - Connect";
+            _parent.Caption = "Confluence Sign-in";
 
             if(this._signInNavigatorView == null)
             {

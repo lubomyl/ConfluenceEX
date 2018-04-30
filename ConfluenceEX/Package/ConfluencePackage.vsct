@@ -71,8 +71,8 @@
         <Icon guid="ImageCatalogGuid" id="AddConnection" />
         <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
-          <CommandName>Connect</CommandName>
-          <ButtonText>Connect</ButtonText>
+          <CommandName>Sign-in</CommandName>
+          <ButtonText>Sign-in</ButtonText>
         </Strings>
       </Button>
     </Buttons>

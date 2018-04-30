@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace ConfluenceEX.ViewModel
 {
-    public class ConnectViewModel : ViewModelBase
+    public class BeforeSignInViewModel : ViewModelBase
     {
 
         private IAuthenticationService _authenticationService;
@@ -26,7 +26,7 @@ namespace ConfluenceEX.ViewModel
 
         public DelegateCommand SignInCommand { get; private set; }
 
-        public ConnectViewModel(string username, string password, SignInNavigatorViewModel parent)
+        public BeforeSignInViewModel(string username, string password, SignInNavigatorViewModel parent)
         {
             this._authenticationService = new AuthenticationService();
             this._parent = parent;
@@ -101,7 +101,7 @@ namespace ConfluenceEX.ViewModel
             return Username != null;
         }
 
-        #region ConnectViewModel Members
+        #region BeforeSignInViewModel Members
 
         public string Username
         {

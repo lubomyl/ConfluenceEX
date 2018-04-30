@@ -77,7 +77,7 @@ namespace ConfluenceEX
         {
             ConfluenceToolWindow toolWindow = (ConfluenceToolWindow) this.FindToolWindow(typeof(ConfluenceToolWindow), 0, false);
 
-            toolWindow.Navigator.ShowConnect();
+            toolWindow.Navigator.ShowSignInNavigatorView();
         }
 
         private void ChangeContentHome(object sender, EventArgs e)
