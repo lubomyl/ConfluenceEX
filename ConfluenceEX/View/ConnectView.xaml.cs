@@ -25,11 +25,11 @@ namespace ConfluenceEX.View
 
         private ConnectViewModel _viewModel;
 
-        public ConnectView()
+        public ConnectView(SignInNavigatorViewModel parent)
         {
             InitializeComponent();
 
-            _viewModel = new ConnectViewModel(SignedInUser.Username, SignedInUser.Password);
+            _viewModel = new ConnectViewModel(SignedInUser.Username, SignedInUser.Password, parent);
             this.DataContext = _viewModel;
         }
 

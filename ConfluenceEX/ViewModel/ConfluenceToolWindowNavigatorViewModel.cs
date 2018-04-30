@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace ConfluenceEX.ViewModel
 {
-    public class NavigationViewModel : ViewModelBase
+    public class ConfluenceToolWindowNavigatorViewModel : ViewModelBase
     {
 
         private object _selectedView;
         private ConfluenceToolWindow _parent;
 
         private ContentListView _contentListView;
-        private ConnectView _connectView;
+        private SignInNavigatorView _signInNavigatorView;
 
-        public NavigationViewModel(ConfluenceToolWindow parent)
+        public ConfluenceToolWindowNavigatorViewModel(ConfluenceToolWindow parent)
         {
             this._parent = parent;
         }
@@ -40,14 +40,14 @@ namespace ConfluenceEX.ViewModel
         {
             _parent.Caption = "Confluence - Connect";
 
-            if(this._connectView == null)
+            if(this._signInNavigatorView == null)
             {
-                this._connectView = new ConnectView();
-                SelectedView = this._connectView;
+                this._signInNavigatorView = new SignInNavigatorView(this._parent);
+                SelectedView = this._signInNavigatorView;
             }
             else
             {
-                SelectedView = _connectView;
+                SelectedView = _signInNavigatorView;
             }
             
         }

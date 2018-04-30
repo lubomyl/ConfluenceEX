@@ -77,14 +77,14 @@ namespace ConfluenceEX
         {
             ConfluenceToolWindow toolWindow = (ConfluenceToolWindow) this.FindToolWindow(typeof(ConfluenceToolWindow), 0, false);
 
-            toolWindow.Navigation.ShowConnect();
+            toolWindow.Navigator.ShowConnect();
         }
 
         private void ChangeContentHome(object sender, EventArgs e)
         {
             ConfluenceToolWindow toolWindow = (ConfluenceToolWindow)this.FindToolWindow(typeof(ConfluenceToolWindow), 0, false);
 
-            toolWindow.Navigation.ShowContent();
+            toolWindow.Navigator.ShowContent();
         }
 
 

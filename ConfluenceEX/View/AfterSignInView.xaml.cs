@@ -14,18 +14,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ConfluenceEX.Main
+namespace ConfluenceEX.View
 {
     /// <summary>
-    /// Interaction logic for ConfluenceToolWindowNAvigator.xaml
+    /// Interaction logic for AfterSignInView.xaml
     /// </summary>
-    public partial class ConfluenceToolWindowNavigator : UserControl
+    public partial class AfterSignInView : UserControl
     {
-        public ConfluenceToolWindowNavigator(ConfluenceToolWindowNavigatorViewModel navigator)
+        public AfterSignInView(SignInNavigatorViewModel parent)
         {
             InitializeComponent();
-
-            this.DataContext = navigator;
         }
     }
 }

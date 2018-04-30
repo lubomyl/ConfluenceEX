@@ -17,6 +17,7 @@ namespace ConfluenceEX.ViewModel
     {
 
         private IAuthenticationService _authenticationService;
+        private SignInNavigatorViewModel _parent;
 
         private string _username;
         private string _password;
@@ -25,9 +26,10 @@ namespace ConfluenceEX.ViewModel
 
         public DelegateCommand SignInCommand { get; private set; }
 
-        public ConnectViewModel(string username, string password)
+        public ConnectViewModel(string username, string password, SignInNavigatorViewModel parent)
         {
             this._authenticationService = new AuthenticationService();
+            this._parent = parent;
 
             this.IsAuthenticated = _authenticationService.IsAuthenticated(_authenticationService.Authenticate(username, password));
 
@@ -50,6 +52,15 @@ namespace ConfluenceEX.ViewModel
             {
                 //TODO 1
                 Console.WriteLine("ERROR: Missing username or password");
+            }
+
+            if (this.IsAuthenticated)
+            {
+                this._parent.ShowAfterSignIn();
+            }
+            else
+            {
+
             }
         }
 
