@@ -18,7 +18,7 @@ namespace ConfluenceEX.Common
         {
             bool ret = true;
 
-            if (_username == null || _password == null)
+            if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
             {
                 ret = false;
             }

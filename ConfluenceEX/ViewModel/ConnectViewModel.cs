@@ -37,13 +37,7 @@ namespace ConfluenceEX.ViewModel
         private void SignIn(object parameter)
         {
             this._username = this.Username;
-
-            var passwordContainer = parameter as IHavePassword;
-            if (passwordContainer != null)
-            {
-                var secureString = passwordContainer.Password;
-                this._password = ConvertToUnsecureString(secureString);
-            }
+            GetPassword(parameter);
 
             SignedInUser.Username = this.Username;
             SignedInUser.Password = this._password;
@@ -51,10 +45,21 @@ namespace ConfluenceEX.ViewModel
             if (SignedInUser.IsComplete())
             {
                 this.IsAuthenticated = _authenticationService.IsAuthenticated(_authenticationService.Authenticate(SignedInUser.Username, SignedInUser.Password));
-            } else
+            }
+            else
             {
                 //TODO 1
                 Console.WriteLine("ERROR: Missing username or password");
+            }
+        }
+
+        private void GetPassword(object parameter)
+        {
+            var passwordContainer = parameter as IHavePassword;
+            if (passwordContainer != null)
+            {
+                var secureString = passwordContainer.Password;
+                this._password = ConvertToUnsecureString(secureString);
             }
         }
 
