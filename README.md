@@ -12,13 +12,21 @@ Visual Studio extension integrating Atlassian Confluence.
   4. As command line argument on  start-up add `/RootSuffix Exp`
 - Build&Start  
 
+##### Authentication protection
+Need ti sign-in at [My testing Confluence server](lubomyl1.atlassian.net/wiki)  
+
 ##### What does it demonstrate?
 REST Client integrated into ToolWindow  
 After project start-up goto and click on `Tool|Confluence` if the Confluence Toolbar is not already shown    
 New ToolWindow with ToolBar should show up  
-On ToolBar click on `Change` / `Add` to test MVVM functionality of change on binding  
-On ToolBar click on `Connect` icon to switch on test view  
-On ToolBar click on `Home` icon to switch back    
+  
+Before successful sign-in:  
+- Fill in credentials for Basic authentication *(credentials are not stored after application shutdown)*  
+
+After successful sign-in:  
+- On ToolBar click on `Change` / `Add` to test MVVM functionality of change on binding at `Home` View 
+- On ToolBar click on `Connect` to check authentication state
+- On ToolBar click on `Home` icon to switch back    
 
 ## Solution structure
 - ConfluenceEX *(main)*
