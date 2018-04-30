@@ -20,7 +20,7 @@ namespace ConfluenceEX.View
     /// <summary>
     /// Interaction logic for TestView.xaml
     /// </summary>
-    public partial class ConnectView : UserControl
+    public partial class ConnectView : UserControl, IHavePassword
     {
 
         private ConnectViewModel _viewModel;
@@ -31,6 +31,14 @@ namespace ConfluenceEX.View
 
             _viewModel = new ConnectViewModel(SignedInUser.Username, SignedInUser.Password);
             this.DataContext = _viewModel;
+        }
+
+        public System.Security.SecureString Password
+        {
+            get
+            {
+                return UserPassword.SecurePassword;
+            }
         }
     }
 }

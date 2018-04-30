@@ -1,4 +1,5 @@
 ﻿<UserControl x:Class="ConfluenceEX.View.ConnectView"
+             x:Name="This" 
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -25,9 +26,9 @@
 
         <Label Grid.Column="0" Grid.Row="1" Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}">Username:</Label>
         <Label Grid.Column="0" Grid.Row="2" Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}">Password:</Label>
-        <TextBox Name="Username" Text="{Binding Username}" Grid.Column="1" Grid.Row="1" Width="150px"/>
-        <PasswordBox Name="password" Grid.Column="1" Grid.Row="2" Width="150px"/>
-        <Button Command="{Binding SignInCommand}" Content="Sign in" Grid.Column="0" Grid.Row="3" Height="25" Name="singInButton" Width="75" />
+        <TextBox x:Name="Username" Text="{Binding Username}" Grid.Column="1" Grid.Row="1" Width="150px"/>
+        <PasswordBox x:Name="UserPassword" Grid.Column="1" Grid.Row="2" Width="150px"/>
+        <Button Command="{Binding SignInCommand}" CommandParameter="{Binding ElementName=This}" Content="Sign in" Grid.Column="0" Grid.Row="3" Height="25" x:Name="SignIn" Width="75" />
         <TextBlock Grid.Column="0" Grid.Row="4" Text="{Binding IsAuthenticated}" Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}"/>
     </Grid>
     
