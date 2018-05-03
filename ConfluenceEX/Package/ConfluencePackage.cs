@@ -110,6 +110,8 @@ namespace ConfluenceEX
                 MenuCommand onToolbarMenuCommand3Click = new MenuCommand(ChangeContentTest, toolbarMenuCommand3ID);
                 MenuCommand onToolbarMenuCommandHomeClick = new MenuCommand(ChangeContentHome, toolbarMenuCommandHomeID);
 
+                onToolbarMenuCommandHomeClick.Enabled = false;
+
                 _mcs.AddCommand(onMenuCommandClickShowToolWindow);
                 _mcs.AddCommand(onToolbarMenuCommand3Click);
                 _mcs.AddCommand(onToolbarMenuCommandHomeClick);
