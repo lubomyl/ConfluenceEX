@@ -63,10 +63,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\ConnectViewModel.cs" />
+    <Compile Include="ViewModel\AfterSignInViewModel.cs" />
+    <Compile Include="ViewModel\BeforeSignInViewModel.cs" />
     <Compile Include="ViewModel\ContentListViewModel.cs" />
-    <Compile Include="ViewModel\NavigationViewModel.cs" />
+    <Compile Include="ViewModel\ConfluenceToolWindowNavigatorViewModel.cs" />
+    <Compile Include="ViewModel\SignInNavigatorViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\AfterSignInView.xaml.cs">
+      <DependentUpon>AfterSignInView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ContentListView.xaml.cs">
       <DependentUpon>ContentListView.xaml</DependentUpon>
     </Compile>
@@ -76,8 +81,11 @@
     <Compile Include="Main\ConfluenceToolWindow.cs" />
     <Compile Include="Main\Guids.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\ConnectView.xaml.cs">
-      <DependentUpon>ConnectView.xaml</DependentUpon>
+    <Compile Include="View\BeforeSignInView.xaml.cs">
+      <DependentUpon>BeforeSignInView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SignInNavigatorView.xaml.cs">
+      <DependentUpon>SignInNavigatorView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +206,7 @@
   <ItemGroup>
     <VSCTCompile Include="Package\ConfluencePackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
+      <SubType>Designer</SubType>
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +225,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AfterSignInView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ContentListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -224,7 +237,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ConnectView.xaml">
+    <Page Include="View\BeforeSignInView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SignInNavigatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

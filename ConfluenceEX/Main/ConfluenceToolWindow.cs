@@ -17,7 +17,7 @@ namespace ConfluenceEX
     public class ConfluenceToolWindow : ToolWindowPane
     {
         private readonly object _view;
-        private NavigationViewModel _navigation;
+        private ConfluenceToolWindowNavigatorViewModel _navigator;
         private bool _isAuthenticated;
         private IAuthenticationService _authenticationService;
 
@@ -30,21 +30,21 @@ namespace ConfluenceEX
 
             this.Caption = Resources.ConflueceToolWindowTitle;
             this._authenticationService = new AuthenticationService();
-            this._navigation = new NavigationViewModel(this);
+            this._navigator = new ConfluenceToolWindowNavigatorViewModel(this);
 
             authenticatedUser = _authenticationService.Authenticate(SignedInUser.Username, SignedInUser.Password);
 
             //TODO try to authenticate with stored credentials first
             if (_authenticationService.IsAuthenticated(authenticatedUser))
             {
-                this._navigation.ShowContent();
+                this._navigator.ShowContent();
             } 
             else
             {
-                this._navigation.ShowConnect();
+                this._navigator.ShowSignInNavigatorView();
             }
 
-            this._view = new ConfluenceToolWindowNavigator(this._navigation);
+            this._view = new ConfluenceToolWindowNavigator(this._navigator);
             base.Content = _view;
 
             this.ToolBar = new CommandID(Guids.guidConfluencePackage, Guids.ConfluenceToolbar);
@@ -55,10 +55,10 @@ namespace ConfluenceEX
             base.Dispose(disposing);
         }
 
-        public NavigationViewModel Navigation
+        public ConfluenceToolWindowNavigatorViewModel Navigator
         {
-            get { return this._navigation; }
-            set { this._navigation = value; }
+            get { return this._navigator; }
+            set { this._navigator = value; }
         }
 
         public bool IsAuthenticated

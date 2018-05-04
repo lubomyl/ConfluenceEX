@@ -12,6 +12,7 @@ namespace ConfluenceEX.Command
     {
         private readonly Predicate<object> _canExecute;
         private readonly Action<object> _execute;
+        private Action signOut;
 
         public event EventHandler CanExecuteChanged;
 
@@ -22,6 +23,11 @@ namespace ConfluenceEX.Command
         {
             _execute = execute;
             _canExecute = canExecute;
+        }
+
+        public DelegateCommand(Action signOut)
+        {
+            this.signOut = signOut;
         }
 
         public bool CanExecute(object parameter)

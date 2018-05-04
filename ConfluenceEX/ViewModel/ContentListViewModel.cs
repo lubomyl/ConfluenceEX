@@ -35,10 +35,7 @@ namespace ConfluenceEX.ViewModel
 
             OleMenuCommandService service = ConfluencePackage.Mcs;
 
-            if (service.FindCommand(new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand1Id)) == null)
-            {
-                InitializeCommands(service);
-            }
+            InitializeCommands(service);
         }
 
         private void InitializeCommands(OleMenuCommandService service)
@@ -51,7 +48,10 @@ namespace ConfluenceEX.ViewModel
                 MenuCommand onToolbarMenuCommand1Click = new MenuCommand(TestOnPropertyChanged, toolbarMenuCommand1ID);
                 MenuCommand onToolbarMenuCommand2Click = new MenuCommand(TestOnCollectionAdd, toolbarMenuCommand2ID);
 
+                service.RemoveCommand(service.FindCommand(toolbarMenuCommand1ID));
                 service.AddCommand(onToolbarMenuCommand1Click);
+
+                service.RemoveCommand(service.FindCommand(toolbarMenuCommand2ID));
                 service.AddCommand(onToolbarMenuCommand2Click);
             }
         }

@@ -49,6 +49,7 @@
       <Button guid="guidConfluenceToolbarMenu" id="ToolbarCommand1" priority="0x0000" type="Button" >
         <Parent guid="guidConfluencePackage" id="ConfluenceToolbarGroup" />
         <CommandFlag>IconAndText</CommandFlag>
+        <CommandFlag>DefaultDisabled</CommandFlag>
         <Icon guid="ImageCatalogGuid" id="EditColumn" />
         <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
@@ -58,7 +59,8 @@
       </Button>
       <Button guid="guidConfluenceToolbarMenu" id="ToolbarCommand2" priority="0x0000" type="Button" >
         <Parent guid="guidConfluencePackage" id="ConfluenceToolbarGroup" />
-        <CommandFlag>IconAndText</CommandFlag> 
+        <CommandFlag>IconAndText</CommandFlag>
+        <CommandFlag>DefaultDisabled</CommandFlag>
         <Icon guid="ImageCatalogGuid" id="AddBuildToQueue" />
         <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
@@ -71,8 +73,8 @@
         <Icon guid="ImageCatalogGuid" id="AddConnection" />
         <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
-          <CommandName>Connect</CommandName>
-          <ButtonText>Connect</ButtonText>
+          <CommandName>Sign-in</CommandName>
+          <ButtonText>Sign-in</ButtonText>
         </Strings>
       </Button>
     </Buttons>

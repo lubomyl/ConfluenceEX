@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="ConfluenceEX.View.AfterSignInView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ConfluenceEX.View"
+             xmlns:vsp="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.14.0"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    
+    <Grid Margin="10">
+
+        <TextBlock Text="Succesfully signed in." Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}"/>
+
+        <Button Command="{Binding SignOutCommand}" Content="Sign out" Grid.Column="0" Grid.Row="3" Height="25" x:Name="SignIn" Width="75" />
+
+    </Grid>
+</UserControl>

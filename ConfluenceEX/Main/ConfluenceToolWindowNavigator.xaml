@@ -12,8 +12,8 @@
         <DataTemplate DataType="{x:Type local:ContentListView}">
             <local:ContentListView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type local:ConnectView}">
-            <local:ConnectView/>
+        <DataTemplate DataType="{x:Type local:BeforeSignInView}">
+            <local:BeforeSignInView/>
         </DataTemplate>
     </UserControl.Resources>
 

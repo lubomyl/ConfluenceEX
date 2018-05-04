@@ -77,14 +77,14 @@ namespace ConfluenceEX
         {
             ConfluenceToolWindow toolWindow = (ConfluenceToolWindow) this.FindToolWindow(typeof(ConfluenceToolWindow), 0, false);
 
-            toolWindow.Navigation.ShowConnect();
+            toolWindow.Navigator.ShowSignInNavigatorView();
         }
 
         private void ChangeContentHome(object sender, EventArgs e)
         {
             ConfluenceToolWindow toolWindow = (ConfluenceToolWindow)this.FindToolWindow(typeof(ConfluenceToolWindow), 0, false);
 
-            toolWindow.Navigation.ShowContent();
+            toolWindow.Navigator.ShowContent();
         }
 
 
@@ -109,6 +109,8 @@ namespace ConfluenceEX
                 MenuCommand onMenuCommandClickShowToolWindow = new MenuCommand(ShowContentListToolWindow, menuCommandID);
                 MenuCommand onToolbarMenuCommand3Click = new MenuCommand(ChangeContentTest, toolbarMenuCommand3ID);
                 MenuCommand onToolbarMenuCommandHomeClick = new MenuCommand(ChangeContentHome, toolbarMenuCommandHomeID);
+
+                onToolbarMenuCommandHomeClick.Enabled = false;
 
                 _mcs.AddCommand(onMenuCommandClickShowToolWindow);
                 _mcs.AddCommand(onToolbarMenuCommand3Click);

@@ -20,16 +20,16 @@ namespace ConfluenceEX.View
     /// <summary>
     /// Interaction logic for TestView.xaml
     /// </summary>
-    public partial class ConnectView : UserControl, IHavePassword
+    public partial class BeforeSignInView : UserControl, IHavePassword
     {
 
-        private ConnectViewModel _viewModel;
+        private BeforeSignInViewModel _viewModel;
 
-        public ConnectView()
+        public BeforeSignInView(SignInNavigatorViewModel parent)
         {
             InitializeComponent();
 
-            _viewModel = new ConnectViewModel(SignedInUser.Username, SignedInUser.Password);
+            _viewModel = new BeforeSignInViewModel(SignedInUser.Username, SignedInUser.Password, parent);
             this.DataContext = _viewModel;
         }
 
