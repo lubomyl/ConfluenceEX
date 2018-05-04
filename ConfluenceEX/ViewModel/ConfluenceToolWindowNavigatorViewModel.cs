@@ -1,6 +1,9 @@
-﻿using ConfluenceEX.View;
+﻿using ConfluenceEX.Main;
+using ConfluenceEX.View;
+using Microsoft.VisualStudio.Shell;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +22,10 @@ namespace ConfluenceEX.ViewModel
         public ConfluenceToolWindowNavigatorViewModel(ConfluenceToolWindow parent)
         {
             this._parent = parent;
+
+            OleMenuCommandService service = ConfluencePackage.Mcs;
+
+            InitializeCommandsEmpty(service);
         }
 
         public void ShowContent()
@@ -50,6 +57,22 @@ namespace ConfluenceEX.ViewModel
                 SelectedView = _signInNavigatorView;
             }
             
+        }
+
+        //TODO 2 - find better solution then initializing null commands
+        private void InitializeCommandsEmpty(OleMenuCommandService service)
+        {
+            if (service != null)
+            {
+                CommandID toolbarMenuCommand1ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand1Id);
+                CommandID toolbarMenuCommand2ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand2Id);
+
+                MenuCommand onToolbarMenuCommand1Click = new MenuCommand(null, toolbarMenuCommand1ID);
+                MenuCommand onToolbarMenuCommand2Click = new MenuCommand(null, toolbarMenuCommand2ID);
+
+                service.AddCommand(onToolbarMenuCommand1Click);
+                service.AddCommand(onToolbarMenuCommand2Click);
+            }
         }
 
         public object SelectedView
