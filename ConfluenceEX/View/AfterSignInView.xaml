@@ -9,10 +9,22 @@
              d:DesignHeight="300" d:DesignWidth="300">
     
     <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-        <TextBlock Text="Succesfully signed in." Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}"/>
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Succesfully signed in." Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}"/>
 
-        <Button Command="{Binding SignOutCommand}" Content="Sign out" Grid.Column="0" Grid.Row="3" Height="25" x:Name="SignIn" Width="75" />
+        <ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding ContentList}"
+                 DisplayMemberPath="Name"/>
+
+        <Button Grid.Column="0" Grid.Row="2" Command="{Binding SignOutCommand}" Content="Sign out" Height="25" x:Name="SignIn" Width="75" />
 
     </Grid>
 </UserControl>
