@@ -10,7 +10,7 @@ namespace ConfluenceRestClient.Model
     public class SpaceList
     {
 
-        public List<Space> Content { get; set; }
+        public List<Space> Results { get; set; }
 
     }
 }

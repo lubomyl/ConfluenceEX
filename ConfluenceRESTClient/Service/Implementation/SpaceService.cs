@@ -8,8 +8,10 @@ using RestSharp;
 
 namespace ConfluenceRESTClient.Service.Implementation
 {
-    class SpaceService : BaseService, ISpaceService
+    public class SpaceService : BaseService, ISpaceService
     {
+
+        public SpaceService(string username, string password) : base(username, password) { }
 
         public void CreateSpace(Space space)
         {
@@ -19,7 +21,7 @@ namespace ConfluenceRESTClient.Service.Implementation
         public SpaceList GetAllSpaces()
         {
             SpaceList ret;
-            var request = new RestRequest("content/{id}");
+            var request = new RestRequest("space");
 
             ret = Get<SpaceList>(request);
 
