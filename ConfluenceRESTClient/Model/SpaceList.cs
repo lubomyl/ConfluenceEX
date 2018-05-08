@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConfluenceRESTClient.Model
+namespace ConfluenceRestClient.Model
 {
-    class SpaceList
+    public class SpaceList
     {
 
         public List<Space> Content { get; set; }
