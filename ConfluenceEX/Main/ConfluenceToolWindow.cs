@@ -29,12 +29,11 @@ namespace ConfluenceEX
             AuthenticatedUser authenticatedUser;
 
             this.Caption = Resources.ConflueceToolWindowTitle;
-            this._authenticationService = new AuthenticationService();
+            this._authenticationService = new AuthenticationService(SignedInUser.Username, SignedInUser.Password);
             this._navigator = new ConfluenceToolWindowNavigatorViewModel(this);
 
-            authenticatedUser = _authenticationService.Authenticate(SignedInUser.Username, SignedInUser.Password);
+            authenticatedUser = _authenticationService.Authenticate();
 
-            //TODO try to authenticate with stored credentials first
             if (_authenticationService.IsAuthenticated(authenticatedUser))
             {
                 this._navigator.ShowContent();

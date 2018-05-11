@@ -10,8 +10,9 @@ namespace ConfluenceRESTClient.Service
     public interface IAuthenticationService
     {
 
-        AuthenticatedUser Authenticate(string username, string password);
+        AuthenticatedUser Authenticate();
 
         bool IsAuthenticated(AuthenticatedUser authenticatedUser);
+
     }
 }
