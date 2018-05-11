@@ -13,7 +13,7 @@ Visual Studio extension integrating Atlassian Confluence.
 - Build&Start  
 
 ##### Authentication protection
-Need ti sign-in at [My testing Confluence server](lubomyl1.atlassian.net/wiki)  
+Need ti sign-in at [My testing Confluence server](lubomyl2.atlassian.net/wiki)  
 
 ##### What does it demonstrate?
 REST Client integrated into ToolWindow  
