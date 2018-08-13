@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ConfluenceEX.ViewModel
 {
-    class SpaceContentViewModel : ViewModelBase
+    class ContentViewModel : ViewModelBase
     {
 
 
-        public SpaceContentViewModel(string username, string password)
+        public ContentViewModel(string username, string password)
         {
 
         }

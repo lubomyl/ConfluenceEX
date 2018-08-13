@@ -65,16 +65,16 @@
     </Compile>
     <Compile Include="ViewModel\AfterSignInViewModel.cs" />
     <Compile Include="ViewModel\BeforeSignInViewModel.cs" />
-    <Compile Include="ViewModel\ContentListViewModel.cs" />
+    <Compile Include="ViewModel\SpaceListViewModel.cs" />
     <Compile Include="ViewModel\ConfluenceToolWindowNavigatorViewModel.cs" />
     <Compile Include="ViewModel\SignInNavigatorViewModel.cs" />
-    <Compile Include="ViewModel\SpaceContentViewModel.cs" />
+    <Compile Include="ViewModel\ContentViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\AfterSignInView.xaml.cs">
       <DependentUpon>AfterSignInView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ContentListView.xaml.cs">
-      <DependentUpon>ContentListView.xaml</DependentUpon>
+    <Compile Include="View\SpaceListView.xaml.cs">
+      <DependentUpon>SpaceListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Main\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -88,8 +88,8 @@
     <Compile Include="View\SignInNavigatorView.xaml.cs">
       <DependentUpon>SignInNavigatorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SpaceContentView.xaml.cs">
-      <DependentUpon>SpaceContentView.xaml</DependentUpon>
+    <Compile Include="View\ContentView.xaml.cs">
+      <DependentUpon>ContentView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -235,7 +235,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ContentListView.xaml">
+    <Page Include="View\SpaceListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -251,7 +251,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SpaceContentView.xaml">
+    <Page Include="View\ContentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

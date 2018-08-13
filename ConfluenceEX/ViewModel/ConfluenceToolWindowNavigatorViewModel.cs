@@ -16,7 +16,7 @@ namespace ConfluenceEX.ViewModel
         private object _selectedView;
         private ConfluenceToolWindow _parent;
 
-        private ContentListView _contentListView;
+        private SpaceListView _contentListView;
         private SignInNavigatorView _signInNavigatorView;
 
         public ConfluenceToolWindowNavigatorViewModel(ConfluenceToolWindow parent)
@@ -34,7 +34,7 @@ namespace ConfluenceEX.ViewModel
 
             if(this._contentListView == null)
             {
-                this._contentListView = new ContentListView();
+                this._contentListView = new SpaceListView();
                 SelectedView = this._contentListView;
             }
             else

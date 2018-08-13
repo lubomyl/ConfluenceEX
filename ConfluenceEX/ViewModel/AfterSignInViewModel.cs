@@ -22,19 +22,11 @@ namespace ConfluenceEX.ViewModel
 
         private bool _isAuthenticated;
 
-        public ObservableCollection<Space> ContentList { get; set; }
-
-        private ISpaceService _spaceService;
-
         public DelegateCommand SignOutCommand { get; private set; }
 
         public AfterSignInViewModel(SignInNavigatorViewModel parent, string username, string password)
         {
             this._parent = parent;
-
-            this._spaceService = new SpaceService(username, password);
-
-            this.ContentList = new ObservableCollection<Space>(this._spaceService.GetAllSpaces().Results);
 
             this.SignOutCommand = new DelegateCommand(SignOut);
         }

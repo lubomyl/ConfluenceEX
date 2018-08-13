@@ -7,16 +7,16 @@ namespace ConfluenceEX.View
     /// <summary>
     /// Interaction logic for SpaceContentView.xaml
     /// </summary>
-    public partial class SpaceContentView : UserControl
+    public partial class ContentView : UserControl
     {
 
-        private SpaceContentViewModel _viewModel;
+        private ContentViewModel _viewModel;
 
-        public SpaceContentView()
+        public ContentView()
         {
             InitializeComponent();
 
-            _viewModel = new SpaceContentViewModel(SignedInUser.Username, SignedInUser.Password);
+            _viewModel = new ContentViewModel(SignedInUser.Username, SignedInUser.Password);
             this.DataContext = _viewModel;
         }
     }
