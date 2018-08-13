@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConfluenceRestClient.Model
 {
-    public class ContentResults
+    public class ContentList
     {
 
         public List<Content> results { get; set; }

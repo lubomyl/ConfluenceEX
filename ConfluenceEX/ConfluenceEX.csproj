@@ -68,6 +68,7 @@
     <Compile Include="ViewModel\ContentListViewModel.cs" />
     <Compile Include="ViewModel\ConfluenceToolWindowNavigatorViewModel.cs" />
     <Compile Include="ViewModel\SignInNavigatorViewModel.cs" />
+    <Compile Include="ViewModel\SpaceContentViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\AfterSignInView.xaml.cs">
       <DependentUpon>AfterSignInView.xaml</DependentUpon>
@@ -86,6 +87,9 @@
     </Compile>
     <Compile Include="View\SignInNavigatorView.xaml.cs">
       <DependentUpon>SignInNavigatorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SpaceContentView.xaml.cs">
+      <DependentUpon>SpaceContentView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -196,11 +200,13 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -242,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SignInNavigatorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SpaceContentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

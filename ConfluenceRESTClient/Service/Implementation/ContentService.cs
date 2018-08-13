@@ -19,12 +19,12 @@ namespace ConfluenceRestClient.Service.Implementation
             throw new NotImplementedException();
         }
 
-        public ContentResults GetAllContent()
+        public ContentList GetAllContent()
         {
-            ContentResults ret = new ContentResults();
+            ContentList ret = new ContentList();
             var request = new RestRequest("content");
 
-            ret = Get<ContentResults>(request);
+            ret = Get<ContentList>(request);
 
             return ret;
         }

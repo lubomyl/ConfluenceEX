@@ -8,9 +8,10 @@ namespace ConfluenceRestClient.Service
 
         Content GetContentById(int id);
 
-        ContentResults GetAllContent();
+        ContentList GetAllContent();
 
         void CreateContent(Content content);
-
+        
+        //TODO GetContent by spaceKey query parameter
     }
 }
