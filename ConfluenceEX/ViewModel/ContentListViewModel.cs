@@ -13,7 +13,7 @@ namespace ConfluenceEX.ViewModel
     public class ContentListViewModel : ViewModelBase
     {
 
-        private const int CONTENT_ID = 65538;
+        private const int CONTENT_ID = 196609;
 
         private IContentService _contentService;
 
