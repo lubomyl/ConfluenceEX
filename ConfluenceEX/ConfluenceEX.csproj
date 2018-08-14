@@ -66,9 +66,9 @@
     <Compile Include="ViewModel\AfterSignInViewModel.cs" />
     <Compile Include="ViewModel\BeforeSignInViewModel.cs" />
     <Compile Include="ViewModel\SpaceListViewModel.cs" />
-    <Compile Include="ViewModel\ConfluenceToolWindowNavigatorViewModel.cs" />
-    <Compile Include="ViewModel\SignInNavigatorViewModel.cs" />
-    <Compile Include="ViewModel\ContentViewModel.cs" />
+    <Compile Include="ViewModel\Navigation\ConfluenceToolWindowNavigatorViewModel.cs" />
+    <Compile Include="ViewModel\Navigation\SignInNavigatorViewModel.cs" />
+    <Compile Include="ViewModel\ContentListViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\AfterSignInView.xaml.cs">
       <DependentUpon>AfterSignInView.xaml</DependentUpon>
@@ -88,8 +88,8 @@
     <Compile Include="View\SignInNavigatorView.xaml.cs">
       <DependentUpon>SignInNavigatorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ContentView.xaml.cs">
-      <DependentUpon>ContentView.xaml</DependentUpon>
+    <Compile Include="View\ContentListView.xaml.cs">
+      <DependentUpon>ContentListView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -251,7 +251,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ContentView.xaml">
+    <Page Include="View\ContentListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

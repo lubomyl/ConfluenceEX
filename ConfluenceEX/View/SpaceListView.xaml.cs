@@ -12,11 +12,11 @@ namespace ConfluenceEX.View
 
         private SpaceListViewModel _viewModel;
 
-        public SpaceListView()
+        public SpaceListView(ConfluenceToolWindowNavigatorViewModel parent)
         {
             InitializeComponent();
 
-            _viewModel = new SpaceListViewModel(SignedInUser.Username, SignedInUser.Password);
+            _viewModel = new SpaceListViewModel(SignedInUser.Username, SignedInUser.Password, parent);
             this.DataContext = _viewModel;
         }
     }

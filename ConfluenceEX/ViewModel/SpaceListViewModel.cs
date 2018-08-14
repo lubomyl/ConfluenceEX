@@ -17,6 +17,7 @@ namespace ConfluenceEX.ViewModel
         private const int CONTENT_ID = 196609;
 
         private ISpaceService _spaceService;
+        private ConfluenceToolWindowNavigatorViewModel _parent;
 
         public ObservableCollection<Space> SpaceList { get; set; }
 
@@ -25,9 +26,10 @@ namespace ConfluenceEX.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public SpaceListViewModel(string username, string password)
+        public SpaceListViewModel(string username, string password, ConfluenceToolWindowNavigatorViewModel parent)
         {
             this._spaceService = new SpaceService(username, password);
+            this._parent = parent;
 
             this.SpaceList = new ObservableCollection<Space>(this._spaceService.GetAllSpaces().Results);
             this.SpaceSelectedCommand = new DelegateCommand(OnItemSelected);
@@ -39,7 +41,9 @@ namespace ConfluenceEX.ViewModel
 
         private void OnItemSelected(object sender)
         {
-            //TODO on space selected navigate to space overview (pages list)
+            Space space = sender as Space;
+
+            this._parent.ShowSpaceContent(space);
         }
 
         private void InitializeCommands(OleMenuCommandService service)

@@ -9,7 +9,7 @@ namespace ConfluenceRestClient.Model
     public class ContentList
     {
 
-        public List<Content> results { get; set; }
+        public List<Content> Results { get; set; }
 
     }
 }

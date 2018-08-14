@@ -36,7 +36,7 @@ namespace ConfluenceEX
 
             if (_authenticationService.IsAuthenticated(authenticatedUser))
             {
-                this._navigator.ShowContent();
+                this._navigator.ShowSpaces();
             } 
             else
             {

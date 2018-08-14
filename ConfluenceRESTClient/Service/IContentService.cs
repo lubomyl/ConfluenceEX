@@ -6,7 +6,7 @@ namespace ConfluenceRestClient.Service
     public interface IContentService
     {
 
-        Content GetContentById(int id);
+        ContentList GetContentBySpaceKey(string spaceKey);
 
         ContentList GetAllContent();
 
