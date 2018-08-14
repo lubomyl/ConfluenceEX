@@ -18,7 +18,7 @@
             <Setter Property="Foreground" Value="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}"/>
         </Style>
     </UserControl.Resources>
-        
+
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -29,8 +29,21 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Column="0" Grid.Row="0">Spaces list:</Label>
-        <ListView Grid.Column="0" Grid.Row="1" ItemsSource="{Binding SpaceList}"
-                 DisplayMemberPath="Name"/>
+
+        <ItemsControl Grid.Column="0" Grid.Row="1" Name="icSpacesList" ItemsSource="{Binding SpaceList}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,0,0,5">
+                        <TextBlock>
+                            <Hyperlink Command="{Binding Path=DataContext.SpaceSelectedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}">
+                                <TextBlock Text="{Binding Name}"/>
+                            </Hyperlink>
+                        </TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
     </Grid>
    
 </UserControl>

@@ -7,6 +7,7 @@ using System;
 using System.Collections.ObjectModel;
 using ConfluenceRESTClient.Service;
 using ConfluenceRESTClient.Service.Implementation;
+using ConfluenceEX.Command;
 
 namespace ConfluenceEX.ViewModel
 {
@@ -19,6 +20,8 @@ namespace ConfluenceEX.ViewModel
 
         public ObservableCollection<Space> SpaceList { get; set; }
 
+        public DelegateCommand SpaceSelectedCommand { get; private set; }
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -27,10 +30,16 @@ namespace ConfluenceEX.ViewModel
             this._spaceService = new SpaceService(username, password);
 
             this.SpaceList = new ObservableCollection<Space>(this._spaceService.GetAllSpaces().Results);
+            this.SpaceSelectedCommand = new DelegateCommand(OnItemSelected);
 
             OleMenuCommandService service = ConfluencePackage.Mcs;
 
             InitializeCommands(service);
+        }
+
+        private void OnItemSelected(object sender)
+        {
+            //TODO on space selected navigate to space overview (pages list)
         }
 
         private void InitializeCommands(OleMenuCommandService service)
