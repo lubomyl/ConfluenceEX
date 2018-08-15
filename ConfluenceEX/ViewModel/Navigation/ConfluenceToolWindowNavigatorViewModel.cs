@@ -30,6 +30,12 @@ namespace ConfluenceEX.ViewModel
             InitializeCommandsEmpty(service);
         }
 
+        public void RefreshSpaces()
+        {
+            this._spacesListView = new SpaceListView(this);
+            SelectedView = this._spacesListView;
+        }
+
         public void ShowSpaces()
         {
             _parent.Caption = "Confluence Spaces";
@@ -43,6 +49,8 @@ namespace ConfluenceEX.ViewModel
             {
                 SelectedView = _spacesListView;
             }
+
+            EnableSpacesRefresh(true);
         }
 
         public void ShowSpaceContent(Space space)
@@ -51,6 +59,21 @@ namespace ConfluenceEX.ViewModel
 
             this._contentListView = new ContentListView(space);
             SelectedView = this._contentListView;
+
+            EnableSpacesRefresh(false);
+        }
+
+        private static void EnableSpacesRefresh(bool enable)
+        {
+            OleMenuCommandService service = ConfluencePackage.Mcs;
+
+            if (service != null)
+            {
+                CommandID toolbarMenuCommandRefreshID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandRefreshId);
+                MenuCommand onToolbarMenuCommandRefreshClick = service.FindCommand(toolbarMenuCommandRefreshID);
+
+                onToolbarMenuCommandRefreshClick.Enabled = enable;
+            }
         }
 
         public void ShowSignInNavigatorView()
@@ -66,7 +89,8 @@ namespace ConfluenceEX.ViewModel
             {
                 SelectedView = _signInNavigatorView;
             }
-            
+
+            EnableSpacesRefresh(false);
         }
 
         //TODO 2 - find better solution then initializing null commands
@@ -74,14 +98,17 @@ namespace ConfluenceEX.ViewModel
         {
             if (service != null)
             {
-                CommandID toolbarMenuCommand1ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand1Id);
-                CommandID toolbarMenuCommand2ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand2Id);
+                CommandID toolbarMenuCommandEditID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandEditId);
+                CommandID toolbarMenuCommandAddID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandAddId);
+                CommandID toolbarMenuCommandRefreshID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandRefreshId);
 
-                MenuCommand onToolbarMenuCommand1Click = new MenuCommand(null, toolbarMenuCommand1ID);
-                MenuCommand onToolbarMenuCommand2Click = new MenuCommand(null, toolbarMenuCommand2ID);
+                MenuCommand onToolbarMenuCommandEditClick = new MenuCommand(null, toolbarMenuCommandEditID);
+                MenuCommand onToolbarMenuCommandAddClick = new MenuCommand(null, toolbarMenuCommandAddID);
+                MenuCommand onToolbarMenuCommandRefreshClick = new MenuCommand(null, toolbarMenuCommandRefreshID);
 
-                service.AddCommand(onToolbarMenuCommand1Click);
-                service.AddCommand(onToolbarMenuCommand2Click);
+                service.AddCommand(onToolbarMenuCommandEditClick);
+                service.AddCommand(onToolbarMenuCommandAddClick);
+                service.AddCommand(onToolbarMenuCommandRefreshClick);
             }
         }
 

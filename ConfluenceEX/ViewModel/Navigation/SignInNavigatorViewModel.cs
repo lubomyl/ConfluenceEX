@@ -66,16 +66,16 @@ namespace ConfluenceEX.ViewModel
 
             if (service != null)
             {
-                CommandID toolbarMenuCommand1ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand1Id);
-                CommandID toolbarMenuCommand2ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand2Id);
+                CommandID toolbarMenuCommandEditID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandEditId);
+                CommandID toolbarMenuCommandAddID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandAddId);
                 CommandID toolbarMenuCommandHomeID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandHome);
 
-                MenuCommand onToolbarMenuCommand1Click = service.FindCommand(toolbarMenuCommand1ID);
-                MenuCommand onToolbarMenuCommand2Click = service.FindCommand(toolbarMenuCommand2ID);
+                MenuCommand onToolbarMenuCommandEditClick = service.FindCommand(toolbarMenuCommandEditID);
+                MenuCommand onToolbarMenuCommandAddClick = service.FindCommand(toolbarMenuCommandAddID);
                 MenuCommand onToolbarMenuCommandHomeClick = service.FindCommand(toolbarMenuCommandHomeID);
 
-                onToolbarMenuCommand1Click.Enabled = enable;
-                onToolbarMenuCommand2Click.Enabled = enable;
+                onToolbarMenuCommandEditClick.Enabled = enable;
+                onToolbarMenuCommandAddClick.Enabled = enable;
                 onToolbarMenuCommandHomeClick.Enabled = enable;
             }
         }

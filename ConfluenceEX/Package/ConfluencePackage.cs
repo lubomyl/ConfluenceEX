@@ -103,17 +103,17 @@ namespace ConfluenceEX
             if (null != _mcs)
             {
                 CommandID menuCommandID = new CommandID(Guids.guidConfluenceCommand, Guids.ConfluenceCommandId);
-                CommandID toolbarMenuCommand3ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand3Id);
+                CommandID toolbarMenuCommandConnectionID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandConnectionId);
                 CommandID toolbarMenuCommandHomeID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandHome);
 
                 MenuCommand onMenuCommandClickShowToolWindow = new MenuCommand(ShowContentListToolWindow, menuCommandID);
-                MenuCommand onToolbarMenuCommand3Click = new MenuCommand(ChangeContentTest, toolbarMenuCommand3ID);
+                MenuCommand onToolbarMenuCommandConnectionClick = new MenuCommand(ChangeContentTest, toolbarMenuCommandConnectionID);
                 MenuCommand onToolbarMenuCommandHomeClick = new MenuCommand(ChangeContentHome, toolbarMenuCommandHomeID);
 
                 onToolbarMenuCommandHomeClick.Enabled = false;
 
                 _mcs.AddCommand(onMenuCommandClickShowToolWindow);
-                _mcs.AddCommand(onToolbarMenuCommand3Click);
+                _mcs.AddCommand(onToolbarMenuCommandConnectionClick);
                 _mcs.AddCommand(onToolbarMenuCommandHomeClick);
             }
         }

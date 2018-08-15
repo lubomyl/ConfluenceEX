@@ -50,18 +50,18 @@ namespace ConfluenceEX.ViewModel
         {
             if (service != null)
             {
-                /*CommandID toolbarMenuCommand1ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand1Id);
-                CommandID toolbarMenuCommand2ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand2Id);
+                CommandID toolbarMenuCommandRefreshID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandRefreshId);
 
-                MenuCommand onToolbarMenuCommand1Click = new MenuCommand(TestOnPropertyChanged, toolbarMenuCommand1ID);
-                MenuCommand onToolbarMenuCommand2Click = new MenuCommand(TestOnCollectionAdd, toolbarMenuCommand2ID);
+                MenuCommand onToolbarMenuCommandRefreshClick = new MenuCommand(RefreshSpaces, toolbarMenuCommandRefreshID);
 
-                service.RemoveCommand(service.FindCommand(toolbarMenuCommand1ID));
-                service.AddCommand(onToolbarMenuCommand1Click);
-
-                service.RemoveCommand(service.FindCommand(toolbarMenuCommand2ID));
-                service.AddCommand(onToolbarMenuCommand2Click);*/
+                service.RemoveCommand(service.FindCommand(toolbarMenuCommandRefreshID));
+                service.AddCommand(onToolbarMenuCommandRefreshClick);
             }
+        }
+
+        private void RefreshSpaces(object sender, EventArgs e)
+        {
+            this._parent.RefreshSpaces();
         }
 
     }
