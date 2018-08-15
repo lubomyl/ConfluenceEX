@@ -1,4 +1,6 @@
-﻿namespace ConfluenceRestClient.Model
+﻿using ConfluenceRESTClient.Model;
+
+namespace ConfluenceRestClient.Model
 {
     public class Content
     {
@@ -7,6 +9,8 @@
         public string Type { get; set; }
         public string Status { get; set; }
         public string Title { get; set; }
+
+        public Links Links { get; set; }
 
     }
 }

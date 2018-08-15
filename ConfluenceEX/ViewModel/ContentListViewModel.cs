@@ -2,6 +2,9 @@
 using ConfluenceRestClient.Model;
 using ConfluenceRestClient.Service;
 using ConfluenceRestClient.Service.Implementation;
+using EnvDTE;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -38,7 +41,12 @@ namespace ConfluenceEX.ViewModel
 
         private void OnItemSelected(object sender)
         {
-            //TODO on content selected open new tab with html page
+            Content content = sender as Content;
+
+            IVsWindowFrame ppFrame;
+            var service = Package.GetGlobalService(typeof(IVsWebBrowsingService)) as IVsWebBrowsingService;
+
+            service.Navigate("http://lubomyl3.atlassian.net/wiki" + content.Links.Webui, 0, out ppFrame);
         }
     }
 }
