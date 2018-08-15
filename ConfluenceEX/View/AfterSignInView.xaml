@@ -21,9 +21,6 @@
 
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Succesfully signed in." Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}"/>
 
-        <ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding ContentList}"
-                 DisplayMemberPath="Name"/>
-
         <Button Grid.Column="0" Grid.Row="2" Command="{Binding SignOutCommand}" Content="Sign out" Height="25" x:Name="SignIn" Width="75" />
 
     </Grid>

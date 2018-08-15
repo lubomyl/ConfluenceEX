@@ -56,8 +56,7 @@ namespace ConfluenceEX.ViewModel
             {
                 SelectedView = _beforeSignInView;
             }
-
-            
+    
         }
 
         //TODO 2 - find better solution how to initialize commands on one place and expose them in public

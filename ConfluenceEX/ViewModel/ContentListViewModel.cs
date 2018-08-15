@@ -1,99 +1,52 @@
-﻿using ConfluenceRestClient.Service;
-using ConfluenceRestClient.Service.Implementation;
+﻿using ConfluenceEX.Command;
 using ConfluenceRestClient.Model;
-
-using System.ComponentModel.Design;
+using ConfluenceRestClient.Service;
+using ConfluenceRestClient.Service.Implementation;
+using EnvDTE;
 using Microsoft.VisualStudio.Shell;
-using ConfluenceEX.Main;
+using Microsoft.VisualStudio.Shell.Interop;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ConfluenceEX.ViewModel
 {
-    public class ContentListViewModel : ViewModelBase
+    class ContentListViewModel : ViewModelBase
     {
 
-        private const int CONTENT_ID = 32959;
+        private const int CONTENT_ID = 196609;
 
         private IContentService _contentService;
 
-        private Content _content;
+        public ObservableCollection<Content> SpaceContentList { get; set; }
 
-        public ObservableCollection<Content> ContentList { get; private set; }
+        public DelegateCommand SpaceContentSelectedCommand { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public ContentListViewModel(string username, string password)
+        public ContentListViewModel(string username, string password, Space space)
         {
-            _contentService = new ContentService(username, password);
-            _content = _contentService.GetContentById(CONTENT_ID);
+            string spaceKey = space.Key;
 
-            this.ContentList = new ObservableCollection<Content>();
+            this._contentService = new ContentService(username, password);
 
-            this.ContentList.Add(_content);
+            this.SpaceContentList = new ObservableCollection<Content>(this._contentService.GetContentBySpaceKey(spaceKey).Results);
+            this.SpaceContentSelectedCommand = new DelegateCommand(OnItemSelected);
 
-            OleMenuCommandService service = ConfluencePackage.Mcs;
-
-            InitializeCommands(service);
         }
 
-        private void InitializeCommands(OleMenuCommandService service)
+        private void OnItemSelected(object sender)
         {
-            if (service != null)
-            {
-                CommandID toolbarMenuCommand1ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand1Id);
-                CommandID toolbarMenuCommand2ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand2Id);
+            Content content = sender as Content;
 
-                MenuCommand onToolbarMenuCommand1Click = new MenuCommand(TestOnPropertyChanged, toolbarMenuCommand1ID);
-                MenuCommand onToolbarMenuCommand2Click = new MenuCommand(TestOnCollectionAdd, toolbarMenuCommand2ID);
+            IVsWindowFrame ppFrame;
+            var service = Package.GetGlobalService(typeof(IVsWebBrowsingService)) as IVsWebBrowsingService;
 
-                service.RemoveCommand(service.FindCommand(toolbarMenuCommand1ID));
-                service.AddCommand(onToolbarMenuCommand1Click);
-
-                service.RemoveCommand(service.FindCommand(toolbarMenuCommand2ID));
-                service.AddCommand(onToolbarMenuCommand2Click);
-            }
+            service.Navigate("http://lubomyl3.atlassian.net/wiki" + content.Links.Webui, 0, out ppFrame);
         }
-
-        private void TestOnPropertyChanged(object sender, EventArgs e)
-        {
-            Random random = new Random();
-
-            Title = "Nový titul" + random.Next();
-        }
-
-        private void TestOnCollectionAdd(object sender, EventArgs e)
-        {
-            Content cnt = new Content();
-            Random random = new Random();
-
-            cnt.Title = "Nový titul" + random.Next();
-
-            ContentList.Add(cnt);
-        }
-
-        #region ContentListViewModel Members
-
-        public Content Content
-        {
-            get { return _content; }
-            set
-            {
-                _content = value;
-                OnPropertyChanged("Content");
-            }
-        }
-
-        public string Title
-        {
-            get { return _content.Title; }
-            set {
-                _content.Title = value;
-                OnPropertyChanged("Title");
-            }
-        }
-
-        #endregion
     }
 }

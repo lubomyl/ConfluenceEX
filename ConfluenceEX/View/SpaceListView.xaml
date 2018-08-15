@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ConfluenceEX.View.ContentListView"
+﻿<UserControl x:Class="ConfluenceEX.View.SpaceListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -28,21 +28,24 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0">Content list:</Label>
+        <Label Grid.Column="0" Grid.Row="0">Spaces list:</Label>
 
-        <ItemsControl Grid.Column="0" Grid.Row="1" Name="icSpaceContentsList" ItemsSource="{Binding SpaceContentList}">
+        <ItemsControl Grid.Column="0" Grid.Row="1" Name="icSpacesList" ItemsSource="{Binding SpaceList}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,0,0,5">
                         <TextBlock>
-                            <Hyperlink Command="{Binding Path=DataContext.SpaceContentSelectedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"
+                            <Hyperlink Command="{Binding Path=DataContext.SpaceSelectedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" 
                                        CommandParameter="{Binding}">
-                                <TextBlock Text="{Binding Title}"/>
+                                <TextBlock Text="{Binding Name}"/>
                             </Hyperlink>
                         </TextBlock>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+
     </Grid>
+   
 </UserControl>
+    

@@ -84,7 +84,7 @@ namespace ConfluenceEX
         {
             ConfluenceToolWindow toolWindow = (ConfluenceToolWindow)this.FindToolWindow(typeof(ConfluenceToolWindow), 0, false);
 
-            toolWindow.Navigator.ShowContent();
+            toolWindow.Navigator.ShowSpaces();
         }
 
 

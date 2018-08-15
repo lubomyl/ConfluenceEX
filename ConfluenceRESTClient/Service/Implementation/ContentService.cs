@@ -19,26 +19,25 @@ namespace ConfluenceRestClient.Service.Implementation
             throw new NotImplementedException();
         }
 
-        public ContentResults GetAllContent()
+        public ContentList GetAllContent()
         {
-            ContentResults ret = new ContentResults();
+            ContentList ret = new ContentList();
             var request = new RestRequest("content");
 
-            ret = Get<ContentResults>(request);
+            ret = Get<ContentList>(request);
 
             return ret;
         }
 
-        public Content GetContentById(int id)
+        public ContentList GetContentBySpaceKey(string spaceKey)
         {
-            Content ret;
-            var request = new RestRequest("content/{id}");
-            request.AddUrlSegment("id", id.ToString());
+            ContentList ret = new ContentList();
+            var request = new RestRequest("content?spaceKey={spaceKey}");
+            request.AddUrlSegment("spaceKey", spaceKey);
 
-            ret = Get<Content>(request);
+            ret = Get<ContentList>(request);
 
             return ret;
-
         }
 
     }

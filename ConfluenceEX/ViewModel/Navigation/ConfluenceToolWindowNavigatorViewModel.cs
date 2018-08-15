@@ -1,5 +1,6 @@
 ﻿using ConfluenceEX.Main;
 using ConfluenceEX.View;
+using ConfluenceRestClient.Model;
 using Microsoft.VisualStudio.Shell;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace ConfluenceEX.ViewModel
         private object _selectedView;
         private ConfluenceToolWindow _parent;
 
+        private SpaceListView _spacesListView;
         private ContentListView _contentListView;
         private SignInNavigatorView _signInNavigatorView;
 
@@ -28,19 +30,27 @@ namespace ConfluenceEX.ViewModel
             InitializeCommandsEmpty(service);
         }
 
-        public void ShowContent()
+        public void ShowSpaces()
         {
-            _parent.Caption = "Confluence";
+            _parent.Caption = "Confluence Spaces";
 
-            if(this._contentListView == null)
+            if(this._spacesListView == null)
             {
-                this._contentListView = new ContentListView();
-                SelectedView = this._contentListView;
+                this._spacesListView = new SpaceListView(this);
+                SelectedView = this._spacesListView;
             }
             else
             {
-                SelectedView = _contentListView;
+                SelectedView = _spacesListView;
             }
+        }
+
+        public void ShowSpaceContent(Space space)
+        {
+            _parent.Caption = "Confluence " + space.Name + " Content";
+
+            this._contentListView = new ContentListView(space);
+            SelectedView = this._contentListView;
         }
 
         public void ShowSignInNavigatorView()

@@ -26,12 +26,9 @@ namespace ConfluenceEX.ViewModel
 
         public DelegateCommand SignInCommand { get; private set; }
 
-        public BeforeSignInViewModel(string username, string password, SignInNavigatorViewModel parent)
+        public BeforeSignInViewModel(SignInNavigatorViewModel parent)
         {
-            this._authenticationService = new AuthenticationService();
             this._parent = parent;
-
-            this.IsAuthenticated = _authenticationService.IsAuthenticated(_authenticationService.Authenticate(username, password));
 
             this.SignInCommand = new DelegateCommand(SignIn);
         }
@@ -41,12 +38,14 @@ namespace ConfluenceEX.ViewModel
             this._username = this.Username;
             GetPassword(parameter);
 
-            SignedInUser.Username = this.Username;
+            SignedInUser.Username = this._username;
             SignedInUser.Password = this._password;
+
+            this._authenticationService = new AuthenticationService(this._username, this._password);
 
             if (SignedInUser.IsComplete())
             {
-                this.IsAuthenticated = _authenticationService.IsAuthenticated(_authenticationService.Authenticate(SignedInUser.Username, SignedInUser.Password));
+                this.IsAuthenticated = _authenticationService.IsAuthenticated(_authenticationService.Authenticate());
             }
             else
             {

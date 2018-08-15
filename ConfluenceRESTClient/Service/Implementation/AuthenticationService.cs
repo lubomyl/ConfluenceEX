@@ -12,12 +12,11 @@ namespace ConfluenceRESTClient.Service.Implementation
     public class AuthenticationService : BaseService, IAuthenticationService
     {
 
-        public AuthenticationService() : base(){ }
+        public AuthenticationService(string username, string password) : base(username, password){ }
 
-        public AuthenticatedUser Authenticate(string username, string password)
+        public AuthenticatedUser Authenticate()
         {
             AuthenticatedUser ret;
-            this.Authenticator = new HttpBasicAuthenticator(username, password);
 
             var request = new RestRequest("user/current");
 
@@ -36,6 +35,22 @@ namespace ConfluenceRESTClient.Service.Implementation
             }
 
             return ret;
+        }
+
+        public string Username
+        {
+            set
+            {
+                base.Username = value;
+            }
+        }
+
+        public string Password
+        {
+            set
+            {
+                base.Password = value;
+            }
         }
 
     }

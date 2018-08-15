@@ -58,7 +58,8 @@
   <ItemGroup>
     <Compile Include="Model\AuthenticatedUser.cs" />
     <Compile Include="Model\Content.cs" />
-    <Compile Include="Model\ContentResults.cs" />
+    <Compile Include="Model\ContentList.cs" />
+    <Compile Include="Model\Links.cs" />
     <Compile Include="Model\Space.cs" />
     <Compile Include="Model\SpaceList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
