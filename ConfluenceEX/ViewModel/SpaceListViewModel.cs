@@ -8,12 +8,13 @@ using System.Collections.ObjectModel;
 using ConfluenceRESTClient.Service;
 using ConfluenceRESTClient.Service.Implementation;
 using ConfluenceEX.Command;
+using System.Collections.Specialized;
+using System.Collections.Generic;
 
 namespace ConfluenceEX.ViewModel
 {
     public class SpaceListViewModel : ViewModelBase
     {
-
         private const int CONTENT_ID = 196609;
 
         private ISpaceService _spaceService;
@@ -33,6 +34,8 @@ namespace ConfluenceEX.ViewModel
 
             this.SpaceList = new ObservableCollection<Space>(this._spaceService.GetAllSpaces().Results);
             this.SpaceSelectedCommand = new DelegateCommand(OnItemSelected);
+
+            this.SpaceList.CollectionChanged += this.OnCollectionChanged;
 
             OleMenuCommandService service = ConfluencePackage.Mcs;
 
@@ -61,7 +64,19 @@ namespace ConfluenceEX.ViewModel
 
         private void RefreshSpaces(object sender, EventArgs e)
         {
-            this._parent.RefreshSpaces();
+            List<Space> temporarySpaceList;
+
+            this.SpaceList.Clear();
+            temporarySpaceList = new List<Space>(this._spaceService.GetAllSpaces().Results);
+
+            foreach(Space space in temporarySpaceList)
+            {
+                this.SpaceList.Add(space);
+            }
+        }
+
+        void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
         }
 
     }

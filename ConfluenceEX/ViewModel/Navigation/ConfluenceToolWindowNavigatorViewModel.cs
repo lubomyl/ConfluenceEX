@@ -30,12 +30,6 @@ namespace ConfluenceEX.ViewModel
             InitializeCommandsEmpty(service);
         }
 
-        public void RefreshSpaces()
-        {
-            this._spacesListView = new SpaceListView(this);
-            SelectedView = this._spacesListView;
-        }
-
         public void ShowSpaces()
         {
             _parent.Caption = "Confluence Spaces";
