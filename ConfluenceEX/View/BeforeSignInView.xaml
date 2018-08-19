@@ -8,7 +8,9 @@
              xmlns:vsp="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.14.0"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+    </UserControl.Resources>
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -26,12 +28,11 @@
 
         <Label Grid.Column="0" Grid.Row="1" Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}">Username:</Label>
         <Label Grid.Column="0" Grid.Row="2" Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}">Password:</Label>
-        <Label Grid.Column="0" Grid.Row="4" Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}">Authenticated:</Label>
-        
+
         <TextBox x:Name="Username" Text="{Binding Username}" Grid.Column="1" Grid.Row="1" Width="150px"/>
         <PasswordBox x:Name="UserPassword" Grid.Column="1" Grid.Row="2" Width="150px"/>
         <Button Command="{Binding SignInCommand}" CommandParameter="{Binding ElementName=This}" Content="Sign in" Grid.Column="0" Grid.Row="3" Height="25" x:Name="SignIn" Width="75" />
-        <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding IsAuthenticated}" Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}"/>
+        <TextBlock Grid.Column="0" Grid.Row="4" Visibility="{Binding BadSignInCredentials, Converter={StaticResource BoolToVisConverter}}" Text="Bad Sign-In credentials" Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}"/>
     </Grid>
     
     

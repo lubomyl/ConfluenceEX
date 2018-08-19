@@ -23,12 +23,15 @@ namespace ConfluenceEX.ViewModel
         private string _password;
 
         private bool _isAuthenticated;
+        private bool _badSignInCredentials;
 
         public DelegateCommand SignInCommand { get; private set; }
 
         public BeforeSignInViewModel(SignInNavigatorViewModel parent)
         {
             this._parent = parent;
+            this._isAuthenticated = false;
+            this._badSignInCredentials = false;
 
             this.SignInCommand = new DelegateCommand(SignIn);
         }
@@ -45,7 +48,8 @@ namespace ConfluenceEX.ViewModel
 
             if (SignedInUser.IsComplete())
             {
-                this.IsAuthenticated = _authenticationService.IsAuthenticated(_authenticationService.Authenticate());
+                this._isAuthenticated = _authenticationService.IsAuthenticated(_authenticationService.Authenticate());
+                this.BadSignInCredentials = !this._isAuthenticated;
             }
             else
             {
@@ -53,13 +57,9 @@ namespace ConfluenceEX.ViewModel
                 Console.WriteLine("ERROR: Missing username or password");
             }
 
-            if (this.IsAuthenticated)
+            if (this._isAuthenticated)
             {
                 this._parent.ShowAfterSignIn();
-            }
-            else
-            {
-
             }
         }
 
@@ -125,6 +125,19 @@ namespace ConfluenceEX.ViewModel
             {
                 this._isAuthenticated = value;
                 OnPropertyChanged("IsAuthenticated");
+            }
+        }
+
+        public bool BadSignInCredentials
+        {
+            get
+            {
+                return this._badSignInCredentials;
+            }
+            set
+            {
+                this._badSignInCredentials = value;
+                OnPropertyChanged("BadSignInCredentials");
             }
         }
 
