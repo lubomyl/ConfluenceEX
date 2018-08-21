@@ -38,18 +38,32 @@ namespace ConfluenceEX.ViewModel
             OleMenuCommandService service = ConfluencePackage.Mcs;
             InitializeCommands(service);
 
-            getSpacesAsync();
+            GetSpacesAsync();
 
             this.SpaceList.CollectionChanged += this.OnCollectionChanged;    
         }
 
-        private async void getSpacesAsync()
+        private async void GetSpacesAsync()
         {
             System.Threading.Tasks.Task<SpaceList> spaceTask = this._spaceService.GetAllSpacesAsync();
 
             var spaceList = await spaceTask as SpaceList;
 
             foreach(Space s in spaceList.Results)
+            {
+                this.SpaceList.Add(s);
+            }
+        }
+
+        private async void RefreshSpacesAsync(object sender, EventArgs e)
+        {
+            System.Threading.Tasks.Task<SpaceList> spaceTask = this._spaceService.GetAllSpacesAsync();
+
+            var spaceList = await spaceTask as SpaceList;
+
+            this.SpaceList.Clear();
+
+            foreach (Space s in spaceList.Results)
             {
                 this.SpaceList.Add(s);
             }
@@ -68,23 +82,10 @@ namespace ConfluenceEX.ViewModel
             {
                 CommandID toolbarMenuCommandRefreshID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandRefreshId);
 
-                MenuCommand onToolbarMenuCommandRefreshClick = new MenuCommand(RefreshSpaces, toolbarMenuCommandRefreshID);
+                MenuCommand onToolbarMenuCommandRefreshClick = new MenuCommand(RefreshSpacesAsync, toolbarMenuCommandRefreshID);
 
                 service.RemoveCommand(service.FindCommand(toolbarMenuCommandRefreshID));
                 service.AddCommand(onToolbarMenuCommandRefreshClick);
-            }
-        }
-
-        private void RefreshSpaces(object sender, EventArgs e)
-        {
-            List<Space> temporarySpaceList;
-
-            this.SpaceList.Clear();
-            temporarySpaceList = new List<Space>(this._spaceService.GetAllSpaces().Results);
-
-            foreach(Space space in temporarySpaceList)
-            {
-                this.SpaceList.Add(space);
             }
         }
 
