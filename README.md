@@ -24,9 +24,10 @@ Before successful sign-in:
 - Fill in credentials for Basic authentication *(credentials are not stored after application shutdown)*  
 
 After successful sign-in:  
-- On ToolBar click on `Change` / `Add` to test MVVM functionality of change on binding at `Home` View 
 - On ToolBar click on `Connect` to check authentication state
-- On ToolBar click on `Home` icon to switch back    
+- On ToolBar click on `Home` icon to show list of available Spaces
+- Click on specific `Space` link to see list of content available under this space
+- Click on specific `Content` link to open new Visual Studio built-in browser tab
 
 ## Solution structure
 - ConfluenceEX *(main)*
