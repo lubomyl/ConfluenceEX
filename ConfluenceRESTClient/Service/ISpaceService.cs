@@ -10,9 +10,11 @@ namespace ConfluenceRESTClient.Service
     public interface ISpaceService
     {
 
-        Space GetSpaceByName(String name);
+        Space GetSpaceByName(string name);
 
         SpaceList GetAllSpaces();
+
+        Task<SpaceList> GetAllSpacesAsync();
 
         void CreateSpace(Space space);
 

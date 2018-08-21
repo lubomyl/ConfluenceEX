@@ -1,7 +1,6 @@
 ﻿using ConfluenceRestClient.Model;
 
 using System.ComponentModel.Design;
-using Microsoft.VisualStudio.Shell;
 using ConfluenceEX.Main;
 using System;
 using System.Collections.ObjectModel;
@@ -10,6 +9,8 @@ using ConfluenceRESTClient.Service.Implementation;
 using ConfluenceEX.Command;
 using System.Collections.Specialized;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.VisualStudio.Shell;
 
 namespace ConfluenceEX.ViewModel
 {
@@ -31,15 +32,27 @@ namespace ConfluenceEX.ViewModel
         {
             this._spaceService = new SpaceService(username, password);
             this._parent = parent;
+            this.SpaceList = new ObservableCollection<Space>();
 
-            this.SpaceList = new ObservableCollection<Space>(this._spaceService.GetAllSpaces().Results);
             this.SpaceSelectedCommand = new DelegateCommand(OnItemSelected);
-
-            this.SpaceList.CollectionChanged += this.OnCollectionChanged;
-
             OleMenuCommandService service = ConfluencePackage.Mcs;
-
             InitializeCommands(service);
+
+            getSpacesAsync();
+
+            this.SpaceList.CollectionChanged += this.OnCollectionChanged;    
+        }
+
+        private async void getSpacesAsync()
+        {
+            System.Threading.Tasks.Task<SpaceList> spaceTask = this._spaceService.GetAllSpacesAsync();
+
+            var spaceList = await spaceTask as SpaceList;
+
+            foreach(Space s in spaceList.Results)
+            {
+                this.SpaceList.Add(s);
+            }
         }
 
         private void OnItemSelected(object sender)

@@ -46,6 +46,16 @@ namespace ConfluenceRESTClient.Service
             }
         }
 
+        public Task<T> GetAsync<T>(IRestRequest request) where T : new()
+        {
+            var taskCompletionSource = new TaskCompletionSource<T>();
+
+            ExecuteAsync<T>(request, (response, handle) => 
+                taskCompletionSource.SetResult(response.Data));
+
+            return taskCompletionSource.Task;
+        }
+
         #region BaseService Members
 
         public string Username
