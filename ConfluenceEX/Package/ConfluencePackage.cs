@@ -41,7 +41,7 @@ namespace ConfluenceEX
     [PackageRegistration(UseManagedResourcesOnly = true)]
     [InstalledProductRegistration("#1110", "#1112", "1.0", IconResourceID = 1400)] // Info on this package for Help/About
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [Guid(Guids.guidConfluencePackageString)]
+    [Guid(Guids.GUID_CONFLUENCE_PACKAGE_STRING)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
     [ProvideToolWindow(typeof(ConfluenceToolWindow))]
     public sealed class ConfluencePackage : Package
@@ -73,21 +73,6 @@ namespace ConfluenceEX
             ErrorHandler.ThrowOnFailure(windowFrame.Show());
         }
 
-        private void ChangeContentTest(object sender, EventArgs e)
-        {
-            ConfluenceToolWindow toolWindow = (ConfluenceToolWindow) this.FindToolWindow(typeof(ConfluenceToolWindow), 0, false);
-
-            toolWindow.Navigator.ShowSignInNavigatorView();
-        }
-
-        private void ChangeContentHome(object sender, EventArgs e)
-        {
-            ConfluenceToolWindow toolWindow = (ConfluenceToolWindow)this.FindToolWindow(typeof(ConfluenceToolWindow), 0, false);
-
-            toolWindow.Navigator.ShowSpaces();
-        }
-
-
         #region Package Members
 
         /// <summary>
@@ -102,19 +87,11 @@ namespace ConfluenceEX
             _mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if (null != _mcs)
             {
-                CommandID menuCommandID = new CommandID(Guids.guidConfluenceCommand, Guids.ConfluenceCommandId);
-                CommandID toolbarMenuCommand3ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand3Id);
-                CommandID toolbarMenuCommandHomeID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandHome);
+                CommandID menuCommandID = new CommandID(Guids.guidConfluenceCommand, Guids.CONFLUENCE_COMMAND_ID);
 
                 MenuCommand onMenuCommandClickShowToolWindow = new MenuCommand(ShowContentListToolWindow, menuCommandID);
-                MenuCommand onToolbarMenuCommand3Click = new MenuCommand(ChangeContentTest, toolbarMenuCommand3ID);
-                MenuCommand onToolbarMenuCommandHomeClick = new MenuCommand(ChangeContentHome, toolbarMenuCommandHomeID);
-
-                onToolbarMenuCommandHomeClick.Enabled = false;
 
                 _mcs.AddCommand(onMenuCommandClickShowToolWindow);
-                _mcs.AddCommand(onToolbarMenuCommand3Click);
-                _mcs.AddCommand(onToolbarMenuCommandHomeClick);
             }
         }
 

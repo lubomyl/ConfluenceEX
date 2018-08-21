@@ -1,25 +1,25 @@
 ﻿using ConfluenceRestClient.Model;
 
 using System.ComponentModel.Design;
-using Microsoft.VisualStudio.Shell;
 using ConfluenceEX.Main;
 using System;
 using System.Collections.ObjectModel;
 using ConfluenceRESTClient.Service;
 using ConfluenceRESTClient.Service.Implementation;
 using ConfluenceEX.Command;
+using System.Collections.Specialized;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.VisualStudio.Shell;
 
 namespace ConfluenceEX.ViewModel
 {
     public class SpaceListViewModel : ViewModelBase
     {
-
-        private const int CONTENT_ID = 196609;
-
         private ISpaceService _spaceService;
         private ConfluenceToolWindowNavigatorViewModel _parent;
 
-        public ObservableCollection<Space> SpaceList { get; set; }
+        private ObservableCollection<Space> _spaceList;
 
         public DelegateCommand SpaceSelectedCommand { get; private set; }
 
@@ -30,13 +30,41 @@ namespace ConfluenceEX.ViewModel
         {
             this._spaceService = new SpaceService(username, password);
             this._parent = parent;
+            this.SpaceList = new ObservableCollection<Space>();
 
-            this.SpaceList = new ObservableCollection<Space>(this._spaceService.GetAllSpaces().Results);
             this.SpaceSelectedCommand = new DelegateCommand(OnItemSelected);
-
             OleMenuCommandService service = ConfluencePackage.Mcs;
-
             InitializeCommands(service);
+
+            GetSpacesAsync();
+
+            this.SpaceList.CollectionChanged += this.OnCollectionChanged;    
+        }
+
+        private async void GetSpacesAsync()
+        {
+            System.Threading.Tasks.Task<SpaceList> spaceTask = this._spaceService.GetAllSpacesAsync();
+
+            var spaceList = await spaceTask as SpaceList;
+
+            foreach(Space s in spaceList.Results)
+            {
+                this.SpaceList.Add(s);
+            }
+        }
+
+        private async void RefreshSpacesAsync(object sender, EventArgs e)
+        {
+            System.Threading.Tasks.Task<SpaceList> spaceTask = this._spaceService.GetAllSpacesAsync();
+
+            var spaceList = await spaceTask as SpaceList;
+
+            this.SpaceList.Clear();
+
+            foreach (Space s in spaceList.Results)
+            {
+                this.SpaceList.Add(s);
+            }
         }
 
         private void OnItemSelected(object sender)
@@ -50,18 +78,22 @@ namespace ConfluenceEX.ViewModel
         {
             if (service != null)
             {
-                /*CommandID toolbarMenuCommand1ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand1Id);
-                CommandID toolbarMenuCommand2ID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommand2Id);
+                CommandID toolbarMenuCommandRefreshID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_REFRESH_ID);
 
-                MenuCommand onToolbarMenuCommand1Click = new MenuCommand(TestOnPropertyChanged, toolbarMenuCommand1ID);
-                MenuCommand onToolbarMenuCommand2Click = new MenuCommand(TestOnCollectionAdd, toolbarMenuCommand2ID);
+                MenuCommand onToolbarMenuCommandRefreshClick = new MenuCommand(RefreshSpacesAsync, toolbarMenuCommandRefreshID);
 
-                service.RemoveCommand(service.FindCommand(toolbarMenuCommand1ID));
-                service.AddCommand(onToolbarMenuCommand1Click);
-
-                service.RemoveCommand(service.FindCommand(toolbarMenuCommand2ID));
-                service.AddCommand(onToolbarMenuCommand2Click);*/
+                service.RemoveCommand(service.FindCommand(toolbarMenuCommandRefreshID));
+                service.AddCommand(onToolbarMenuCommandRefreshClick);
             }
+        }
+
+        void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+        }
+
+        public ObservableCollection<Space> SpaceList {
+            get { return this._spaceList; }
+            set { this._spaceList = value; }
         }
 
     }

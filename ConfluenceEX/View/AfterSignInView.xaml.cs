@@ -25,7 +25,7 @@ namespace ConfluenceEX.View
 
         private AfterSignInViewModel _viewModel;
 
-        public AfterSignInView(SignInNavigatorViewModel parent)
+        public AfterSignInView(ConfluenceToolWindowNavigatorViewModel parent)
         {
             InitializeComponent();
 

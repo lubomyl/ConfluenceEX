@@ -17,18 +17,21 @@ namespace ConfluenceEX.ViewModel
     {
 
         private IAuthenticationService _authenticationService;
-        private SignInNavigatorViewModel _parent;
+        private ConfluenceToolWindowNavigatorViewModel _parent;
 
         private string _username;
         private string _password;
 
         private bool _isAuthenticated;
+        private bool _badSignInCredentials;
 
         public DelegateCommand SignInCommand { get; private set; }
 
-        public BeforeSignInViewModel(SignInNavigatorViewModel parent)
+        public BeforeSignInViewModel(ConfluenceToolWindowNavigatorViewModel parent)
         {
             this._parent = parent;
+            this._isAuthenticated = false;
+            this._badSignInCredentials = false;
 
             this.SignInCommand = new DelegateCommand(SignIn);
         }
@@ -45,21 +48,19 @@ namespace ConfluenceEX.ViewModel
 
             if (SignedInUser.IsComplete())
             {
-                this.IsAuthenticated = _authenticationService.IsAuthenticated(_authenticationService.Authenticate());
+                ConfluenceToolWindow.AuthenticatedUser = _authenticationService.Authenticate();
+                this._isAuthenticated = _authenticationService.IsAuthenticated(ConfluenceToolWindow.AuthenticatedUser);
+                this.BadSignInCredentials = !this._isAuthenticated;
             }
             else
             {
-                //TODO 1
+                //TODO
                 Console.WriteLine("ERROR: Missing username or password");
             }
 
-            if (this.IsAuthenticated)
+            if (this._isAuthenticated)
             {
                 this._parent.ShowAfterSignIn();
-            }
-            else
-            {
-
             }
         }
 
@@ -92,7 +93,7 @@ namespace ConfluenceEX.ViewModel
             }
         }
 
-        //TODO 1
+        //TODO
         //Check if can execute sign-in
         //On Textbox change notify and update state
         private bool CanExecuteSignIn()
@@ -125,6 +126,19 @@ namespace ConfluenceEX.ViewModel
             {
                 this._isAuthenticated = value;
                 OnPropertyChanged("IsAuthenticated");
+            }
+        }
+
+        public bool BadSignInCredentials
+        {
+            get
+            {
+                return this._badSignInCredentials;
+            }
+            set
+            {
+                this._badSignInCredentials = value;
+                OnPropertyChanged("BadSignInCredentials");
             }
         }
 

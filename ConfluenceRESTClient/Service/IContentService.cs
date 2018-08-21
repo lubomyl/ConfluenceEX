@@ -11,7 +11,5 @@ namespace ConfluenceRestClient.Service
         ContentList GetAllContent();
 
         void CreateContent(Content content);
-        
-        //TODO GetContent by spaceKey query parameter
     }
 }

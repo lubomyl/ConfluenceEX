@@ -17,15 +17,19 @@ namespace ConfluenceRESTClient.Service.Implementation
         {
             throw new NotImplementedException();
         }
-
+    
         public SpaceList GetAllSpaces()
         {
-            SpaceList ret;
             var request = new RestRequest("space");
 
-            ret = Get<SpaceList>(request);
+            return Get<SpaceList>(request);
+        }
 
-            return ret;
+        public Task<SpaceList> GetAllSpacesAsync()
+        {
+            var request = new RestRequest("space");
+
+            return GetAsync<SpaceList>(request);
         }
 
         public Space GetSpaceByName(string name)
