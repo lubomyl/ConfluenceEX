@@ -111,23 +111,23 @@ namespace ConfluenceEX.ViewModel
         {
             if (service != null)
             {
-                CommandID toolbarMenuCommandRefreshID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandRefreshId);
+                CommandID toolbarMenuCommandRefreshID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_REFRESH_ID);
                 MenuCommand onToolbarMenuCommandRefreshClick = service.FindCommand(toolbarMenuCommandRefreshID);
 
                 onToolbarMenuCommandRefreshClick.Enabled = enable;
             }
         }
 
-        //TODO 2 - find better solution then initializing null commands
+        //TODO - find better solution then initializing null commands
         private void InitializeCommandsEmpty(OleMenuCommandService service)
         {
             if (service != null)
             {
-                CommandID toolbarMenuCommandEditID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandEditId);
-                CommandID toolbarMenuCommandAddID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandAddId);
-                CommandID toolbarMenuCommandHomeID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandHome);
-                CommandID toolbarMenuCommandConnectionID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandConnectionId);
-                CommandID toolbarMenuCommandRefreshID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandRefreshId);
+                CommandID toolbarMenuCommandEditID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_EDIT_ID);
+                CommandID toolbarMenuCommandAddID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_ADD_ID);
+                CommandID toolbarMenuCommandHomeID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_HOME_ID);
+                CommandID toolbarMenuCommandConnectionID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_CONNECTION_ID);
+                CommandID toolbarMenuCommandRefreshID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_REFRESH_ID);
 
                 MenuCommand onToolbarMenuCommandEditClick = new MenuCommand(null, toolbarMenuCommandEditID);
                 MenuCommand onToolbarMenuCommandAddClick = new MenuCommand(null, toolbarMenuCommandAddID);
@@ -147,9 +147,9 @@ namespace ConfluenceEX.ViewModel
         {
             if (service != null)
             {
-                CommandID toolbarMenuCommandEditID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandEditId);
-                CommandID toolbarMenuCommandAddID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandAddId);
-                CommandID toolbarMenuCommandHomeID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandHome);
+                CommandID toolbarMenuCommandEditID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_EDIT_ID);
+                CommandID toolbarMenuCommandAddID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_ADD_ID);
+                CommandID toolbarMenuCommandHomeID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_HOME_ID);
 
                 MenuCommand onToolbarMenuCommandEditClick = service.FindCommand(toolbarMenuCommandEditID);
                 MenuCommand onToolbarMenuCommandAddClick = service.FindCommand(toolbarMenuCommandAddID);

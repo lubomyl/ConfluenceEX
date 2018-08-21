@@ -16,12 +16,9 @@ namespace ConfluenceEX.ViewModel
 {
     class ContentListViewModel : ViewModelBase
     {
-
-        private const int CONTENT_ID = 196609;
-
         private IContentService _contentService;
 
-        public ObservableCollection<Content> SpaceContentList { get; set; }
+        private ObservableCollection<Content> _spaceContentList;
 
         public DelegateCommand SpaceContentSelectedCommand { get; private set; }
 
@@ -47,6 +44,12 @@ namespace ConfluenceEX.ViewModel
             var service = Package.GetGlobalService(typeof(IVsWebBrowsingService)) as IVsWebBrowsingService;
 
             service.Navigate("https://lubomyl3.atlassian.net/wiki" + content.Links.Webui, 0, out ppFrame);
+        }
+
+        public ObservableCollection<Content> SpaceContentList
+        {
+            get { return this._spaceContentList; }
+            set { this._spaceContentList = value; }
         }
     }
 }

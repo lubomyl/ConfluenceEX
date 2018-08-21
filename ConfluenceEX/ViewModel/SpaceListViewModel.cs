@@ -16,12 +16,10 @@ namespace ConfluenceEX.ViewModel
 {
     public class SpaceListViewModel : ViewModelBase
     {
-        private const int CONTENT_ID = 196609;
-
         private ISpaceService _spaceService;
         private ConfluenceToolWindowNavigatorViewModel _parent;
 
-        public ObservableCollection<Space> SpaceList { get; set; }
+        private ObservableCollection<Space> _spaceList;
 
         public DelegateCommand SpaceSelectedCommand { get; private set; }
 
@@ -80,7 +78,7 @@ namespace ConfluenceEX.ViewModel
         {
             if (service != null)
             {
-                CommandID toolbarMenuCommandRefreshID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandRefreshId);
+                CommandID toolbarMenuCommandRefreshID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_REFRESH_ID);
 
                 MenuCommand onToolbarMenuCommandRefreshClick = new MenuCommand(RefreshSpacesAsync, toolbarMenuCommandRefreshID);
 
@@ -91,6 +89,11 @@ namespace ConfluenceEX.ViewModel
 
         void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+        }
+
+        public ObservableCollection<Space> SpaceList {
+            get { return this._spaceList; }
+            set { this._spaceList = value; }
         }
 
     }

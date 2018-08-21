@@ -54,7 +54,7 @@ namespace ConfluenceEX.ViewModel
             }
             else
             {
-                //TODO 1
+                //TODO
                 Console.WriteLine("ERROR: Missing username or password");
             }
 
@@ -93,7 +93,7 @@ namespace ConfluenceEX.ViewModel
             }
         }
 
-        //TODO 1
+        //TODO
         //Check if can execute sign-in
         //On Textbox change notify and update state
         private bool CanExecuteSignIn()

@@ -8,15 +8,6 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <UserControl.Resources>
-        <DataTemplate DataType="{x:Type local:SpaceListView}">
-            <local:SpaceListView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type local:BeforeSignInView}">
-            <local:BeforeSignInView/>
-        </DataTemplate>
-    </UserControl.Resources>
-
     <ContentControl x:Name="Pages" Content="{Binding SelectedView}"/>
     
 </UserControl>

@@ -17,11 +17,6 @@ namespace ConfluenceEX.ViewModel
 
         private ConfluenceToolWindowNavigatorViewModel _parent;
 
-        private string _username;
-        private string _password;
-
-        private bool _isAuthenticated;
-
         public DelegateCommand SignOutCommand { get; private set; }
 
         public AfterSignInViewModel(ConfluenceToolWindowNavigatorViewModel parent, string username, string password)

@@ -13,15 +13,16 @@ using ConfluenceEX.Common;
 namespace ConfluenceEX
 {
 
-    [Guid(Guids.guidConfluenceToolWindow)]
+    [Guid(Guids.GUID_CONFLUENCE_TOOL_WINDOW_STRING)]
     public class ConfluenceToolWindow : ToolWindowPane
     {
         private readonly object _view;
         private ConfluenceToolWindowNavigatorViewModel _navigator;
         private bool _isAuthenticated;
-        public IAuthenticationService _authenticationService;
 
         private static AuthenticatedUser _authenticatedUser;
+
+        public IAuthenticationService _authenticationService;
 
         /// <summary>
         /// Standard constructor for the tool window.
@@ -46,7 +47,7 @@ namespace ConfluenceEX
             this._view = new ConfluenceToolWindowNavigator(this._navigator);
             base.Content = _view;
 
-            this.ToolBar = new CommandID(Guids.guidConfluencePackage, Guids.ConfluenceToolbar);
+            this.ToolBar = new CommandID(Guids.guidConfluencePackage, Guids.CONFLUENCE_TOOLBAR_ID);
         }
 
         protected override void Dispose(bool disposing)
