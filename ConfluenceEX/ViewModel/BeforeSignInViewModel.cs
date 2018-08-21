@@ -17,7 +17,7 @@ namespace ConfluenceEX.ViewModel
     {
 
         private IAuthenticationService _authenticationService;
-        private SignInNavigatorViewModel _parent;
+        private ConfluenceToolWindowNavigatorViewModel _parent;
 
         private string _username;
         private string _password;
@@ -27,7 +27,7 @@ namespace ConfluenceEX.ViewModel
 
         public DelegateCommand SignInCommand { get; private set; }
 
-        public BeforeSignInViewModel(SignInNavigatorViewModel parent)
+        public BeforeSignInViewModel(ConfluenceToolWindowNavigatorViewModel parent)
         {
             this._parent = parent;
             this._isAuthenticated = false;
@@ -48,7 +48,8 @@ namespace ConfluenceEX.ViewModel
 
             if (SignedInUser.IsComplete())
             {
-                this._isAuthenticated = _authenticationService.IsAuthenticated(_authenticationService.Authenticate());
+                ConfluenceToolWindow.AuthenticatedUser = _authenticationService.Authenticate();
+                this._isAuthenticated = _authenticationService.IsAuthenticated(ConfluenceToolWindow.AuthenticatedUser);
                 this.BadSignInCredentials = !this._isAuthenticated;
             }
             else

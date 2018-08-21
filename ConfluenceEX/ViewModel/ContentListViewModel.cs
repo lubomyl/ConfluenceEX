@@ -46,7 +46,7 @@ namespace ConfluenceEX.ViewModel
             IVsWindowFrame ppFrame;
             var service = Package.GetGlobalService(typeof(IVsWebBrowsingService)) as IVsWebBrowsingService;
 
-            service.Navigate("http://lubomyl3.atlassian.net/wiki" + content.Links.Webui, 0, out ppFrame);
+            service.Navigate("https://lubomyl3.atlassian.net/wiki" + content.Links.Webui, 0, out ppFrame);
         }
     }
 }

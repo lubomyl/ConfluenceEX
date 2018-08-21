@@ -15,7 +15,7 @@ namespace ConfluenceEX.ViewModel
     class AfterSignInViewModel : ViewModelBase
     {
 
-        private SignInNavigatorViewModel _parent;
+        private ConfluenceToolWindowNavigatorViewModel _parent;
 
         private string _username;
         private string _password;
@@ -24,7 +24,7 @@ namespace ConfluenceEX.ViewModel
 
         public DelegateCommand SignOutCommand { get; private set; }
 
-        public AfterSignInViewModel(SignInNavigatorViewModel parent, string username, string password)
+        public AfterSignInViewModel(ConfluenceToolWindowNavigatorViewModel parent, string username, string password)
         {
             this._parent = parent;
 

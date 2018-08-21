@@ -25,7 +25,7 @@ namespace ConfluenceEX.View
 
         private BeforeSignInViewModel _viewModel;
 
-        public BeforeSignInView(SignInNavigatorViewModel parent)
+        public BeforeSignInView(ConfluenceToolWindowNavigatorViewModel parent)
         {
             InitializeComponent();
 

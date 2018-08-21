@@ -19,28 +19,28 @@ namespace ConfluenceEX
         private readonly object _view;
         private ConfluenceToolWindowNavigatorViewModel _navigator;
         private bool _isAuthenticated;
-        private IAuthenticationService _authenticationService;
+        public IAuthenticationService _authenticationService;
+
+        private static AuthenticatedUser _authenticatedUser;
 
         /// <summary>
         /// Standard constructor for the tool window.
         /// </summary>
         public ConfluenceToolWindow() : base(null)
         {
-            AuthenticatedUser authenticatedUser;
-
             this.Caption = Resources.ConflueceToolWindowTitle;
             this._authenticationService = new AuthenticationService(SignedInUser.Username, SignedInUser.Password);
             this._navigator = new ConfluenceToolWindowNavigatorViewModel(this);
 
-            authenticatedUser = _authenticationService.Authenticate();
+            _authenticatedUser = _authenticationService.Authenticate();
 
-            if (_authenticationService.IsAuthenticated(authenticatedUser))
+            if (_authenticationService.IsAuthenticated(_authenticatedUser))
             {
-                this._navigator.ShowSpaces();
+                this._navigator.ShowSpaces(null, null);
             } 
             else
             {
-                this._navigator.ShowSignInNavigatorView();
+                this._navigator.ShowBeforeSignIn();
             }
 
             this._view = new ConfluenceToolWindowNavigator(this._navigator);
@@ -64,6 +64,12 @@ namespace ConfluenceEX
         {
             get { return this._isAuthenticated; }
             private set { this._isAuthenticated = value; }
+        }
+
+        public static AuthenticatedUser AuthenticatedUser
+        {
+            get { return _authenticatedUser; }
+            set { _authenticatedUser = value; }
         }
     }
 }

@@ -73,21 +73,6 @@ namespace ConfluenceEX
             ErrorHandler.ThrowOnFailure(windowFrame.Show());
         }
 
-        private void ChangeContentTest(object sender, EventArgs e)
-        {
-            ConfluenceToolWindow toolWindow = (ConfluenceToolWindow) this.FindToolWindow(typeof(ConfluenceToolWindow), 0, false);
-
-            toolWindow.Navigator.ShowSignInNavigatorView();
-        }
-
-        private void ChangeContentHome(object sender, EventArgs e)
-        {
-            ConfluenceToolWindow toolWindow = (ConfluenceToolWindow)this.FindToolWindow(typeof(ConfluenceToolWindow), 0, false);
-
-            toolWindow.Navigator.ShowSpaces();
-        }
-
-
         #region Package Members
 
         /// <summary>
@@ -103,18 +88,10 @@ namespace ConfluenceEX
             if (null != _mcs)
             {
                 CommandID menuCommandID = new CommandID(Guids.guidConfluenceCommand, Guids.ConfluenceCommandId);
-                CommandID toolbarMenuCommandConnectionID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandConnectionId);
-                CommandID toolbarMenuCommandHomeID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.TestCommandHome);
 
                 MenuCommand onMenuCommandClickShowToolWindow = new MenuCommand(ShowContentListToolWindow, menuCommandID);
-                MenuCommand onToolbarMenuCommandConnectionClick = new MenuCommand(ChangeContentTest, toolbarMenuCommandConnectionID);
-                MenuCommand onToolbarMenuCommandHomeClick = new MenuCommand(ChangeContentHome, toolbarMenuCommandHomeID);
-
-                onToolbarMenuCommandHomeClick.Enabled = false;
 
                 _mcs.AddCommand(onMenuCommandClickShowToolWindow);
-                _mcs.AddCommand(onToolbarMenuCommandConnectionClick);
-                _mcs.AddCommand(onToolbarMenuCommandHomeClick);
             }
         }
 
