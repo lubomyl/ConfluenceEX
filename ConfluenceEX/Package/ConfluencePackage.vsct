@@ -46,6 +46,8 @@
           <ButtonText>Home</ButtonText>
         </Strings>
       </Button>
+      <!-- TODO uncomment when implementing back/forward feature -->
+      <!--
       <Button guid="guidConfluenceToolbarMenu" id="ToolbarCommandEdit" priority="0x0000" type="Button" >
         <Parent guid="guidConfluencePackage" id="ConfluenceToolbarGroup" />
         <CommandFlag>IconAndText</CommandFlag>
@@ -68,6 +70,7 @@
           <CommandName>Add</CommandName>
         </Strings>
       </Button>
+      -->
       <Button guid="guidConfluenceToolbarMenu" id="ToolbarCommandConnection" priority="0x0000" type="Button" >
         <Parent guid="guidConfluencePackage" id="ConfluenceToolbarGroup" />
         <Icon guid="ImageCatalogGuid" id="AddConnection" />
