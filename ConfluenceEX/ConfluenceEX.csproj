@@ -54,6 +54,7 @@
     <Compile Include="Common\DelegateCommand.cs" />
     <Compile Include="Common\IHavePassword.cs" />
     <Compile Include="Common\SignedInUser.cs" />
+    <Compile Include="Main\ConfluenceToolWindowSearchTasks.cs" />
     <Compile Include="View\Navigation\ConfluenceToolWindowNavigator.xaml.cs">
       <DependentUpon>ConfluenceToolWindowNavigator.xaml</DependentUpon>
     </Compile>
