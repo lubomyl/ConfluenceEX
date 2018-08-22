@@ -1,7 +1,9 @@
 ﻿using ConfluenceEX.View;
 using ConfluenceEX.ViewModel;
 using ConfluenceRestClient.Model;
+using Microsoft.Internal.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio;
+using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using System;
@@ -16,6 +18,12 @@ namespace ConfluenceEX.Main
         public override bool SearchEnabled
         {
             get { return true; }
+        }
+
+        public override void ProvideSearchSettings(IVsUIDataSource pSearchSettings)
+        {
+            Utilities.SetValue(pSearchSettings,
+                SearchSettingsDataSource.SearchWatermarkProperty.Name, "Search Spaces list");
         }
 
         public override IVsSearchTask CreateSearch(uint dwCookie, IVsSearchQuery pSearchQuery, IVsSearchCallback pSearchCallback)
