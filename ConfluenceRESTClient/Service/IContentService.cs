@@ -1,5 +1,6 @@
 ﻿using ConfluenceRestClient.Model;
 using ConfluenceRESTClient.Service;
+using System.Threading.Tasks;
 
 namespace ConfluenceRestClient.Service
 {
@@ -7,6 +8,8 @@ namespace ConfluenceRestClient.Service
     {
 
         ContentList GetContentBySpaceKey(string spaceKey);
+
+        Task<ContentList> GetContentBySpaceKeyAsync(string spaceKey);
 
         ContentList GetAllContent();
 

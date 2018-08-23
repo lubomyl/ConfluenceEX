@@ -1,26 +1,31 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Shell;
-using ConfluenceEX.Main;
-using ConfluenceEX.View;
 using System.ComponentModel.Design;
 using ConfluenceEX.ViewModel;
 using ConfluenceRESTClient.Service.Implementation;
 using ConfluenceRESTClient.Service;
 using ConfluenceRESTClient.Model;
 using ConfluenceEX.Common;
+using System.Collections.ObjectModel;
+using ConfluenceRestClient.Model;
 
-namespace ConfluenceEX
+namespace ConfluenceEX.Main
 {
 
     [Guid(Guids.GUID_CONFLUENCE_TOOL_WINDOW_STRING)]
-    public class ConfluenceToolWindow : ToolWindowPane
+    public partial class ConfluenceToolWindow : ToolWindowPane
     {
         private readonly object _view;
         private ConfluenceToolWindowNavigatorViewModel _navigator;
         private bool _isAuthenticated;
 
         private static AuthenticatedUser _authenticatedUser;
+
+        public ObservableCollection<Space> spaceList;
+        public ObservableCollection<Space> spaceListCopy;
+
+        public bool repeatedSearch = false;
 
         public IAuthenticationService _authenticationService;
 

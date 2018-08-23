@@ -5,13 +5,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ConfluenceEX.View"
-             xmlns:vsp="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.14.0"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             Background="{DynamicResource ToolWindowBackgroundBrushKey}">
+    
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
+
+        <ResourceDictionary x:Key="style">
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Uid="VisualStudioThemeResources"
+					Source="pack://application:,,,/ConfluenceEX;component/Main/VisualStudioThemeResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
-    <Grid Margin="10">
+
+    <Grid Margin="10" Resources="{StaticResource style}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
@@ -23,16 +32,18 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
-        <TextBlock Grid.Column="0" Grid.Row="0" Text="Pass in login credentials:" Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}"/>
 
-        <Label Grid.Column="0" Grid.Row="1" Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}">Username:</Label>
-        <Label Grid.Column="0" Grid.Row="2" Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}">Password:</Label>
+        <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource PlainText}">Login credentials:</TextBlock>
+
+        <Label Grid.Column="0" Grid.Row="1">Username:</Label>
+        <Label Grid.Column="0" Grid.Row="2">Password:</Label>
 
         <TextBox x:Name="Username" Text="{Binding Username}" Grid.Column="1" Grid.Row="1" Width="150px"/>
         <PasswordBox x:Name="UserPassword" Grid.Column="1" Grid.Row="2" Width="150px"/>
-        <Button Command="{Binding SignInCommand}" CommandParameter="{Binding ElementName=This}" Content="Sign in" Grid.Column="0" Grid.Row="3" Height="25" x:Name="SignIn" Width="75" />
-        <TextBlock Grid.Column="0" Grid.Row="4" Visibility="{Binding BadSignInCredentials, Converter={StaticResource BoolToVisConverter}}" Text="Bad Sign-In credentials" Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}"/>
+        <Button Command="{Binding SignInCommand}" CommandParameter="{Binding ElementName=This}" Content="Sign in" Grid.Column="0" 
+                Grid.Row="3" Height="25" x:Name="SignIn" Width="75" />
+        <TextBlock Grid.Column="0" Grid.Row="4" Visibility="{Binding BadSignInCredentials, Converter={StaticResource BoolToVisConverter}}" 
+                   Style="{StaticResource PlainText}">Bad credentials</TextBlock>
     </Grid>
     
     

@@ -54,6 +54,10 @@
     <Compile Include="Common\DelegateCommand.cs" />
     <Compile Include="Common\IHavePassword.cs" />
     <Compile Include="Common\SignedInUser.cs" />
+    <Compile Include="Main\ConfluenceToolWindowSearchTasks.cs" />
+    <Compile Include="Theme\TeamFoundationColors.cs" />
+    <Compile Include="Theme\ThemeColorId.cs" />
+    <Compile Include="Theme\ThemeColors.cs" />
     <Compile Include="View\Navigation\ConfluenceToolWindowNavigator.xaml.cs">
       <DependentUpon>ConfluenceToolWindowNavigator.xaml</DependentUpon>
     </Compile>
@@ -190,6 +194,7 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="RestSharp, Version=106.2.1.0, Culture=neutral, PublicKeyToken=598062e77f915f75" />
     <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -223,6 +228,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Main\VisualStudioThemeResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Navigation\ConfluenceToolWindowNavigator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
