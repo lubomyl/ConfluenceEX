@@ -6,12 +6,22 @@
              xmlns:local="clr-namespace:ConfluenceEX.View"
              xmlns:vsp="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.14.0"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    
+             d:DesignHeight="300" d:DesignWidth="300"
+             Background="{DynamicResource ToolWindowBackgroundBrushKey}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Uid="VisualStudioThemeResources"
+					Source="pack://application:,,,/ConfluenceEX;component/Main/VisualStudioThemeResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="Auto" />
-        <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -19,9 +29,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="0" Grid.Row="0" Text="Succesfully signed in." Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.SystemMenuTextBrushKey}}"/>
+        <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource PlainText}">Successfully signed-in!</TextBlock>
 
-        <Button Grid.Column="0" Grid.Row="2" Command="{Binding SignOutCommand}" Content="Sign out" Height="25" x:Name="SignIn" Width="75" />
+        <Button Grid.Column="0" Grid.Row="2" Command="{Binding SignOutCommand}" Content="Sign out" Height="25" x:Name="SignOut" Width="75" />
 
     </Grid>
 </UserControl>
