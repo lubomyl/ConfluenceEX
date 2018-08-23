@@ -58,6 +58,7 @@
     <Compile Include="Theme\TeamFoundationColors.cs" />
     <Compile Include="Theme\ThemeColorId.cs" />
     <Compile Include="Theme\ThemeColors.cs" />
+    <Compile Include="ViewModel\Validation\EmptyOrWhitespaceRule.cs" />
     <Compile Include="View\Navigation\ConfluenceToolWindowNavigator.xaml.cs">
       <DependentUpon>ConfluenceToolWindowNavigator.xaml</DependentUpon>
     </Compile>
