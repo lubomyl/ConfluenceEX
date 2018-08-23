@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ConfluenceEX.View"
+             xmlns:validation="clr-namespace:ConfluenceEX.ViewModel.Validation"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              Background="{DynamicResource ToolWindowBackgroundBrushKey}">
@@ -20,10 +21,10 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Margin="10" Resources="{StaticResource style}">
+    <Grid Margin="20" Resources="{StaticResource style}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -35,13 +36,23 @@
 
         <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource PlainText}">Login credentials:</TextBlock>
 
-        <Label Grid.Column="0" Grid.Row="1">Username:</Label>
-        <Label Grid.Column="0" Grid.Row="2">Password:</Label>
+        <Label Grid.Row="1">Username:</Label>
+        <TextBox Grid.Column="1" Grid.Row="1" Width="150px" Margin="0,0,0,10">
+            <TextBox.Text>
+                <Binding x:Name="username" Path="Username" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validation:EmptyOrWhitespaceRule></validation:EmptyOrWhitespaceRule>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <TextBox x:Name="Username" Text="{Binding Username}" Grid.Column="1" Grid.Row="1" Width="150px"/>
-        <PasswordBox x:Name="UserPassword" Grid.Column="1" Grid.Row="2" Width="150px"/>
+        <Label Grid.Row="2">Password:</Label>
+        <PasswordBox x:Name="UserPassword" Grid.Column="1" Grid.Row="2" Width="150px" Margin="0,0,0,10"/>
+        
         <Button Command="{Binding SignInCommand}" CommandParameter="{Binding ElementName=This}" Content="Sign in" Grid.Column="0" 
-                Grid.Row="3" Height="25" x:Name="SignIn" Width="75" />
+                Grid.Row="3" Height="25" x:Name="SignIn" Width="75" Margin="0,0,0,10"/>
+        
         <TextBlock Grid.Column="0" Grid.Row="4" Visibility="{Binding BadSignInCredentials, Converter={StaticResource BoolToVisConverter}}" 
                    Style="{StaticResource PlainText}">Bad credentials</TextBlock>
     </Grid>

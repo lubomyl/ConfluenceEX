@@ -6,6 +6,8 @@ using ConfluenceRESTClient.Service.Implementation;
 using System;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace ConfluenceEX.ViewModel
 {
@@ -50,8 +52,8 @@ namespace ConfluenceEX.ViewModel
             }
             else
             {
-                //TODO
-                Console.WriteLine("ERROR: Missing username or password");
+                /*BindingExpression be = Username.GetBindingExpression(TextBox.TextProperty);
+                be.UpdateSource();*/
             }
 
             if (this._isAuthenticated)

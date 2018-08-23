@@ -14,6 +14,10 @@ namespace ConfluenceEX.Main
 {
     public partial class ConfluenceToolWindow : ToolWindowPane
     {
+        private ObservableCollection<Space> _spaceList;
+        private ObservableCollection<Space> _spaceListCopy;
+
+        private bool _repeatedSearch = false;
 
         public override bool SearchEnabled
         {
@@ -35,15 +39,15 @@ namespace ConfluenceEX.Main
 
         public override void ClearSearch()
         {
-            repeatedSearch = false;
+            _repeatedSearch = false;
 
             ConfluenceToolWindowNavigator control = (ConfluenceToolWindowNavigator) this.Content;
 
-            spaceList.Clear();
+            _spaceList.Clear();
 
-            foreach (Space space in spaceListCopy)
+            foreach (Space space in _spaceListCopy)
             {
-                spaceList.Add(space);
+                _spaceList.Add(space);
             }
         }
 
@@ -88,15 +92,15 @@ namespace ConfluenceEX.Main
                 }
                 finally
                 {
-                    m_toolWindow.repeatedSearch = true;
+                    m_toolWindow._repeatedSearch = true;
 
                     ThreadHelper.Generic.Invoke(() =>
                     {
-                        m_toolWindow.spaceList.Clear();
+                        m_toolWindow._spaceList.Clear();
 
                         foreach (Space space in resultList)
                         {
-                            m_toolWindow.spaceList.Add(space);
+                            m_toolWindow._spaceList.Add(space);
                         }
                     });
 
@@ -110,7 +114,7 @@ namespace ConfluenceEX.Main
 
             private uint SearchForSpaceName(List<Space> resultList, bool matchCase, uint resultCount, string searchString)
             {
-                foreach (Space space in m_toolWindow.spaceList)
+                foreach (Space space in m_toolWindow._spaceList)
                 {
                     if (matchCase == true)
                     {
@@ -140,15 +144,15 @@ namespace ConfluenceEX.Main
 
             private void InitializeListsToSearch(ConfluenceToolWindowNavigatorViewModel navigator)
             {
-                m_toolWindow.spaceList = ((SpaceListViewModel)((SpaceListView)navigator.SelectedView).DataContext).SpaceList;
+                m_toolWindow._spaceList = ((SpaceListViewModel)((SpaceListView)navigator.SelectedView).DataContext).SpaceList;
 
-                if (!m_toolWindow.repeatedSearch)
+                if (!m_toolWindow._repeatedSearch)
                 {
-                    m_toolWindow.spaceListCopy = new ObservableCollection<Space>();
+                    m_toolWindow._spaceListCopy = new ObservableCollection<Space>();
 
-                    foreach (Space space in m_toolWindow.spaceList)
+                    foreach (Space space in m_toolWindow._spaceList)
                     {
-                        m_toolWindow.spaceListCopy.Add(space);
+                        m_toolWindow._spaceListCopy.Add(space);
                     }
                 }
             }
@@ -157,11 +161,11 @@ namespace ConfluenceEX.Main
             {
                 this.SearchResults = 0;
 
-                m_toolWindow.spaceListCopy = new ObservableCollection<Space>();
+                m_toolWindow._spaceListCopy = new ObservableCollection<Space>();
 
-                foreach (Space space in m_toolWindow.spaceList)
+                foreach (Space space in m_toolWindow._spaceList)
                 {
-                    m_toolWindow.spaceListCopy.Add(space);
+                    m_toolWindow._spaceListCopy.Add(space);
                 }
             }
         }

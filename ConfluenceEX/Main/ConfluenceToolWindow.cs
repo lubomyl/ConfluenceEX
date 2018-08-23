@@ -22,11 +22,6 @@ namespace ConfluenceEX.Main
 
         private static AuthenticatedUser _authenticatedUser;
 
-        public ObservableCollection<Space> spaceList;
-        public ObservableCollection<Space> spaceListCopy;
-
-        public bool repeatedSearch = false;
-
         public IAuthenticationService _authenticationService;
 
         /// <summary>

@@ -20,6 +20,8 @@ namespace ConfluenceEX.ViewModel
 
         private ObservableCollection<Content> _spaceContentList;
 
+        private bool _openInExternalBrowser;
+
         public DelegateCommand SpaceContentSelectedCommand { get; private set; }
 
         /// <summary>
@@ -53,16 +55,29 @@ namespace ConfluenceEX.ViewModel
         {
             Content content = sender as Content;
 
-            IVsWindowFrame ppFrame;
-            var service = Package.GetGlobalService(typeof(IVsWebBrowsingService)) as IVsWebBrowsingService;
+            if (this._openInExternalBrowser)
+            {
+                System.Diagnostics.Process.Start("https://lubomyl3.atlassian.net/wiki" + content.Links.Webui);
+            }
+            else
+            {
+                IVsWindowFrame ppFrame;
+                var service = Package.GetGlobalService(typeof(IVsWebBrowsingService)) as IVsWebBrowsingService;
 
-            service.Navigate("https://lubomyl3.atlassian.net/wiki" + content.Links.Webui, 0, out ppFrame);
+                service.Navigate("https://lubomyl3.atlassian.net/wiki" + content.Links.Webui, 0, out ppFrame);
+            }
         }
 
         public ObservableCollection<Content> SpaceContentList
         {
             get { return this._spaceContentList; }
             set { this._spaceContentList = value; }
+        }
+
+        public bool OpenInExternalBrowser
+        {
+            get { return this._openInExternalBrowser; }
+            set { this._openInExternalBrowser = value; }
         }
     }
 }
