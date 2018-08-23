@@ -30,10 +30,23 @@ namespace ConfluenceEX.ViewModel
             string spaceKey = space.Key;
 
             this._contentService = new ContentService(username, password);
+            this.SpaceContentList = new ObservableCollection<Content>();
 
-            this.SpaceContentList = new ObservableCollection<Content>(this._contentService.GetContentBySpaceKey(spaceKey).Results);
+            this.GetContentBySpaceKeyAsync(spaceKey);
+
             this.SpaceContentSelectedCommand = new DelegateCommand(OnItemSelected);
+        }
 
+        private async void GetContentBySpaceKeyAsync(string spaceKey)
+        {
+            System.Threading.Tasks.Task<ContentList> contentTask = this._contentService.GetContentBySpaceKeyAsync(spaceKey);
+
+            var contentList = await contentTask as ContentList;
+
+            foreach (Content c in contentList.Results)
+            {
+                this.SpaceContentList.Add(c);
+            }
         }
 
         private void OnItemSelected(object sender)
