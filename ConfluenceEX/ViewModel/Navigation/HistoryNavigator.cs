@@ -9,7 +9,7 @@ namespace ConfluenceEX.ViewModel.Navigation
 {
     public class HistoryNavigator
     {
-        private const int STACK_SIZE = 5;
+        private const int STACK_SIZE = 3;
         private const int STEP = 1;
 
         private List<UserControl> _viewStack;
@@ -78,7 +78,7 @@ namespace ConfluenceEX.ViewModel.Navigation
 
         public void AddView(UserControl view)
         {
-            if (this._index != this._viewStack.Count)
+            if (this._index != this._viewStack.Count - 1)
             {
                 for (int i = _index + STEP; i < this._viewStack.Count; i++)
                 {
@@ -86,8 +86,28 @@ namespace ConfluenceEX.ViewModel.Navigation
                 }
             }
 
+            if(this._index == STACK_SIZE)
+            {
+                ShiftStackLeft();
+            }
+
             this._viewStack.Add(view);
             this._index++;
+        }
+
+        private void ShiftStackLeft()
+        {
+            for (int i = 1; i < this._viewStack.Count; i++)
+            {
+                this._viewStack[i - 1] = this._viewStack[i];
+            }
+
+            for (int i = _viewStack.Count - 1; i < this._viewStack.Count; i++)
+            {
+                this._viewStack.RemoveAt(i);
+            }
+
+            this._index--;
         }
     }
 }
