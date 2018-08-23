@@ -40,5 +40,13 @@ namespace ConfluenceRestClient.Service.Implementation
             return ret;
         }
 
+        public Task<ContentList> GetContentBySpaceKeyAsync(string spaceKey)
+        {
+            var request = new RestRequest("content?spaceKey={spaceKey}");
+            request.AddUrlSegment("spaceKey", spaceKey);
+
+            return GetAsync<ContentList>(request);
+        }
+
     }
 }
