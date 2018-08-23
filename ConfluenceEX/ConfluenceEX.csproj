@@ -82,7 +82,7 @@
     <Compile Include="Main\ConfluenceToolWindow.cs" />
     <Compile Include="Main\Guids.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\BeforeSignInView.xaml.cs">
+    <Compile Include="Main\BeforeSignInView.xaml.cs">
       <DependentUpon>BeforeSignInView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ContentListView.xaml.cs">
@@ -224,6 +224,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Main\Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Navigation\ConfluenceToolWindowNavigator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -240,7 +244,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\BeforeSignInView.xaml">
+    <Page Include="Main\BeforeSignInView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

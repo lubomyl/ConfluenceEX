@@ -37,7 +37,7 @@ namespace ConfluenceEX.Main
         {
             repeatedSearch = false;
 
-            ConfluenceToolWindowNavigator control = (ConfluenceToolWindowNavigator)this.Content;
+            ConfluenceToolWindowNavigator control = (ConfluenceToolWindowNavigator) this.Content;
 
             spaceList.Clear();
 
