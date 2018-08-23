@@ -50,10 +50,14 @@ namespace ConfluenceEX.ViewModel
             if (this._afterSignInView == null)
             {
                 this._afterSignInView = new AfterSignInView(this);
+                this._historyNavigator.AddView(this._afterSignInView);
+
                 SelectedView = this._afterSignInView;
             }
             else
             {
+                this._historyNavigator.AddView(this._afterSignInView);
+
                 SelectedView = _afterSignInView;
             }
         }
@@ -67,10 +71,14 @@ namespace ConfluenceEX.ViewModel
             if (this._beforeSignInView == null)
             {
                 this._beforeSignInView = new BeforeSignInView(this);
+                this._historyNavigator.AddView(this._beforeSignInView);
+
                 SelectedView = this._beforeSignInView;
             }
             else
             {
+                this._historyNavigator.AddView(this._beforeSignInView);
+
                 SelectedView = _beforeSignInView;
             }
         }
@@ -83,12 +91,18 @@ namespace ConfluenceEX.ViewModel
             if (this._spacesListView == null)
             {
                 this._spacesListView = new SpaceListView(this);
+                this._historyNavigator.AddView(this._spacesListView);
+
                 SelectedView = this._spacesListView;
             }
             else
             {
+                this._historyNavigator.AddView(this._spacesListView);
+
                 SelectedView = _spacesListView;
             }
+
+            
         }
 
         public void ShowSpaceContent(Space space)
@@ -97,6 +111,8 @@ namespace ConfluenceEX.ViewModel
             EnableSpacesRefresh(false, _service);
 
             this._contentListView = new ContentListView(space);
+            this._historyNavigator.AddView(this._contentListView);
+
             SelectedView = this._contentListView;
         }
 
@@ -156,8 +172,8 @@ namespace ConfluenceEX.ViewModel
                 CommandID toolbarMenuCommandConnectionID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_CONNECTION_ID);
                 CommandID toolbarMenuCommandRefreshID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_REFRESH_ID);
 
-                MenuCommand onToolbarMenuCommandBackClick = new MenuCommand(null, toolbarMenuCommandBackID);
-                MenuCommand onToolbarMenuCommandForwardClick = new MenuCommand(null, toolbarMenuCommandForwardID);
+                MenuCommand onToolbarMenuCommandBackClick = new MenuCommand(GoBack, toolbarMenuCommandBackID);
+                MenuCommand onToolbarMenuCommandForwardClick = new MenuCommand(GoForward, toolbarMenuCommandForwardID);
                 MenuCommand onToolbarMenuCommandHomeClick = new MenuCommand(ShowSpaces, toolbarMenuCommandHomeID);
                 MenuCommand onToolbarMenuCommandConnectionClick = new MenuCommand(ShowConnection, toolbarMenuCommandConnectionID);
                 MenuCommand onToolbarMenuCommandRefreshClick = new MenuCommand(null, toolbarMenuCommandRefreshID);
@@ -185,13 +201,28 @@ namespace ConfluenceEX.ViewModel
             }
         }
 
+        private void GoBack(object sender, EventArgs e)
+        {
+            if (this._historyNavigator.CanGoBack())
+            {
+                this.SelectedView = this._historyNavigator.GetBackView();
+            }
+        }
+
+        private void GoForward(object sender, EventArgs e)
+        {
+            if (this._historyNavigator.CanGoForward())
+            {
+                this.SelectedView = this._historyNavigator.GetForwardView();
+            }
+        }
+
         public object SelectedView
         {
             get { return _selectedView; }
             set
             {
                 _selectedView = value;
-                this._historyNavigator.AddView((UserControl) value);
 
                 if (this._historyNavigator.CanGoBack())
                 {

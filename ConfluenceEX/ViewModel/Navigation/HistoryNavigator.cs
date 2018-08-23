@@ -20,12 +20,12 @@ namespace ConfluenceEX.ViewModel.Navigation
         {
             this._viewStack = new List<UserControl>();
 
-            _index = 0;
+            _index = -1;
         }
 
         public bool CanGoBack()
         {
-            if (_index > 0 && this._viewStack.Count > 1) {
+            if (this._index > 0 && this._viewStack.Count > 1) {
                 return true;
             }
             else
@@ -36,7 +36,7 @@ namespace ConfluenceEX.ViewModel.Navigation
 
         public bool CanGoForward()
         {
-            if(_index < this._viewStack.Count)
+            if(this._index + 1 < this._viewStack.Count)
             {
                 return true;
             }
@@ -50,8 +50,10 @@ namespace ConfluenceEX.ViewModel.Navigation
         {
             if (CanGoBack())
             {
+                UserControl ret = _viewStack[_index - STEP];
                 this._index--;
-                return _viewStack[_index - STEP];
+
+                return ret;
             } else
             {
                 //TODO throw exception
@@ -63,8 +65,10 @@ namespace ConfluenceEX.ViewModel.Navigation
         {
             if (CanGoForward())
             {
+                UserControl ret = _viewStack[this._index + STEP];
                 this._index++;
-                return _viewStack[_index + STEP];
+
+                return ret;
             } else
             {
                 //TODO throw exception
@@ -74,9 +78,12 @@ namespace ConfluenceEX.ViewModel.Navigation
 
         public void AddView(UserControl view)
         {
-            for (int i = _index + STEP; i < this._viewStack.Count; i++)
+            if (this._index != this._viewStack.Count)
             {
-                this._viewStack.RemoveAt(i);
+                for (int i = _index + STEP; i < this._viewStack.Count; i++)
+                {
+                    this._viewStack.RemoveAt(i);
+                }
             }
 
             this._viewStack.Add(view);
