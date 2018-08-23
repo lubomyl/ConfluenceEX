@@ -1,6 +1,7 @@
 ﻿using ConfluenceEX.Common;
 using ConfluenceEX.Main;
 using ConfluenceEX.View;
+using ConfluenceEX.ViewModel.Navigation;
 using ConfluenceRestClient.Model;
 using ConfluenceRESTClient.Service;
 using ConfluenceRESTClient.Service.Implementation;
@@ -11,6 +12,7 @@ using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace ConfluenceEX.ViewModel
 {
@@ -27,9 +29,12 @@ namespace ConfluenceEX.ViewModel
 
         private OleMenuCommandService _service;
 
+        private HistoryNavigator _historyNavigator;
+
         public ConfluenceToolWindowNavigatorViewModel(ConfluenceToolWindow parent)
         {
             this._parent = parent;
+            this._historyNavigator = new HistoryNavigator();
 
             _service = ConfluencePackage.Mcs;
 
@@ -167,6 +172,7 @@ namespace ConfluenceEX.ViewModel
             set
             {
                 _selectedView = value;
+                this._historyNavigator.AddView((UserControl) value);
                 OnPropertyChanged("SelectedView");
             }
         }
