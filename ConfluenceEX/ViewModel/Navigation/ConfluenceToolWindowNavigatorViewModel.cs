@@ -67,18 +67,16 @@ namespace ConfluenceEX.ViewModel
             _parent.Caption = "Confluence - Sign-in";
             this.EnableCommands(false, _service);
             EnableSpacesRefresh(false, _service);
+            EnableBack(false, _service);
 
             if (this._beforeSignInView == null)
             {
                 this._beforeSignInView = new BeforeSignInView(this);
-                this._historyNavigator.AddView(this._beforeSignInView);
 
                 SelectedView = this._beforeSignInView;
             }
             else
             {
-                this._historyNavigator.AddView(this._beforeSignInView);
-
                 SelectedView = _beforeSignInView;
             }
         }
