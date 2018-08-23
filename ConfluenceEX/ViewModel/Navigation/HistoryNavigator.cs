@@ -25,7 +25,7 @@ namespace ConfluenceEX.ViewModel.Navigation
 
         public bool CanGoBack()
         {
-            if (_index > 0) {
+            if (_index > 0 && this._viewStack.Count > 1) {
                 return true;
             }
             else
@@ -36,7 +36,7 @@ namespace ConfluenceEX.ViewModel.Navigation
 
         public bool CanGoForward()
         {
-            if(_index < STACK_SIZE)
+            if(_index < this._viewStack.Count)
             {
                 return true;
             }

@@ -13,8 +13,8 @@ namespace ConfluenceEX.Main
         public const int CONFLUENCE_COMMAND_ID = 0x0101;
 
         public const int COMMAND_HOME_ID = 0x0129;
-        public const int COMMAND_EDIT_ID = 0x0130;
-        public const int COMMAND_ADD_ID = 0x0131;
+        public const int COMMAND_BACK_ID = 0x0130;
+        public const int COMMAND_FORWARD_ID = 0x0131;
         public const int COMMAND_CONNECTION_ID = 0x0132;
         public const int COMMAND_REFRESH_ID = 0x0133;
 

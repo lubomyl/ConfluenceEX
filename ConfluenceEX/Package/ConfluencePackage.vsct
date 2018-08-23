@@ -46,31 +46,26 @@
           <ButtonText>Home</ButtonText>
         </Strings>
       </Button>
-      <!-- TODO uncomment when implementing back/forward feature -->
-      <!--
-      <Button guid="guidConfluenceToolbarMenu" id="ToolbarCommandEdit" priority="0x0000" type="Button" >
+      <Button guid="guidConfluenceToolbarMenu" id="ToolbarCommandBack" priority="0x0000" type="Button" >
         <Parent guid="guidConfluencePackage" id="ConfluenceToolbarGroup" />
-        <CommandFlag>IconAndText</CommandFlag>
-        <CommandFlag>DefaultDisabled</CommandFlag>
-        <Icon guid="ImageCatalogGuid" id="EditColumn" />
+        <Icon guid="ImageCatalogGuid" id="Backwards" />
         <CommandFlag>IconIsMoniker</CommandFlag>
+        <CommandFlag>DefaultDisabled</CommandFlag>
         <Strings>
-          <ButtonText>ChangeTest</ButtonText>
-          <CommandName>Change</CommandName>
+          <ButtonText>Back</ButtonText>
+          <CommandName>Back</CommandName>
         </Strings>
       </Button>
-      <Button guid="guidConfluenceToolbarMenu" id="ToolbarCommandAdd" priority="0x0000" type="Button" >
+      <Button guid="guidConfluenceToolbarMenu" id="ToolbarCommandForward" priority="0x0000" type="Button" >
         <Parent guid="guidConfluencePackage" id="ConfluenceToolbarGroup" />
-        <CommandFlag>IconAndText</CommandFlag>
-        <CommandFlag>DefaultDisabled</CommandFlag>
-        <Icon guid="ImageCatalogGuid" id="AddBuildToQueue" />
+        <Icon guid="ImageCatalogGuid" id="Forwards" />
         <CommandFlag>IconIsMoniker</CommandFlag>
+        <CommandFlag>DefaultDisabled</CommandFlag>
         <Strings>
-          <ButtonText>AddTest</ButtonText>
-          <CommandName>Add</CommandName>
+          <ButtonText>Forward</ButtonText>
+          <CommandName>Forward</CommandName>
         </Strings>
       </Button>
-      -->
       <Button guid="guidConfluenceToolbarMenu" id="ToolbarCommandConnection" priority="0x0000" type="Button" >
         <Parent guid="guidConfluencePackage" id="ConfluenceToolbarGroup" />
         <Icon guid="ImageCatalogGuid" id="AddConnection" />
@@ -102,8 +97,8 @@
 
     <GuidSymbol name="guidConfluenceToolbarMenu" value="{1E127E55-FDD7-4091-AA9F-AD0465FAF33F}">
       <IDSymbol name="ToolbarCommandHome" value="0x0129" />
-      <IDSymbol name="ToolbarCommandEdit" value="0x0130" />
-      <IDSymbol name="ToolbarCommandAdd" value="0x0131" />
+      <IDSymbol name="ToolbarCommandBack" value="0x0130" />
+      <IDSymbol name="ToolbarCommandForward" value="0x0131" />
       <IDSymbol name="ToolbarCommandConnection" value="0x0132" />
       <IDSymbol name="ToolbarCommandRefresh" value="0x0133" />
     </GuidSymbol>

@@ -111,8 +111,8 @@ namespace ConfluenceEX.ViewModel
                 ShowBeforeSignIn();
             }
         }
-
-        private static void EnableSpacesRefresh(bool enable, OleMenuCommandService service)
+        //TODO create one function fow all command with switch by enum
+        private void EnableSpacesRefresh(bool enable, OleMenuCommandService service)
         {
             if (service != null)
             {
@@ -123,28 +123,53 @@ namespace ConfluenceEX.ViewModel
             }
         }
 
+        private void EnableBack(bool enable, OleMenuCommandService service)
+        {
+            if (service != null)
+            {
+                CommandID toolbarMenuCommandBackID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_BACK_ID);
+                MenuCommand onToolbarMenuCommandBackClick = service.FindCommand(toolbarMenuCommandBackID);
+
+                onToolbarMenuCommandBackClick.Enabled = enable;
+            }
+        }
+
+        private void EnableForward(bool enable, OleMenuCommandService service)
+        {
+            if (service != null)
+            {
+                CommandID toolbarMenuCommandForwardID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_FORWARD_ID);
+                MenuCommand onToolbarMenuCommandForwardClick = service.FindCommand(toolbarMenuCommandForwardID);
+
+                onToolbarMenuCommandForwardClick.Enabled = enable;
+            }
+        }
+
         //TODO - find better solution then initializing null commands
         private void InitializeCommandsEmpty(OleMenuCommandService service)
         {
             if (service != null)
             {
-                CommandID toolbarMenuCommandEditID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_EDIT_ID);
-                CommandID toolbarMenuCommandAddID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_ADD_ID);
+                CommandID toolbarMenuCommandBackID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_BACK_ID);
+                CommandID toolbarMenuCommandForwardID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_FORWARD_ID);
                 CommandID toolbarMenuCommandHomeID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_HOME_ID);
                 CommandID toolbarMenuCommandConnectionID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_CONNECTION_ID);
                 CommandID toolbarMenuCommandRefreshID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_REFRESH_ID);
 
-                MenuCommand onToolbarMenuCommandEditClick = new MenuCommand(null, toolbarMenuCommandEditID);
-                MenuCommand onToolbarMenuCommandAddClick = new MenuCommand(null, toolbarMenuCommandAddID);
+                MenuCommand onToolbarMenuCommandBackClick = new MenuCommand(null, toolbarMenuCommandBackID);
+                MenuCommand onToolbarMenuCommandForwardClick = new MenuCommand(null, toolbarMenuCommandForwardID);
                 MenuCommand onToolbarMenuCommandHomeClick = new MenuCommand(ShowSpaces, toolbarMenuCommandHomeID);
                 MenuCommand onToolbarMenuCommandConnectionClick = new MenuCommand(ShowConnection, toolbarMenuCommandConnectionID);
                 MenuCommand onToolbarMenuCommandRefreshClick = new MenuCommand(null, toolbarMenuCommandRefreshID);
 
-                service.AddCommand(onToolbarMenuCommandEditClick);
-                service.AddCommand(onToolbarMenuCommandAddClick);
+                service.AddCommand(onToolbarMenuCommandBackClick);
+                service.AddCommand(onToolbarMenuCommandForwardClick);
                 service.AddCommand(onToolbarMenuCommandHomeClick);
                 service.AddCommand(onToolbarMenuCommandConnectionClick);
                 service.AddCommand(onToolbarMenuCommandRefreshClick);
+
+                onToolbarMenuCommandBackClick.Enabled = false;
+                onToolbarMenuCommandForwardClick.Enabled = false;
             }
         }
 
@@ -152,16 +177,10 @@ namespace ConfluenceEX.ViewModel
         {
             if (service != null)
             {
-                CommandID toolbarMenuCommandEditID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_EDIT_ID);
-                CommandID toolbarMenuCommandAddID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_ADD_ID);
                 CommandID toolbarMenuCommandHomeID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_HOME_ID);
 
-                MenuCommand onToolbarMenuCommandEditClick = service.FindCommand(toolbarMenuCommandEditID);
-                MenuCommand onToolbarMenuCommandAddClick = service.FindCommand(toolbarMenuCommandAddID);
                 MenuCommand onToolbarMenuCommandHomeClick = service.FindCommand(toolbarMenuCommandHomeID);
 
-                onToolbarMenuCommandEditClick.Enabled = enable;
-                onToolbarMenuCommandAddClick.Enabled = enable;
                 onToolbarMenuCommandHomeClick.Enabled = enable;
             }
         }
@@ -173,6 +192,25 @@ namespace ConfluenceEX.ViewModel
             {
                 _selectedView = value;
                 this._historyNavigator.AddView((UserControl) value);
+
+                if (this._historyNavigator.CanGoBack())
+                {
+                    EnableBack(true, _service);
+                }
+                else
+                {
+                    EnableBack(false, _service);
+                }
+
+                if (this._historyNavigator.CanGoForward())
+                {
+                    EnableForward(true, _service);
+                }
+                else
+                {
+                    EnableForward(false, _service);
+                }
+
                 OnPropertyChanged("SelectedView");
             }
         }
