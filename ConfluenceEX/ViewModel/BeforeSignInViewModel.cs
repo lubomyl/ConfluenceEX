@@ -42,7 +42,7 @@ namespace ConfluenceEX.ViewModel
             SignedInUser.Username = this._username;
             SignedInUser.Password = this._password;
 
-            this._authenticationService = new AuthenticationService(this._username, this._password);
+            this._authenticationService = new BasicAuthenticationService(this._username, this._password);
 
             if (SignedInUser.IsComplete())
             {

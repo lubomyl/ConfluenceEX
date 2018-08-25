@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace ConfluenceRESTClient.Service.Implementation
 {
-    public class AuthenticationService : BaseService, IAuthenticationService
+    public class BasicAuthenticationService : BaseService, IAuthenticationService
     {
 
-        public AuthenticationService(string username, string password) : base(username, password){ }
+        public BasicAuthenticationService(string username, string password) : base(username, password){ }
 
         public AuthenticatedUser Authenticate()
         {

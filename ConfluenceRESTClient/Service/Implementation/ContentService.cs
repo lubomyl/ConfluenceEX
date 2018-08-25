@@ -12,7 +12,7 @@ namespace ConfluenceRestClient.Service.Implementation
     public class ContentService : BaseService, IContentService
     {
 
-        public ContentService(string username, string password) : base(username, password) { }
+        public ContentService() : base() { }
 
         public void CreateContent(Content content)
         {

@@ -11,7 +11,7 @@ namespace ConfluenceRESTClient.Service.Implementation
     public class SpaceService : BaseService, ISpaceService
     {
 
-        public SpaceService(string username, string password) : base(username, password) { }
+        public SpaceService() : base() { }
 
         public void CreateSpace(Space space)
         {
