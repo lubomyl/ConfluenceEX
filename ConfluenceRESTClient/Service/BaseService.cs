@@ -1,5 +1,7 @@
 ﻿using DevDefined.OAuth.Consumer;
 using DevDefined.OAuth.Framework;
+using RestSharp;
+using RestSharp.Authenticators;
 using System;
 using System.Configuration;
 using System.Collections.Generic;
@@ -8,42 +10,27 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using ConfluenceRestClient.Model;
-using Newtonsoft.Json;
 
 namespace ConfluenceRESTClient.Service
 {
 
     //TODO implement error logging
-    public class BaseService
+    public class BaseService : RestSharp.RestClient
     {
-        private static BaseService _instance = null;
 
         private string _username = string.Empty;
         private string _password = string.Empty;
 
-        private OAuthSession _session;
-
-        private const string REST_URL = "https://lubomyl3.atlassian.net/wiki/rest/api/";
+        private const string RestUrl = "https://lubomyl3.atlassian.net/wiki/rest/api";
 
         public BaseService(string username, string password)
         {
 
         }
 
-        private BaseService() { }
-
-        public static BaseService Instance
+        public BaseService()
         {
-            get
-            {
-                if(_instance == null)
-                {
-                    _instance = new BaseService();
-                }
-
-                return _instance;
-            }
+            this.BaseUrl = new Uri(RestUrl);
         }
 
         public void ProcessOauthDance()
@@ -66,22 +53,25 @@ namespace ConfluenceRESTClient.Service
                 Key = certificate.PrivateKey
             };
 
-            this._session = new OAuthSession(consumerContext, requestTokenUrl, userAuthorizeUrl, accessUrl);
-            IToken requestToken = _session.GetRequestToken("POST");
+            var session = new OAuthSession(consumerContext, requestTokenUrl, userAuthorizeUrl, accessUrl);
+            IToken requestToken = session.GetRequestToken("POST");
 
-            string authorisationUrl = _session.GetUserAuthorizationUrlForToken(requestToken);
+            string authorisationUrl = session.GetUserAuthorizationUrlForToken(requestToken);
 
             //TODO oauth_verification need to be added on break after redirecting user to token authentication
-            IToken accessToken = _session.ExchangeRequestTokenForAccessToken(requestToken, "POST", "APNRp8");
+            IToken accessToken = session.ExchangeRequestTokenForAccessToken(requestToken, "POST", "5BDeJN");
+
+            this.Authenticator = OAuth1Authenticator.ForProtectedResource(consumerKey, consumerSecret, accessToken.Token,
+                accessToken.TokenSecret);
         }
 
-        public T Get<T> (string resource) where T : new()
+        public T Get<T> (IRestRequest request) where T : new()
         {
-            var response = _session.Request().Get().ForUrl(REST_URL + resource).ReadBody();
+            var response = Execute<T>(request);
 
-            if (response != null)
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                return JsonConvert.DeserializeObject<T>(response);
+                return response.Data;
             }
             else
             {
@@ -89,7 +79,7 @@ namespace ConfluenceRESTClient.Service
             }
         }
 
-        /*public Task<T> GetAsync<T>(IRestRequest request) where T : new()
+        public Task<T> GetAsync<T>(IRestRequest request) where T : new()
         {
             var taskCompletionSource = new TaskCompletionSource<T>();
 
@@ -97,7 +87,7 @@ namespace ConfluenceRESTClient.Service
                 taskCompletionSource.SetResult(response.Data));
 
             return taskCompletionSource.Task;
-        }*/
+        }
 
         #region BaseService Members
 

@@ -9,7 +9,7 @@ namespace ConfluenceRestClient.Service
 
         ContentList GetContentBySpaceKey(string spaceKey);
 
-        //Task<ContentList> GetContentBySpaceKeyAsync(string spaceKey);
+        Task<ContentList> GetContentBySpaceKeyAsync(string spaceKey);
 
         ContentList GetAllContent();
 

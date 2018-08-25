@@ -22,8 +22,7 @@ namespace ConfluenceEX.Main
 
         private static AuthenticatedUser _authenticatedUser;
 
-        private IAuthenticationService _authenticationService;
-        private BaseService _baseService;
+        public IAuthenticationService _authenticationService;
 
         /// <summary>
         /// Standard constructor for the tool window.
@@ -31,8 +30,8 @@ namespace ConfluenceEX.Main
         public ConfluenceToolWindow() : base(null)
         {
             this.Caption = Resources.ConflueceToolWindowTitle;
+            this._authenticationService = new BasicAuthenticationService(SignedInUser.Username, SignedInUser.Password);
             this._navigator = new ConfluenceToolWindowNavigatorViewModel(this);
-            /*this._authenticationService = new BasicAuthenticationService(SignedInUser.Username, SignedInUser.Password);
 
             _authenticatedUser = _authenticationService.Authenticate();
 
@@ -41,12 +40,9 @@ namespace ConfluenceEX.Main
                 this._navigator.ShowSpaces(null, null);
             } 
             else
-            {*/
-            _baseService = BaseService.Instance;
-            _baseService.ProcessOauthDance();
-
-            this._navigator.ShowAfterSignIn();
-            //}
+            {
+                this._navigator.ShowBeforeSignIn();
+            }
 
             this._view = new ConfluenceToolWindowNavigator(this._navigator);
             base.Content = _view;
