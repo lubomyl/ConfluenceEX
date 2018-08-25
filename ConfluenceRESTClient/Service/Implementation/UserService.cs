@@ -28,5 +28,17 @@ namespace ConfluenceRESTClient.Service.Implementation
             });
         }
 
+        public bool IsAuthenticated(AuthenticatedUser authenticatedUser)
+        {
+            bool ret = false;
+
+            if (authenticatedUser != null)
+            {
+                ret = true;
+            }
+
+            return ret;
+        }
+
     }
 }

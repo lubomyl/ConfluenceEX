@@ -39,7 +39,7 @@ namespace ConfluenceEX.ViewModel
             this.SignInOAuthCommand = new DelegateCommand(SignInOAuth);
         }
 
-        private void SignIn(object parameter)
+        private async void SignIn(object parameter)
         {
             this._username = this.Username;
             GetPassword(parameter);
@@ -49,20 +49,17 @@ namespace ConfluenceEX.ViewModel
 
             this._userService = new UserService();
 
-            //TODO basic sign-in using username/password form
-            /*
             if (SignedInUser.IsComplete())
             {
-                ConfluenceToolWindow.AuthenticatedUser = _userService.GetAuthenticatedUserAsync();
+                ConfluenceToolWindow.AuthenticatedUser = await this._userService.GetAuthenticatedUserAsync();
                 this._isAuthenticated = _userService.IsAuthenticated(ConfluenceToolWindow.AuthenticatedUser);
                 this.BadSignInCredentials = !this._isAuthenticated;
             }
             else
             {
                 /*BindingExpression be = Username.GetBindingExpression(TextBox.TextProperty);
-                be.UpdateSource();
+                be.UpdateSource();*/
             }
-            */
 
             if (this._isAuthenticated)
             {

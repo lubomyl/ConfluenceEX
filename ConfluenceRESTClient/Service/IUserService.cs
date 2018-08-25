@@ -12,5 +12,6 @@ namespace ConfluenceRESTClient.Service
 
         Task<AuthenticatedUser> GetAuthenticatedUserAsync();
 
+        bool IsAuthenticated(AuthenticatedUser authenticatedUser);
     }
 }
