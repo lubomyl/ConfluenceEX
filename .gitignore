@@ -240,3 +240,6 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/ConfluenceRESTClient/Properties/Settings.Designer.cs
+/ConfluenceRESTClient/Properties/Settings.settings
+/ConfluenceRESTClient/app.config
