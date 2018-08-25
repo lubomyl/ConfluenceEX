@@ -28,7 +28,7 @@ namespace ConfluenceEX.ViewModel
         /// </summary>
         public SpaceListViewModel(string username, string password, ConfluenceToolWindowNavigatorViewModel parent)
         {
-            this._spaceService = new SpaceService(username, password);
+            this._spaceService = new SpaceService();
             this._parent = parent;
             this.SpaceList = new ObservableCollection<Space>();
 
@@ -36,12 +36,16 @@ namespace ConfluenceEX.ViewModel
             OleMenuCommandService service = ConfluencePackage.Mcs;
             InitializeCommands(service);
 
-            GetSpacesAsync();
+            foreach(Space s in this._spaceService.GetAllSpaces().Results)
+            {
+                this.SpaceList.Add(s);
+            }
+            //GetSpacesAsync();
 
             this.SpaceList.CollectionChanged += this.OnCollectionChanged;    
         }
 
-        private async void GetSpacesAsync()
+        /*private async void GetSpacesAsync()
         {
             System.Threading.Tasks.Task<SpaceList> spaceTask = this._spaceService.GetAllSpacesAsync();
 
@@ -65,7 +69,7 @@ namespace ConfluenceEX.ViewModel
             {
                 this.SpaceList.Add(s);
             }
-        }
+        }*/
 
         private void OnItemSelected(object sender)
         {
@@ -80,7 +84,7 @@ namespace ConfluenceEX.ViewModel
             {
                 CommandID toolbarMenuCommandRefreshID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_REFRESH_ID);
 
-                MenuCommand onToolbarMenuCommandRefreshClick = new MenuCommand(RefreshSpacesAsync, toolbarMenuCommandRefreshID);
+                MenuCommand onToolbarMenuCommandRefreshClick = new MenuCommand(null /*RefreshSpacesAsync*/, toolbarMenuCommandRefreshID);
 
                 service.RemoveCommand(service.FindCommand(toolbarMenuCommandRefreshID));
                 service.AddCommand(onToolbarMenuCommandRefreshClick);

@@ -29,7 +29,7 @@ namespace ConfluenceEX.View
         {
             InitializeComponent();
 
-            _viewModel = new AfterSignInViewModel(parent, SignedInUser.Username, SignedInUser.Password);
+            _viewModel = new AfterSignInViewModel(parent);
             this.DataContext = _viewModel;
         }
     }

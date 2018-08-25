@@ -4,14 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ConfluenceRestClient.Model;
-using RestSharp;
 
 namespace ConfluenceRESTClient.Service.Implementation
 {
-    public class SpaceService : BaseService, ISpaceService
+    public class SpaceService : ISpaceService
     {
 
-        public SpaceService() : base() { }
+        private BaseService _baseService;
+
+        public SpaceService()
+        {
+            this._baseService = BaseService.Instance;
+        }
 
         public void CreateSpace(Space space)
         {
@@ -20,17 +24,17 @@ namespace ConfluenceRESTClient.Service.Implementation
     
         public SpaceList GetAllSpaces()
         {
-            var request = new RestRequest("space");
+            var resource = "space";
 
-            return Get<SpaceList>(request);
+            return _baseService.Get<SpaceList>(resource);
         }
 
-        public Task<SpaceList> GetAllSpacesAsync()
+        /*public Task<SpaceList> GetAllSpacesAsync()
         {
             var request = new RestRequest("space");
 
-            return GetAsync<SpaceList>(request);
-        }
+            return _baseService.GetAsync<SpaceList>(request);
+        }*/
 
         public Space GetSpaceByName(string name)
         {

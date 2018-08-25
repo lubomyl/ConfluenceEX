@@ -1,6 +1,4 @@
 ﻿using ConfluenceRESTClient.Model;
-using RestSharp;
-using RestSharp.Authenticators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +16,9 @@ namespace ConfluenceRESTClient.Service.Implementation
         {
             AuthenticatedUser ret;
 
-            var request = new RestRequest("user/current");
+            var resource = "user/current";
 
-            ret = Get<AuthenticatedUser>(request);
+            ret = Get<AuthenticatedUser>(resource);
 
             return ret;
         }

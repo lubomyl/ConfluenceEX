@@ -4,15 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ConfluenceRestClient.Model;
-using RestSharp;
 using ConfluenceRESTClient.Service;
 
 namespace ConfluenceRestClient.Service.Implementation
 {
-    public class ContentService : BaseService, IContentService
+    public class ContentService : IContentService
     {
+        private BaseService _baseService;
 
-        public ContentService() : base() { }
+        public ContentService()
+        {
+            this._baseService = BaseService.Instance;
+        }
 
         public void CreateContent(Content content)
         {
@@ -22,9 +25,9 @@ namespace ConfluenceRestClient.Service.Implementation
         public ContentList GetAllContent()
         {
             ContentList ret = new ContentList();
-            var request = new RestRequest("content");
+            var resource = "content";
 
-            ret = Get<ContentList>(request);
+            ret = _baseService.Get<ContentList>(resource);
 
             return ret;
         }
@@ -32,21 +35,21 @@ namespace ConfluenceRestClient.Service.Implementation
         public ContentList GetContentBySpaceKey(string spaceKey)
         {
             ContentList ret = new ContentList();
-            var request = new RestRequest("content?spaceKey={spaceKey}");
-            request.AddUrlSegment("spaceKey", spaceKey);
 
-            ret = Get<ContentList>(request);
+            var resource = $"content?spaceKey={spaceKey}";
+            
+            ret = _baseService.Get<ContentList>(resource);
 
             return ret;
         }
 
-        public Task<ContentList> GetContentBySpaceKeyAsync(string spaceKey)
+        /*public Task<ContentList> GetContentBySpaceKeyAsync(string spaceKey)
         {
             var request = new RestRequest("content?spaceKey={spaceKey}");
             request.AddUrlSegment("spaceKey", spaceKey);
 
-            return GetAsync<ContentList>(request);
-        }
+            return _baseService.GetAsync<ContentList>(request);
+        }*/
 
     }
 }
