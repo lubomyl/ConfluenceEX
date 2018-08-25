@@ -1,4 +1,5 @@
 ﻿using ConfluenceEX.ViewModel;
+using DevDefined.OAuth.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,11 +25,11 @@ namespace ConfluenceEX.View
 
         private OAuthVerifierConfirmationViewModel _viewModel;
 
-        public OAuthVerifierConfirmationView(ConfluenceToolWindowNavigatorViewModel parent)
+        public OAuthVerifierConfirmationView(ConfluenceToolWindowNavigatorViewModel parent, IToken requestToken)
         {
             InitializeComponent();
 
-            _viewModel = new OAuthVerifierConfirmationViewModel(parent);
+            _viewModel = new OAuthVerifierConfirmationViewModel(parent, requestToken);
             this.DataContext = _viewModel;
         }
     }

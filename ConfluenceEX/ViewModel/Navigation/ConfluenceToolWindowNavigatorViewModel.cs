@@ -5,6 +5,7 @@ using ConfluenceEX.ViewModel.Navigation;
 using ConfluenceRestClient.Model;
 using ConfluenceRESTClient.Service;
 using ConfluenceRESTClient.Service.Implementation;
+using DevDefined.OAuth.Framework;
 using Microsoft.VisualStudio.Shell;
 using System;
 using System.Collections.Generic;
@@ -127,13 +128,13 @@ namespace ConfluenceEX.ViewModel
             }
         }
 
-        public void ShowOAuthVerificationConfirmation(object sender, EventArgs e)
+        public void ShowOAuthVerificationConfirmation(object sender, EventArgs e, IToken requestToken)
         {
             _parent.Caption = "Confirm OAuth Verification Code";
 
             if (this._oAuthVerifierConfirmationView == null)
             {
-                this._oAuthVerifierConfirmationView = new OAuthVerifierConfirmationView(this);
+                this._oAuthVerifierConfirmationView = new OAuthVerifierConfirmationView(this, requestToken);
 
                 SelectedView = this._oAuthVerifierConfirmationView;
             }

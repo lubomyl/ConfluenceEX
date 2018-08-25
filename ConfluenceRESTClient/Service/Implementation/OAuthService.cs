@@ -30,8 +30,8 @@ namespace ConfluenceRESTClient.Service.Implementation
         public Task<string> GetUserAuthorizationUrlForToken(IToken requestToken)
         {
             return Task.Run(() => {
-                string authorisationUrl = this._baseService.Session.GetUserAuthorizationUrlForToken(requestToken);
-                return authorisationUrl;
+                string authorizationUrl = this._baseService.Session.GetUserAuthorizationUrlForToken(requestToken);
+                return authorizationUrl;
             });
         }
 
@@ -43,6 +43,5 @@ namespace ConfluenceRESTClient.Service.Implementation
                 return accessToken;
             });
         }
-
     }
 }

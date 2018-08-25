@@ -10,7 +10,7 @@ namespace ConfluenceRestClient.Model
         public string Status { get; set; }
         public string Title { get; set; }
 
-        public Links Links { get; set; }
+        public Links _Links { get; set; }
 
     }
 }

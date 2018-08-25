@@ -3,6 +3,7 @@ using ConfluenceEX.Common;
 using ConfluenceEX.Main;
 using ConfluenceRESTClient.Service;
 using ConfluenceRESTClient.Service.Implementation;
+using DevDefined.OAuth.Framework;
 using System;
 using System.Runtime.InteropServices;
 using System.Security;
@@ -15,6 +16,8 @@ namespace ConfluenceEX.ViewModel
     {
 
         private IUserService _userService;
+        private IOAuthService _oAuthService;
+
         private ConfluenceToolWindowNavigatorViewModel _parent;
 
         private string _username;
@@ -67,9 +70,16 @@ namespace ConfluenceEX.ViewModel
             }
         }
 
-        private void SignInOAuth(object parameter)
+        private async void SignInOAuth(object parameter)
         {
-            this._parent.ShowOAuthVerificationConfirmation(null, null);
+            this._oAuthService = new OAuthService();
+
+            IToken requestToken = await this._oAuthService.GetRequestToken();
+            string authorizationUrl = await this._oAuthService.GetUserAuthorizationUrlForToken(requestToken);
+
+            System.Diagnostics.Process.Start(authorizationUrl);
+
+            this._parent.ShowOAuthVerificationConfirmation(null, null, requestToken);
         }
 
         private void GetPassword(object parameter)

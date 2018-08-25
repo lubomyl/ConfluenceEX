@@ -10,5 +10,6 @@ namespace ConfluenceRESTClient.Model
     {
 
         public string Webui { get; set; }
+
     }
 }
