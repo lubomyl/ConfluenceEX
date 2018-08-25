@@ -78,9 +78,9 @@
     </Compile>
     <Compile Include="Service\BaseService.cs" />
     <Compile Include="Service\BaseService2.cs" />
-    <Compile Include="Service\IAuthenticationService.cs" />
+    <Compile Include="Service\IUserService.cs" />
     <Compile Include="Service\IContentService.cs" />
-    <Compile Include="Service\Implementation\AuthenticationService.cs" />
+    <Compile Include="Service\Implementation\UserService.cs" />
     <Compile Include="Service\Implementation\ContentService.cs" />
     <Compile Include="Service\Implementation\SpaceService.cs" />
     <Compile Include="Service\ISpaceService.cs" />

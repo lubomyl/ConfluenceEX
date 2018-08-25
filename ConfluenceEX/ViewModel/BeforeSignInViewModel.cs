@@ -14,7 +14,7 @@ namespace ConfluenceEX.ViewModel
     public class BeforeSignInViewModel : ViewModelBase
     {
 
-        private IAuthenticationService _authenticationService;
+        private IUserService _userService;
         private ConfluenceToolWindowNavigatorViewModel _parent;
 
         private string _username;
@@ -42,12 +42,14 @@ namespace ConfluenceEX.ViewModel
             SignedInUser.Username = this._username;
             SignedInUser.Password = this._password;
 
-            this._authenticationService = new AuthenticationService(this._username, this._password);
+            this._userService = new UserService(this._username, this._password);
 
+            //TODO basic sign-in using username/password form
+            /*
             if (SignedInUser.IsComplete())
             {
-                ConfluenceToolWindow.AuthenticatedUser = _authenticationService.Authenticate();
-                this._isAuthenticated = _authenticationService.IsAuthenticated(ConfluenceToolWindow.AuthenticatedUser);
+                ConfluenceToolWindow.AuthenticatedUser = _userService.GetAuthenticatedUserAsync();
+                this._isAuthenticated = _userService.IsAuthenticated(ConfluenceToolWindow.AuthenticatedUser);
                 this.BadSignInCredentials = !this._isAuthenticated;
             }
             else
@@ -55,6 +57,7 @@ namespace ConfluenceEX.ViewModel
                 /*BindingExpression be = Username.GetBindingExpression(TextBox.TextProperty);
                 be.UpdateSource();*/
             }
+            */
 
             if (this._isAuthenticated)
             {
