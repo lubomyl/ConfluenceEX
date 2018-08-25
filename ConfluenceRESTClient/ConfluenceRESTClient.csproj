@@ -78,6 +78,8 @@
     </Compile>
     <Compile Include="Service\BaseService.cs" />
     <Compile Include="Service\BaseService2.cs" />
+    <Compile Include="Service\Implementation\OAuthService.cs" />
+    <Compile Include="Service\IOAuthService.cs" />
     <Compile Include="Service\IUserService.cs" />
     <Compile Include="Service\IContentService.cs" />
     <Compile Include="Service\Implementation\UserService.cs" />

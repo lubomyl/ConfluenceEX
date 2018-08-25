@@ -14,7 +14,7 @@ namespace ConfluenceRESTClient.Service.Implementation
 
         public SpaceService()
         {
-            _baseService = BaseService2.Instance;
+            this._baseService = BaseService2.Instance;
         }
 
         public void CreateSpace(Space space)

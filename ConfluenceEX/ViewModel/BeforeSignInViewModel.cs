@@ -24,6 +24,7 @@ namespace ConfluenceEX.ViewModel
         private bool _badSignInCredentials;
 
         public DelegateCommand SignInCommand { get; private set; }
+        public DelegateCommand SignInOAuthCommand { get; private set; }
 
         public BeforeSignInViewModel(ConfluenceToolWindowNavigatorViewModel parent)
         {
@@ -32,6 +33,7 @@ namespace ConfluenceEX.ViewModel
             this._badSignInCredentials = false;
 
             this.SignInCommand = new DelegateCommand(SignIn);
+            this.SignInOAuthCommand = new DelegateCommand(SignInOAuth);
         }
 
         private void SignIn(object parameter)
@@ -42,7 +44,7 @@ namespace ConfluenceEX.ViewModel
             SignedInUser.Username = this._username;
             SignedInUser.Password = this._password;
 
-            this._userService = new UserService(this._username, this._password);
+            this._userService = new UserService();
 
             //TODO basic sign-in using username/password form
             /*
@@ -55,7 +57,7 @@ namespace ConfluenceEX.ViewModel
             else
             {
                 /*BindingExpression be = Username.GetBindingExpression(TextBox.TextProperty);
-                be.UpdateSource();*/
+                be.UpdateSource();
             }
             */
 
@@ -63,6 +65,11 @@ namespace ConfluenceEX.ViewModel
             {
                 this._parent.ShowAfterSignIn();
             }
+        }
+
+        private void SignInOAuth(object parameter)
+        {
+            this._parent.ShowOAuthVerificationConfirmation(null, null);
         }
 
         private void GetPassword(object parameter)

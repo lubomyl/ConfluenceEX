@@ -20,10 +20,10 @@ namespace ConfluenceRESTClient.Service
 
         private BaseService2()
         {
-
+            this.PrepareOAuthSession();
         }
 
-        public void ProcessOauthDance()
+        public void PrepareOAuthSession()
         {
             X509Certificate2 certificate = new X509Certificate2(Properties.Settings.Default.CertificatePath, Properties.Settings.Default.CertificateSecret);
 
@@ -41,13 +41,6 @@ namespace ConfluenceRESTClient.Service
             };
 
             this._session = new OAuthSession(consumerContext, requestTokenUrl, userAuthorizeTokenUrl, accessTokenUrl);
-
-            IToken requestToken = this._session.GetRequestToken("POST");
-
-            string authorisationUrl = this._session.GetUserAuthorizationUrlForToken(requestToken);
-
-            //TODO oauth_verification need to be added on break after redirecting user to token authentication
-            IToken accessToken = this._session.ExchangeRequestTokenForAccessToken(requestToken, "POST", "3U5vBS");
         }
 
         public T Get2<T>(string resource) where T : new()
@@ -74,6 +67,18 @@ namespace ConfluenceRESTClient.Service
                 }
 
                 return _instance;
+            }
+        }
+
+        public OAuthSession Session
+        {
+            get
+            {
+                return this._session;
+            }
+            private set
+            {
+                this._session = value;
             }
         }
 

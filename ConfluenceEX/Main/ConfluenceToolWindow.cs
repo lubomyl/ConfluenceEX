@@ -48,9 +48,9 @@ namespace ConfluenceEX.Main
             }
             */
             BaseService2 baseService2 = BaseService2.Instance;
-            baseService2.ProcessOauthDance();
+            baseService2.PrepareOAuthSession();
 
-            this._navigator.ShowAfterSignIn();
+            this._navigator.ShowBeforeSignIn();
 
             this._view = new ConfluenceToolWindowNavigator(this._navigator);
             base.Content = _view;

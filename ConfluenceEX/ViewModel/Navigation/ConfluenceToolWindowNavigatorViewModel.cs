@@ -26,6 +26,7 @@ namespace ConfluenceEX.ViewModel
         private ContentListView _contentListView;
         private AfterSignInView _afterSignInView;
         private BeforeSignInView _beforeSignInView;
+        private OAuthVerifierConfirmationView _oAuthVerifierConfirmationView;
 
         private OleMenuCommandService _service;
 
@@ -100,9 +101,7 @@ namespace ConfluenceEX.ViewModel
                 this._historyNavigator.AddView(this._spacesListView);
 
                 SelectedView = _spacesListView;
-            }
-
-            
+            }     
         }
 
         public void ShowSpaceContent(Space space)
@@ -126,6 +125,27 @@ namespace ConfluenceEX.ViewModel
             {
                 ShowBeforeSignIn();
             }
+        }
+
+        public void ShowOAuthVerificationConfirmation(object sender, EventArgs e)
+        {
+            _parent.Caption = "Confirm OAuth Verification Code";
+
+            if (this._oAuthVerifierConfirmationView == null)
+            {
+                this._oAuthVerifierConfirmationView = new OAuthVerifierConfirmationView(this);
+
+                SelectedView = this._oAuthVerifierConfirmationView;
+            }
+            else
+            {
+                SelectedView = _beforeSignInView;
+            }
+
+            this._historyNavigator.ClearStack();
+            this.EnableCommand(false, _service, Guids.COMMAND_HOME_ID);
+            this.EnableCommand(false, _service, Guids.COMMAND_REFRESH_ID);
+            this.EnableCommand(false, _service, Guids.COMMAND_BACK_ID);
         }
 
         private void EnableCommand(bool enable, OleMenuCommandService service, int commandGuid)
