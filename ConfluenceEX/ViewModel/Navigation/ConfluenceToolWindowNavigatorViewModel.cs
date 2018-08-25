@@ -38,14 +38,14 @@ namespace ConfluenceEX.ViewModel
 
             _service = ConfluencePackage.Mcs;
 
-            InitializeCommandsEmpty(_service);
+            InitializeCommands(_service);
         }
 
         public void ShowAfterSignIn()
         {     
             _parent.Caption = "Confluence - Signed-in";
-            this.EnableCommands(true, _service);
-            EnableSpacesRefresh(false, _service);
+            this.EnableCommand(true, _service, Guids.COMMAND_HOME_ID);
+            this.EnableCommand(false, _service, Guids.COMMAND_REFRESH_ID);
 
             if (this._afterSignInView == null)
             {
@@ -65,28 +65,28 @@ namespace ConfluenceEX.ViewModel
         public void ShowBeforeSignIn()
         {
             _parent.Caption = "Confluence - Sign-in";
-            this.EnableCommands(false, _service);
-            EnableSpacesRefresh(false, _service);
-
+            
             if (this._beforeSignInView == null)
             {
                 this._beforeSignInView = new BeforeSignInView(this);
-                this._historyNavigator.AddView(this._beforeSignInView);
 
                 SelectedView = this._beforeSignInView;
             }
             else
             {
-                this._historyNavigator.AddView(this._beforeSignInView);
-
                 SelectedView = _beforeSignInView;
             }
+
+            this._historyNavigator.ClearStack();
+            this.EnableCommand(false, _service, Guids.COMMAND_HOME_ID);
+            this.EnableCommand(false, _service, Guids.COMMAND_REFRESH_ID);
+            this.EnableCommand(false, _service, Guids.COMMAND_BACK_ID);
         }
 
         public void ShowSpaces(object sender, EventArgs e)
         {
             _parent.Caption = "Confluence Spaces";
-            EnableSpacesRefresh(true, _service);
+            this.EnableCommand(true, _service, Guids.COMMAND_REFRESH_ID);
 
             if (this._spacesListView == null)
             {
@@ -108,7 +108,7 @@ namespace ConfluenceEX.ViewModel
         public void ShowSpaceContent(Space space)
         {
             _parent.Caption = "Confluence " + space.Name + " Content";
-            EnableSpacesRefresh(false, _service);
+            this.EnableCommand(false, _service, Guids.COMMAND_REFRESH_ID);
 
             this._contentListView = new ContentListView(space);
             this._historyNavigator.AddView(this._contentListView);
@@ -127,42 +127,19 @@ namespace ConfluenceEX.ViewModel
                 ShowBeforeSignIn();
             }
         }
-        //TODO create one function fow all command with switch by enum
-        private void EnableSpacesRefresh(bool enable, OleMenuCommandService service)
+
+        private void EnableCommand(bool enable, OleMenuCommandService service, int commandGuid)
         {
             if (service != null)
             {
-                CommandID toolbarMenuCommandRefreshID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_REFRESH_ID);
-                MenuCommand onToolbarMenuCommandRefreshClick = service.FindCommand(toolbarMenuCommandRefreshID);
+                CommandID toolbarMenuCommandID = new CommandID(Guids.guidConfluenceToolbarMenu, commandGuid);
+                MenuCommand onToolbarMenuCommandClick = service.FindCommand(toolbarMenuCommandID);
 
-                onToolbarMenuCommandRefreshClick.Enabled = enable;
+                onToolbarMenuCommandClick.Enabled = enable;
             }
         }
 
-        private void EnableBack(bool enable, OleMenuCommandService service)
-        {
-            if (service != null)
-            {
-                CommandID toolbarMenuCommandBackID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_BACK_ID);
-                MenuCommand onToolbarMenuCommandBackClick = service.FindCommand(toolbarMenuCommandBackID);
-
-                onToolbarMenuCommandBackClick.Enabled = enable;
-            }
-        }
-
-        private void EnableForward(bool enable, OleMenuCommandService service)
-        {
-            if (service != null)
-            {
-                CommandID toolbarMenuCommandForwardID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_FORWARD_ID);
-                MenuCommand onToolbarMenuCommandForwardClick = service.FindCommand(toolbarMenuCommandForwardID);
-
-                onToolbarMenuCommandForwardClick.Enabled = enable;
-            }
-        }
-
-        //TODO - find better solution then initializing null commands
-        private void InitializeCommandsEmpty(OleMenuCommandService service)
+        private void InitializeCommands(OleMenuCommandService service)
         {
             if (service != null)
             {
@@ -183,21 +160,6 @@ namespace ConfluenceEX.ViewModel
                 service.AddCommand(onToolbarMenuCommandHomeClick);
                 service.AddCommand(onToolbarMenuCommandConnectionClick);
                 service.AddCommand(onToolbarMenuCommandRefreshClick);
-
-                onToolbarMenuCommandBackClick.Enabled = false;
-                onToolbarMenuCommandForwardClick.Enabled = false;
-            }
-        }
-
-        private void EnableCommands(bool enable, OleMenuCommandService service)
-        {
-            if (service != null)
-            {
-                CommandID toolbarMenuCommandHomeID = new CommandID(Guids.guidConfluenceToolbarMenu, Guids.COMMAND_HOME_ID);
-
-                MenuCommand onToolbarMenuCommandHomeClick = service.FindCommand(toolbarMenuCommandHomeID);
-
-                onToolbarMenuCommandHomeClick.Enabled = enable;
             }
         }
 
@@ -206,6 +168,15 @@ namespace ConfluenceEX.ViewModel
             if (this._historyNavigator.CanGoBack())
             {
                 this.SelectedView = this._historyNavigator.GetBackView();
+
+                if(this.SelectedView.GetType() == typeof(SpaceListView))
+                {
+                    this.EnableCommand(true, _service, Guids.COMMAND_REFRESH_ID);
+                } 
+                else
+                {
+                    this.EnableCommand(false, _service, Guids.COMMAND_REFRESH_ID);
+                }
             }
         }
 
@@ -214,6 +185,15 @@ namespace ConfluenceEX.ViewModel
             if (this._historyNavigator.CanGoForward())
             {
                 this.SelectedView = this._historyNavigator.GetForwardView();
+
+                if (this.SelectedView.GetType() == typeof(SpaceListView))
+                {
+                    this.EnableCommand(true, _service, Guids.COMMAND_REFRESH_ID);
+                }
+                else
+                {
+                    this.EnableCommand(false, _service, Guids.COMMAND_REFRESH_ID);
+                }
             }
         }
 
@@ -226,20 +206,20 @@ namespace ConfluenceEX.ViewModel
 
                 if (this._historyNavigator.CanGoBack())
                 {
-                    EnableBack(true, _service);
+                    this.EnableCommand(true, _service, Guids.COMMAND_BACK_ID);
                 }
                 else
                 {
-                    EnableBack(false, _service);
+                    this.EnableCommand(false, _service, Guids.COMMAND_BACK_ID);
                 }
 
                 if (this._historyNavigator.CanGoForward())
                 {
-                    EnableForward(true, _service);
+                    this.EnableCommand(true, _service, Guids.COMMAND_FORWARD_ID);
                 }
                 else
                 {
-                    EnableForward(false, _service);
+                    this.EnableCommand(false, _service, Guids.COMMAND_FORWARD_ID);
                 }
 
                 OnPropertyChanged("SelectedView");
