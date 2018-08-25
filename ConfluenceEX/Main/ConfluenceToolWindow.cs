@@ -30,7 +30,7 @@ namespace ConfluenceEX.Main
         public ConfluenceToolWindow() : base(null)
         {
             this.Caption = Resources.ConflueceToolWindowTitle;
-            this._authenticationService = new BasicAuthenticationService(SignedInUser.Username, SignedInUser.Password);
+            this._authenticationService = new AuthenticationService(SignedInUser.Username, SignedInUser.Password);
             this._navigator = new ConfluenceToolWindowNavigatorViewModel(this);
 
             _authenticatedUser = _authenticationService.Authenticate();

@@ -23,18 +23,19 @@ namespace ConfluenceRESTClient.Service
 
         private const string RestUrl = "https://lubomyl3.atlassian.net/wiki/rest/api";
 
-        public BaseService(string username, string password)
-        {
-
-        }
-
         public BaseService()
         {
             this.BaseUrl = new Uri(RestUrl);
         }
 
-        public void ProcessOauthDance()
+        public BaseService(string username, string password)
         {
+            /*this.BaseUrl = new Uri(RestUrl);
+            this._username = username;
+            this._password = password;
+
+            this.Authenticator = new HttpBasicAuthenticator(_username, _password);*/
+
             string consumerKey = Properties.Settings.Default.consumerKey;
             string consumerSecret = Properties.Settings.Default.consumerSecret;
 
@@ -43,6 +44,7 @@ namespace ConfluenceRESTClient.Service
             string requestTokenUrl = "https://lubomyl3.atlassian.net/wiki/plugins/servlet/oauth/request-token";
             string userAuthorizeUrl = "https://lubomyl3.atlassian.net/wiki/plugins/servlet/oauth/authorize";
             string accessUrl = "https://lubomyl3.atlassian.net/wiki/plugins/servlet/oauth/access-token";
+            string callBackUrl = "";
 
             var consumerContext = new OAuthConsumerContext
             {
@@ -50,19 +52,13 @@ namespace ConfluenceRESTClient.Service
                 ConsumerKey = consumerKey,
                 ConsumerSecret = consumerSecret,
                 UseHeaderForOAuthParameters = true,
-                Key = certificate.PrivateKey
+                Key = certificate.PrivateKey            
             };
 
-            var session = new OAuthSession(consumerContext, requestTokenUrl, userAuthorizeUrl, accessUrl);
+            var session = new OAuthSession(consumerContext, requestUrl, userAuthorizeUrl, accessUrl);
             IToken requestToken = session.GetRequestToken("POST");
 
-            string authorisationUrl = session.GetUserAuthorizationUrlForToken(requestToken);
 
-            //TODO oauth_verification need to be added on break after redirecting user to token authentication
-            IToken accessToken = session.ExchangeRequestTokenForAccessToken(requestToken, "POST", "5BDeJN");
-
-            this.Authenticator = OAuth1Authenticator.ForProtectedResource(consumerKey, consumerSecret, accessToken.Token,
-                accessToken.TokenSecret);
         }
 
         public T Get<T> (IRestRequest request) where T : new()
