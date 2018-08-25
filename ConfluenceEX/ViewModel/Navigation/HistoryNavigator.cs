@@ -109,10 +109,5 @@ namespace ConfluenceEX.ViewModel.Navigation
 
             this._index--;
         }
-
-        public void ClearStack()
-        {
-            this._viewStack.Clear();
-        }
     }
 }

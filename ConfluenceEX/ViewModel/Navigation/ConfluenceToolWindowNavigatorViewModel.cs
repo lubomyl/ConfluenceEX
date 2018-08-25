@@ -77,7 +77,6 @@ namespace ConfluenceEX.ViewModel
                 SelectedView = _beforeSignInView;
             }
 
-            this._historyNavigator.ClearStack();
             this.EnableCommand(false, _service, Guids.COMMAND_HOME_ID);
             this.EnableCommand(false, _service, Guids.COMMAND_REFRESH_ID);
             this.EnableCommand(false, _service, Guids.COMMAND_BACK_ID);
