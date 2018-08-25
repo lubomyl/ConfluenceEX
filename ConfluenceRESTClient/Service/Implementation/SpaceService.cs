@@ -8,28 +8,27 @@ using RestSharp;
 
 namespace ConfluenceRESTClient.Service.Implementation
 {
-    public class SpaceService : BaseService, ISpaceService
+    public class SpaceService : ISpaceService
     {
+        private BaseService2 _baseService;
 
-        public SpaceService(string username, string password) : base(username, password) { }
+        public SpaceService()
+        {
+            _baseService = BaseService2.Instance;
+        }
 
         public void CreateSpace(Space space)
         {
             throw new NotImplementedException();
         }
 
-        public SpaceList GetAllSpaces()
-        { 
-            var request = new RestRequest("space");
-
-            return Get<SpaceList>(request);
-        }
-
         public Task<SpaceList> GetAllSpacesAsync()
         {
-            var request = new RestRequest("space");
+            return Task.Run(() => {
+                var resource = "space";
 
-            return GetAsync<SpaceList>(request);
+                return this._baseService.Get2<SpaceList>(resource);
+            });
         }
 
         public Space GetSpaceByName(string name)
@@ -37,9 +36,5 @@ namespace ConfluenceRESTClient.Service.Implementation
             throw new NotImplementedException();
         }
 
-        SpaceList ISpaceService.GetAllSpaces()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

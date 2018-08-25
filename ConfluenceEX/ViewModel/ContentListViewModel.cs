@@ -31,7 +31,7 @@ namespace ConfluenceEX.ViewModel
         {
             string spaceKey = space.Key;
 
-            this._contentService = new ContentService(username, password);
+            this._contentService = new ContentService();
             this.SpaceContentList = new ObservableCollection<Content>();
 
             this.GetContentBySpaceKeyAsync(spaceKey);

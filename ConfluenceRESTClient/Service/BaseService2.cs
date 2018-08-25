@@ -47,7 +47,7 @@ namespace ConfluenceRESTClient.Service
             string authorisationUrl = this._session.GetUserAuthorizationUrlForToken(requestToken);
 
             //TODO oauth_verification need to be added on break after redirecting user to token authentication
-            IToken accessToken = this._session.ExchangeRequestTokenForAccessToken(requestToken, "POST", "FuSXUl");
+            IToken accessToken = this._session.ExchangeRequestTokenForAccessToken(requestToken, "POST", "3U5vBS");
         }
 
         public T Get2<T>(string resource) where T : new()

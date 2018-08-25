@@ -12,8 +12,6 @@ namespace ConfluenceRESTClient.Service
 
         Space GetSpaceByName(string name);
 
-        SpaceList GetAllSpaces();
-
         Task<SpaceList> GetAllSpacesAsync();
 
         void CreateSpace(Space space);
