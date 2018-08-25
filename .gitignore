@@ -240,5 +240,3 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
-/ConfluenceRESTClient/Properties/Settings.settings
-/ConfluenceRESTClient/Properties/Settings.Designer.cs
