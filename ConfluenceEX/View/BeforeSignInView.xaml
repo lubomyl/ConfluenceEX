@@ -32,6 +32,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource PlainText}">Login credentials:</TextBlock>
@@ -55,6 +56,9 @@
         
         <TextBlock Grid.Column="0" Grid.Row="4" Visibility="{Binding BadSignInCredentials, Converter={StaticResource BoolToVisConverter}}" 
                    Style="{StaticResource PlainText}">Bad credentials</TextBlock>
+
+        <Button Command="{Binding SignInOAuthCommand}" CommandParameter="{Binding ElementName=This}" Content="OAuth Sign in" Grid.Column="0" 
+                Grid.Row="5" Height="25" x:Name="SignInOAuth" Width="75" Margin="0,0,0,10"/>
     </Grid>
     
     

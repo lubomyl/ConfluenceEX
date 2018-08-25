@@ -3,6 +3,7 @@ using ConfluenceEX.Common;
 using ConfluenceEX.Main;
 using ConfluenceRESTClient.Service;
 using ConfluenceRESTClient.Service.Implementation;
+using DevDefined.OAuth.Framework;
 using System;
 using System.Runtime.InteropServices;
 using System.Security;
@@ -14,7 +15,9 @@ namespace ConfluenceEX.ViewModel
     public class BeforeSignInViewModel : ViewModelBase
     {
 
-        private IAuthenticationService _authenticationService;
+        private IUserService _userService;
+        private IOAuthService _oAuthService;
+
         private ConfluenceToolWindowNavigatorViewModel _parent;
 
         private string _username;
@@ -24,6 +27,7 @@ namespace ConfluenceEX.ViewModel
         private bool _badSignInCredentials;
 
         public DelegateCommand SignInCommand { get; private set; }
+        public DelegateCommand SignInOAuthCommand { get; private set; }
 
         public BeforeSignInViewModel(ConfluenceToolWindowNavigatorViewModel parent)
         {
@@ -32,9 +36,10 @@ namespace ConfluenceEX.ViewModel
             this._badSignInCredentials = false;
 
             this.SignInCommand = new DelegateCommand(SignIn);
+            this.SignInOAuthCommand = new DelegateCommand(SignInOAuth);
         }
 
-        private void SignIn(object parameter)
+        private async void SignIn(object parameter)
         {
             this._username = this.Username;
             GetPassword(parameter);
@@ -42,12 +47,12 @@ namespace ConfluenceEX.ViewModel
             SignedInUser.Username = this._username;
             SignedInUser.Password = this._password;
 
-            this._authenticationService = new AuthenticationService(this._username, this._password);
+            this._userService = new UserService();
 
             if (SignedInUser.IsComplete())
             {
-                ConfluenceToolWindow.AuthenticatedUser = _authenticationService.Authenticate();
-                this._isAuthenticated = _authenticationService.IsAuthenticated(ConfluenceToolWindow.AuthenticatedUser);
+                ConfluenceToolWindow.AuthenticatedUser = await this._userService.GetAuthenticatedUserAsync();
+                this._isAuthenticated = _userService.IsAuthenticated(ConfluenceToolWindow.AuthenticatedUser);
                 this.BadSignInCredentials = !this._isAuthenticated;
             }
             else
@@ -60,6 +65,18 @@ namespace ConfluenceEX.ViewModel
             {
                 this._parent.ShowAfterSignIn();
             }
+        }
+
+        private async void SignInOAuth(object parameter)
+        {
+            this._oAuthService = new OAuthService();
+
+            IToken requestToken = await this._oAuthService.GetRequestToken();
+            string authorizationUrl = await this._oAuthService.GetUserAuthorizationUrlForToken(requestToken);
+
+            System.Diagnostics.Process.Start(authorizationUrl);
+
+            this._parent.ShowOAuthVerificationConfirmation(null, null, requestToken);
         }
 
         private void GetPassword(object parameter)

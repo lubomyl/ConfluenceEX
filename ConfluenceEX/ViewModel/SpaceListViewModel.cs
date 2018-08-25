@@ -17,6 +17,7 @@ namespace ConfluenceEX.ViewModel
     public class SpaceListViewModel : ViewModelBase
     {
         private ISpaceService _spaceService;
+
         private ConfluenceToolWindowNavigatorViewModel _parent;
 
         private ObservableCollection<Space> _spaceList;
@@ -28,7 +29,8 @@ namespace ConfluenceEX.ViewModel
         /// </summary>
         public SpaceListViewModel(string username, string password, ConfluenceToolWindowNavigatorViewModel parent)
         {
-            this._spaceService = new SpaceService(username, password);
+            this._spaceService = new SpaceService();
+
             this._parent = parent;
             this.SpaceList = new ObservableCollection<Space>();
 
@@ -46,11 +48,11 @@ namespace ConfluenceEX.ViewModel
             System.Threading.Tasks.Task<SpaceList> spaceTask = this._spaceService.GetAllSpacesAsync();
 
             var spaceList = await spaceTask as SpaceList;
-
+            
             foreach(Space s in spaceList.Results)
             {
                 this.SpaceList.Add(s);
-            }
+            }  
         }
 
         private async void RefreshSpacesAsync(object sender, EventArgs e)

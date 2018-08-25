@@ -9,43 +9,37 @@ using ConfluenceRESTClient.Service;
 
 namespace ConfluenceRestClient.Service.Implementation
 {
-    public class ContentService : BaseService, IContentService
+    public class ContentService : IContentService
     {
 
-        public ContentService(string username, string password) : base(username, password) { }
+        private BaseService2 _baseService;
+
+        public ContentService()
+        {
+            _baseService = BaseService2.Instance;
+        }
 
         public void CreateContent(Content content)
         {
             throw new NotImplementedException();
         }
 
-        public ContentList GetAllContent()
+        public Task<ContentList> GetAllContentAsync()
         {
-            ContentList ret = new ContentList();
-            var request = new RestRequest("content");
+            return Task.Run(() => {
+                var resource = "content";
 
-            ret = Get<ContentList>(request);
-
-            return ret;
-        }
-
-        public ContentList GetContentBySpaceKey(string spaceKey)
-        {
-            ContentList ret = new ContentList();
-            var request = new RestRequest("content?spaceKey={spaceKey}");
-            request.AddUrlSegment("spaceKey", spaceKey);
-
-            ret = Get<ContentList>(request);
-
-            return ret;
+                return this._baseService.Get2<ContentList>(resource);
+            });
         }
 
         public Task<ContentList> GetContentBySpaceKeyAsync(string spaceKey)
         {
-            var request = new RestRequest("content?spaceKey={spaceKey}");
-            request.AddUrlSegment("spaceKey", spaceKey);
+            return Task.Run(() => {
+                var resource = $"content?spaceKey={spaceKey}";
 
-            return GetAsync<ContentList>(request);
+                return this._baseService.Get2<ContentList>(resource);
+            });
         }
 
     }

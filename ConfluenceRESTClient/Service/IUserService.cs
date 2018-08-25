@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace ConfluenceRESTClient.Service
 {
-    public interface IAuthenticationService
+    public interface IUserService
     {
 
-        AuthenticatedUser Authenticate();
+        Task<AuthenticatedUser> GetAuthenticatedUserAsync();
 
         bool IsAuthenticated(AuthenticatedUser authenticatedUser);
-
     }
 }

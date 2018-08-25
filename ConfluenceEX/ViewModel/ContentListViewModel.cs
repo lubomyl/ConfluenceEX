@@ -31,7 +31,7 @@ namespace ConfluenceEX.ViewModel
         {
             string spaceKey = space.Key;
 
-            this._contentService = new ContentService(username, password);
+            this._contentService = new ContentService();
             this.SpaceContentList = new ObservableCollection<Content>();
 
             this.GetContentBySpaceKeyAsync(spaceKey);
@@ -57,14 +57,14 @@ namespace ConfluenceEX.ViewModel
 
             if (this._openInExternalBrowser)
             {
-                System.Diagnostics.Process.Start("https://lubomyl3.atlassian.net/wiki" + content.Links.Webui);
+                System.Diagnostics.Process.Start("https://lubomyl3.atlassian.net/wiki" + content._Links.Webui);
             }
             else
             {
                 IVsWindowFrame ppFrame;
                 var service = Package.GetGlobalService(typeof(IVsWebBrowsingService)) as IVsWebBrowsingService;
 
-                service.Navigate("https://lubomyl3.atlassian.net/wiki" + content.Links.Webui, 0, out ppFrame);
+                service.Navigate("https://lubomyl3.atlassian.net/wiki" + content._Links.Webui, 0, out ppFrame);
             }
         }
 

@@ -5,13 +5,11 @@ using System.Threading.Tasks;
 namespace ConfluenceRestClient.Service
 {
     public interface IContentService
-    {
-
-        ContentList GetContentBySpaceKey(string spaceKey);
+    { 
 
         Task<ContentList> GetContentBySpaceKeyAsync(string spaceKey);
 
-        ContentList GetAllContent();
+        Task<ContentList> GetAllContentAsync();
 
         void CreateContent(Content content);
     }
