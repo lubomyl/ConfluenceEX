@@ -132,16 +132,9 @@ namespace ConfluenceEX.ViewModel
         {
             _parent.Caption = "Confirm OAuth Verification Code";
 
-            if (this._oAuthVerifierConfirmationView == null)
-            {
-                this._oAuthVerifierConfirmationView = new OAuthVerifierConfirmationView(this, requestToken);
+            this._oAuthVerifierConfirmationView = new OAuthVerifierConfirmationView(this, requestToken);
 
-                SelectedView = this._oAuthVerifierConfirmationView;
-            }
-            else
-            {
-                SelectedView = _beforeSignInView;
-            }
+            SelectedView = this._oAuthVerifierConfirmationView;
 
             this._historyNavigator.ClearStack();
             this.EnableCommand(false, _service, Guids.COMMAND_HOME_ID);

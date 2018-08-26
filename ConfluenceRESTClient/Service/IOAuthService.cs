@@ -10,6 +10,8 @@ namespace ConfluenceRESTClient.Service
     public interface IOAuthService
     {
 
+        void CreateOAuthSession();
+
         //Step 1 - Get Request token to be able to generate authorization url for user
         Task<IToken> GetRequestToken();
 

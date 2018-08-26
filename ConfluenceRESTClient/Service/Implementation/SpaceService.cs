@@ -10,11 +10,11 @@ namespace ConfluenceRESTClient.Service.Implementation
 {
     public class SpaceService : ISpaceService
     {
-        private BaseService2 _baseService;
+        private DevDefinedBaseService _baseService;
 
         public SpaceService()
         {
-            this._baseService = BaseService2.Instance;
+            this._baseService = DevDefinedBaseService.Instance;
         }
 
         public void CreateSpace(Space space)
@@ -27,7 +27,7 @@ namespace ConfluenceRESTClient.Service.Implementation
             return Task.Run(() => {
                 var resource = "space";
 
-                return this._baseService.Get2<SpaceList>(resource);
+                return this._baseService.Get<SpaceList>(resource);
             });
         }
 

@@ -12,11 +12,11 @@ namespace ConfluenceRestClient.Service.Implementation
     public class ContentService : IContentService
     {
 
-        private BaseService2 _baseService;
+        private DevDefinedBaseService _baseService;
 
         public ContentService()
         {
-            _baseService = BaseService2.Instance;
+            _baseService = DevDefinedBaseService.Instance;
         }
 
         public void CreateContent(Content content)
@@ -29,7 +29,7 @@ namespace ConfluenceRestClient.Service.Implementation
             return Task.Run(() => {
                 var resource = "content";
 
-                return this._baseService.Get2<ContentList>(resource);
+                return this._baseService.Get<ContentList>(resource);
             });
         }
 
@@ -38,7 +38,7 @@ namespace ConfluenceRestClient.Service.Implementation
             return Task.Run(() => {
                 var resource = $"content?spaceKey={spaceKey}";
 
-                return this._baseService.Get2<ContentList>(resource);
+                return this._baseService.Get<ContentList>(resource);
             });
         }
 

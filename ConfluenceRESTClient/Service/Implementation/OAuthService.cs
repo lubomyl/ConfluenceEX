@@ -11,11 +11,31 @@ namespace ConfluenceRESTClient.Service.Implementation
 {
     public class OAuthService : IOAuthService
     {
-        private BaseService2 _baseService;
+        private DevDefinedBaseService _baseService;
 
         public OAuthService()
         {
-            this._baseService = BaseService2.Instance;
+            this._baseService = DevDefinedBaseService.Instance;
+        }
+
+        public void CreateOAuthSession()
+        {
+            X509Certificate2 certificate = new X509Certificate2(Properties.Settings.Default.CertificatePath, Properties.Settings.Default.CertificateSecret);
+
+            string requestTokenUrl = "https://lubomyl3.atlassian.net/wiki/plugins/servlet/oauth/request-token";
+            string userAuthorizeTokenUrl = "https://lubomyl3.atlassian.net/wiki/plugins/servlet/oauth/authorize";
+            string accessTokenUrl = "https://lubomyl3.atlassian.net/wiki/plugins/servlet/oauth/access-token";
+
+            var consumerContext = new OAuthConsumerContext
+            {
+                ConsumerKey = Properties.Settings.Default.ConsumerKey,
+                ConsumerSecret = Properties.Settings.Default.ConsumerSecret,
+                SignatureMethod = SignatureMethod.RsaSha1,
+                Key = certificate.PrivateKey,
+                UseHeaderForOAuthParameters = true
+            };
+
+            this._baseService.Session = new OAuthSession(consumerContext, requestTokenUrl, userAuthorizeTokenUrl, accessTokenUrl);
         }
 
         public Task<IToken> GetRequestToken()
