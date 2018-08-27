@@ -1,6 +1,7 @@
 ﻿using ConfluenceEX.Command;
 using ConfluenceEX.Common;
 using ConfluenceRestClient.Model;
+using ConfluenceRESTClient.Model;
 using ConfluenceRESTClient.Service;
 using ConfluenceRESTClient.Service.Implementation;
 using Microsoft.VisualStudio.Settings;
@@ -20,6 +21,10 @@ namespace ConfluenceEX.ViewModel
 
         private ConfluenceToolWindowNavigatorViewModel _parent;
 
+        private AuthenticatedUser _authenticatedUser;
+
+        private IUserService _userService;
+
         private WritableSettingsStore _userSettingsStore;
 
         public DelegateCommand SignOutCommand { get; private set; }
@@ -28,10 +33,20 @@ namespace ConfluenceEX.ViewModel
         {
             this._parent = parent;
 
+            this._userService = new UserService();
+            this.GetAuthenticatedUserAsync();
+
             SettingsManager settingsManager = new ShellSettingsManager(ServiceProvider.GlobalProvider);
             this._userSettingsStore = settingsManager.GetWritableSettingsStore(SettingsScope.UserSettings);
 
             this.SignOutCommand = new DelegateCommand(SignOut);
+        }
+
+        private async void GetAuthenticatedUserAsync()
+        {
+            System.Threading.Tasks.Task<AuthenticatedUser> authenticatedUserTask = this._userService.GetAuthenticatedUserAsync();
+
+            this.AuthenticatedUser = await authenticatedUserTask as AuthenticatedUser;
         }
 
         private void SignOut(object parameter)
@@ -46,6 +61,19 @@ namespace ConfluenceEX.ViewModel
         private void DeletePropertyFromUserSettings(string propertyName)
         {
             this._userSettingsStore.DeleteProperty("External Tools", propertyName);
+        }
+
+        public AuthenticatedUser AuthenticatedUser
+        {
+            get
+            {
+                return this._authenticatedUser;
+            }
+            set
+            {
+                this._authenticatedUser = value;
+                OnPropertyChanged("AuthenticatedUser");
+            }
         }
 
     }

@@ -27,11 +27,22 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource PlainText}">Successfully signed-in!</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource PlainText}">Successfully signed-in as:</TextBlock>
 
-        <Button Grid.Column="0" Grid.Row="2" Command="{Binding SignOutCommand}" Content="Sign out" Height="25" x:Name="SignOut" Width="75" />
+        <Label Grid.Column="0" Grid.Row="1" >Username:</Label>
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding AuthenticatedUser.Username}" Style="{StaticResource PlainText}"/>
+
+        <Label Grid.Column="0" Grid.Row="2" >Name:</Label>
+        <TextBlock Grid.Column="2" Grid.Row="2" Text="{Binding AuthenticatedUser.DisplayName}" Style="{StaticResource PlainText}"/>
+
+        <Label Grid.Column="0" Grid.Row="3" >Type:</Label>
+        <TextBlock Grid.Column="3" Grid.Row="3" Text="{Binding AuthenticatedUser.Type}" Style="{StaticResource PlainText}"/>
+        
+        <Button Grid.Column="0" Grid.Row="4" Command="{Binding SignOutCommand}" Content="Sign out" Height="25" x:Name="SignOut" Width="75" />
 
     </Grid>
 </UserControl>
