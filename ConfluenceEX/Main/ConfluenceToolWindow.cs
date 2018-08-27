@@ -23,7 +23,6 @@ namespace ConfluenceEX.Main
         private static AuthenticatedUser _authenticatedUser;
 
         private IUserService _userService;
-        private IOAuthService _oAuthService;
 
         /// <summary>
         /// Standard constructor for the tool window.
@@ -32,8 +31,6 @@ namespace ConfluenceEX.Main
         {
             this.Caption = Resources.ConflueceToolWindowTitle;
             this._navigator = new ConfluenceToolWindowNavigatorViewModel(this);
-
-            this._oAuthService = new OAuthService();
 
             /*
             this._authenticationService = new AuthenticationService(SignedInUser.Username, SignedInUser.Password);
@@ -49,14 +46,12 @@ namespace ConfluenceEX.Main
                 this._navigator.ShowBeforeSignIn();
             }
             */
-            _oAuthService.InitializeOAuthSession();
-
             this._view = new ConfluenceToolWindowNavigator(this._navigator);
             base.Content = _view;
 
             this.ToolBar = new CommandID(Guids.guidConfluencePackage, Guids.CONFLUENCE_TOOLBAR_ID);
 
-            this._navigator.ShowBeforeSignIn(); 
+            this._navigator.ShowConnection(null, null); 
         }
 
         protected override void Dispose(bool disposing)

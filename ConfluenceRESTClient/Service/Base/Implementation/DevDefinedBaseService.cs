@@ -42,6 +42,17 @@ namespace ConfluenceRESTClient.Service
             this._session = new OAuthSession(consumerContext, requestTokenUrl, userAuthorizeTokenUrl, accessTokenUrl);
         }
 
+        public void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret)
+        {
+            this.InitializeOAuthSession();
+
+            IToken accessToken = new TokenBase();
+            accessToken.Token = token;
+            accessToken.TokenSecret = tokenSecret;
+
+            this._session.AccessToken = accessToken;
+        }
+
         public T Get<T>(string resource) where T : new()
         {
             var response = this._session.Request().Get().ForUrl(REST_URL + resource).ReadBody();

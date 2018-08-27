@@ -10,7 +10,11 @@ namespace ConfluenceRESTClient.Service
     public interface IOAuthService
     {
 
+        //Initializing communication session - requestTokenUrl, authorizeUrl, accessTokenUrl, consumerContext{ consumerKey, consumerSecret, signatureMethod, certificate }
         void InitializeOAuthSession();
+
+        //Reinitializing communication session - accessToken, accessTokenSecret
+        void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret);
 
         //Step 1 - Get Request token to be able to generate authorization url for user
         Task<IToken> GetRequestToken();

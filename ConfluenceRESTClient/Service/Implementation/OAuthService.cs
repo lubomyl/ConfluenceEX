@@ -22,6 +22,12 @@ namespace ConfluenceRESTClient.Service.Implementation
         {
             this._baseService.InitializeOAuthSession();
         }
+
+        public void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret)
+        {
+            this._baseService.ReinitializeOAuthSessionAccessToken(token, tokenSecret);
+        }
+
         public Task<IToken> GetRequestToken()
         {
             return Task.Run(() =>

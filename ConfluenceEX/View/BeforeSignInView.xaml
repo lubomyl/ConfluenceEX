@@ -21,20 +21,10 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Margin="20" Resources="{StaticResource style}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <WrapPanel Orientation="Horizontal" Margin="20" Resources="{StaticResource style}">
 
+        <!--TODO uncomment in case of allowing basic authentication
+        
         <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource PlainText}">Login credentials:</TextBlock>
 
         <Label Grid.Row="1">Username:</Label>
@@ -54,11 +44,15 @@
         <Button Command="{Binding SignInCommand}" CommandParameter="{Binding ElementName=This}" Content="Sign in" Grid.Column="0" 
                 Grid.Row="3" Height="25" x:Name="SignIn" Width="75" Margin="0,0,0,10"/>
 
-        <Button Command="{Binding SignInOAuthCommand}" CommandParameter="{Binding ElementName=This}" Content="OAuth Sign in" Grid.Column="0" 
-                Grid.Row="4" Height="25" x:Name="SignInOAuth" Width="75" Margin="0,0,0,10"/>
+        -->
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource PlainText}" Margin="0,0,20,10">OAuth1.0:</TextBlock>
+        
+        <Button Command="{Binding SignInOAuthCommand}" CommandParameter="{Binding ElementName=This}" Content="Redirect" Grid.Column="0" 
+                Grid.Row="1" Height="25" x:Name="SignInOAuth" Width="75" Margin="0,0,20,10"/>
 
         <TextBlock Grid.Column="0" Grid.Row="5" Text="{Binding ErrorMessage}" Style="{StaticResource PlainText}" />
-    </Grid>
+    </WrapPanel>
     
     
 </UserControl>

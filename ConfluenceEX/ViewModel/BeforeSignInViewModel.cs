@@ -75,6 +75,7 @@ namespace ConfluenceEX.ViewModel
 
             try
             {
+                this._oAuthService.InitializeOAuthSession();
                 requestToken = await this._oAuthService.GetRequestToken();
                 authorizationUrl = await this._oAuthService.GetUserAuthorizationUrlForToken(requestToken);
 
@@ -85,6 +86,10 @@ namespace ConfluenceEX.ViewModel
             {
                 this.ErrorMessage = ex.Message;
             } 
+            catch(SecurityException ex)
+            {
+                this.ErrorMessage = ex.Message;
+            }
         }
 
         private void GetPassword(object parameter)
