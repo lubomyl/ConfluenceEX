@@ -11,6 +11,7 @@ namespace ConfluenceEX.ViewModel.Navigation
     {
         private const int STACK_SIZE = 3;
         private const int STEP = 1;
+        private const int STARTING_INDEX = -1;
 
         private List<UserControl> _viewStack;
 
@@ -20,7 +21,7 @@ namespace ConfluenceEX.ViewModel.Navigation
         {
             this._viewStack = new List<UserControl>();
 
-            _index = -1;
+            _index = STARTING_INDEX;
         }
 
         public bool CanGoBack()
@@ -113,6 +114,7 @@ namespace ConfluenceEX.ViewModel.Navigation
         public void ClearStack()
         {
             this._viewStack.Clear();
+            this._index = STARTING_INDEX;
         }
     }
 }
