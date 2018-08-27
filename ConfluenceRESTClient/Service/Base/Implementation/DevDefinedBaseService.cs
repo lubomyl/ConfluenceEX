@@ -15,7 +15,7 @@ namespace ConfluenceRESTClient.Service
 
     /// <summary>
     /// DevDefined.OAuth library concrete implementation of IBaseService.
-    /// Singleton class pattern used to not to reinitialize OAuth session on every application start.
+    /// Singleton class pattern used to not to reinitialize OAuth session on every reference of this class.
     /// </summary>
     public class DevDefinedBaseService : IBaseService<IToken>
     {
@@ -70,6 +70,10 @@ namespace ConfluenceRESTClient.Service
             this._session.AccessToken = accessToken;
         }
 
+
+        /// <summary>
+        /// <see cref="IBaseService{T}.Get{K}(string)"/>
+        /// </summary>
         public K Get<K>(string resource) where K : new()
         {
             var response = this._session.Request().Get().ForUrl(REST_URL + resource).ReadBody();
@@ -84,6 +88,9 @@ namespace ConfluenceRESTClient.Service
                 }
         }
 
+        /// <summary>
+        /// <see cref="IBaseService{T}.GetRequestToken"/>
+        /// </summary>
         public IToken GetRequestToken()
         {
             IToken ret = this._session.GetRequestToken("POST");
@@ -91,6 +98,9 @@ namespace ConfluenceRESTClient.Service
             return ret;
         }
 
+        /// <summary>
+        /// <see cref="IBaseService{T}.GetUserAuthorizationUrlForToken(T)"/>
+        /// </summary>
         public string GetUserAuthorizationUrlForToken(IToken requestToken)
         {
             string ret = this._session.GetUserAuthorizationUrlForToken(requestToken);
@@ -98,6 +108,9 @@ namespace ConfluenceRESTClient.Service
             return ret;
         }
 
+        /// <summary>
+        /// <see cref="IBaseService{T}.ExchangeRequestTokenForAccessToken(T, string)"/>
+        /// </summary>
         public IToken ExchangeRequestTokenForAccessToken(IToken requestToken, string verificationCode)
         {
 
@@ -118,18 +131,5 @@ namespace ConfluenceRESTClient.Service
                 return _instance;
             }
         }
-
-        public OAuthSession Session
-        {
-            get
-            {
-                return this._session;
-            }
-            private set
-            {
-                this._session = value;
-            }
-        }
-
     }
 }

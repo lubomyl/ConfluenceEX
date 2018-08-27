@@ -18,7 +18,7 @@ namespace ConfluenceRESTClient.Service.Implementation
             this._baseService = DevDefinedBaseService.Instance;
         }
 
-        public void CreateSpace(Space space)
+        public void CreateSpaceAsync(Space space)
         {
             throw new NotImplementedException();
         }
@@ -32,7 +32,7 @@ namespace ConfluenceRESTClient.Service.Implementation
             });
         }
 
-        public Space GetSpaceByName(string name)
+        public Task<Space> GetSpaceByNameAsync(string name)
         {
             throw new NotImplementedException();
         }
