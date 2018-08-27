@@ -26,6 +26,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource PlainText}" Margin="0,0,0,10">Paste generated oauth_verifier code:</TextBlock>
@@ -34,6 +35,8 @@
 
         <Button Command="{Binding SignInCommand}" CommandParameter="{Binding ElementName=This}" Content="Sign in" Grid.Column="0" 
                 Grid.Row="2" Height="25" x:Name="SignIn" Width="75" Margin="0,0,0,10"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding ErrorMessage}" Style="{StaticResource PlainText}" />
 
     </Grid>
 </UserControl>

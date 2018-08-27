@@ -19,6 +19,8 @@ namespace ConfluenceEX.ViewModel
         private string _oAuthVerificationCode;
         private IToken _requestToken;
 
+        private string _errorMessage;
+
         public DelegateCommand SignInCommand { get; private set; }
 
         public OAuthVerifierConfirmationViewModel(ConfluenceToolWindowNavigatorViewModel parent, IToken requestToken)
@@ -35,9 +37,15 @@ namespace ConfluenceEX.ViewModel
             //TODO check if accessToken is OK - if not do not change view else show afterSignIn
             this._oAuthService = new OAuthService();
 
-            IToken accessToken = await this._oAuthService.ExchangeRequestTokenForAccessToken(this._requestToken, OAuthVerificationCode);
-
-            this._parent.ShowAfterSignIn();
+            try
+            {
+                IToken accessToken = await this._oAuthService.ExchangeRequestTokenForAccessToken(this._requestToken, OAuthVerificationCode);
+                this._parent.ShowAfterSignIn();
+            }
+            catch (OAuthException ex)
+            {
+                this.ErrorMessage = ex.Message;
+            }
         }
 
         public string OAuthVerificationCode
@@ -50,6 +58,19 @@ namespace ConfluenceEX.ViewModel
             {
                 this._oAuthVerificationCode = value;
                 OnPropertyChanged("OAuthVerificationCode");
+            }
+        }
+
+        public string ErrorMessage
+        {
+            get
+            {
+                return this._errorMessage;
+            }
+            set
+            {
+                this._errorMessage = value;
+                OnPropertyChanged("ErrorMessage");
             }
         }
     }

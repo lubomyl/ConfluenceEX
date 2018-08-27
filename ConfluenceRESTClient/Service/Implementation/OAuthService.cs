@@ -43,6 +43,7 @@ namespace ConfluenceRESTClient.Service.Implementation
             return Task.Run(() =>
             {
                 IToken requestToken = this._baseService.Session.GetRequestToken("POST");
+                
                 return requestToken;
             });
         }

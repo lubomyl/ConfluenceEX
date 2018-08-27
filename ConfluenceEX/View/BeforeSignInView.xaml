@@ -50,15 +50,14 @@
 
         <Label Grid.Row="2">Password:</Label>
         <PasswordBox x:Name="UserPassword" Grid.Column="1" Grid.Row="2" Width="150px" Margin="0,0,0,10"/>
-        
+
         <Button Command="{Binding SignInCommand}" CommandParameter="{Binding ElementName=This}" Content="Sign in" Grid.Column="0" 
                 Grid.Row="3" Height="25" x:Name="SignIn" Width="75" Margin="0,0,0,10"/>
-        
-        <TextBlock Grid.Column="0" Grid.Row="4" Visibility="{Binding BadSignInCredentials, Converter={StaticResource BoolToVisConverter}}" 
-                   Style="{StaticResource PlainText}">Bad credentials</TextBlock>
 
         <Button Command="{Binding SignInOAuthCommand}" CommandParameter="{Binding ElementName=This}" Content="OAuth Sign in" Grid.Column="0" 
-                Grid.Row="5" Height="25" x:Name="SignInOAuth" Width="75" Margin="0,0,0,10"/>
+                Grid.Row="4" Height="25" x:Name="SignInOAuth" Width="75" Margin="0,0,0,10"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="5" Text="{Binding ErrorMessage}" Style="{StaticResource PlainText}" />
     </Grid>
     
     
