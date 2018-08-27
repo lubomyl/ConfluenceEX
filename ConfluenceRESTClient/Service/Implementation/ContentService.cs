@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using ConfluenceRestClient.Model;
 using RestSharp;
 using ConfluenceRESTClient.Service;
+using DevDefined.OAuth.Framework;
 
 namespace ConfluenceRestClient.Service.Implementation
 {
     public class ContentService : IContentService
     {
 
-        private DevDefinedBaseService _baseService;
+        private IBaseService<IToken> _baseService;
 
         public ContentService()
         {

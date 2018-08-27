@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace ConfluenceRESTClient.Service
 {
-    public interface IBaseService
+    public interface IBaseService<T>
     {
 
-        T Get<T>(string resource) where T : new();
+        K Get<K>(string resource) where K : new();
 
+        T GetRequestToken();
+
+        string GetUserAuthorizationUrlForToken(T requestToken);
+
+        T ExchangeRequestTokenForAccessToken(T requestToken, string verificationCode);
     }
 }

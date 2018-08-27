@@ -11,7 +11,7 @@ namespace ConfluenceRESTClient.Service.Implementation
 {
     public class OAuthService : IOAuthService
     {
-        private DevDefinedBaseService _baseService;
+        private IBaseService<IToken> _baseService;
 
         public OAuthService()
         {
@@ -20,19 +20,19 @@ namespace ConfluenceRESTClient.Service.Implementation
 
         public void InitializeOAuthSession()
         {
-            this._baseService.InitializeOAuthSession();
+            ((DevDefinedBaseService)this._baseService).InitializeOAuthSession();
         }
 
         public void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret)
         {
-            this._baseService.ReinitializeOAuthSessionAccessToken(token, tokenSecret);
+            ((DevDefinedBaseService)this._baseService).ReinitializeOAuthSessionAccessToken(token, tokenSecret);
         }
 
         public Task<IToken> GetRequestToken()
         {
             return Task.Run(() =>
             {
-                IToken requestToken = this._baseService.Session.GetRequestToken("POST");
+                IToken requestToken = this._baseService.GetRequestToken();
                 
                 return requestToken;
             });
@@ -41,7 +41,7 @@ namespace ConfluenceRESTClient.Service.Implementation
         public Task<string> GetUserAuthorizationUrlForToken(IToken requestToken)
         {
             return Task.Run(() => {
-                string authorizationUrl = this._baseService.Session.GetUserAuthorizationUrlForToken(requestToken);
+                string authorizationUrl = this._baseService.GetUserAuthorizationUrlForToken(requestToken);
                 return authorizationUrl;
             });
         }
@@ -50,7 +50,7 @@ namespace ConfluenceRESTClient.Service.Implementation
         {
             return Task.Run(() =>
             {
-                IToken accessToken = this._baseService.Session.ExchangeRequestTokenForAccessToken(requestToken, "POST", oAuthVerificationCode);
+                IToken accessToken = this._baseService.ExchangeRequestTokenForAccessToken(requestToken, oAuthVerificationCode);
                 return accessToken;
             });
         }

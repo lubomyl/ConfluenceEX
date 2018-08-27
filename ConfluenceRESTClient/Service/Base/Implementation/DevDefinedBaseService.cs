@@ -1,4 +1,5 @@
-﻿using DevDefined.OAuth.Consumer;
+﻿using ConfluenceRESTClient.Service;
+using DevDefined.OAuth.Consumer;
 using DevDefined.OAuth.Framework;
 using Newtonsoft.Json;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ConfluenceRESTClient.Service
 {
-    public class DevDefinedBaseService : IBaseService
+    public class DevDefinedBaseService : IBaseService<IToken>
     {
         private OAuthSession _session;
 
@@ -53,18 +54,40 @@ namespace ConfluenceRESTClient.Service
             this._session.AccessToken = accessToken;
         }
 
-        public T Get<T>(string resource) where T : new()
+        public K Get<K>(string resource) where K : new()
         {
             var response = this._session.Request().Get().ForUrl(REST_URL + resource).ReadBody();
 
                 if (response != null)
                 {
-                    return JsonConvert.DeserializeObject<T>(response);
+                    return JsonConvert.DeserializeObject<K>(response);
                 }
                 else
                 {
-                    return default(T);
+                    return default(K);
                 }
+        }
+
+        public IToken GetRequestToken()
+        {
+            IToken ret = this._session.GetRequestToken("POST");
+
+            return ret;
+        }
+
+        public string GetUserAuthorizationUrlForToken(IToken requestToken)
+        {
+            string ret = this._session.GetUserAuthorizationUrlForToken(requestToken);
+
+            return ret;
+        }
+
+        public IToken ExchangeRequestTokenForAccessToken(IToken requestToken, string verificationCode)
+        {
+
+            IToken ret = this._session.ExchangeRequestTokenForAccessToken(requestToken, "POST", verificationCode);
+
+            return ret;
         }
 
         public static DevDefinedBaseService Instance

@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using ConfluenceRestClient.Model;
 using RestSharp;
+using DevDefined.OAuth.Framework;
 
 namespace ConfluenceRESTClient.Service.Implementation
 {
     public class SpaceService : ISpaceService
     {
-        private DevDefinedBaseService _baseService;
+        private IBaseService<IToken> _baseService;
 
         public SpaceService()
         {
