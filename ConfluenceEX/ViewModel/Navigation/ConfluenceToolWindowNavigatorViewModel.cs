@@ -6,7 +6,9 @@ using ConfluenceRestClient.Model;
 using ConfluenceRESTClient.Service;
 using ConfluenceRESTClient.Service.Implementation;
 using DevDefined.OAuth.Framework;
+using Microsoft.VisualStudio.Settings;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -23,11 +25,15 @@ namespace ConfluenceEX.ViewModel
         private object _selectedView;
         private ConfluenceToolWindow _parent;
 
+        private IOAuthService _oAuthService;
+
         private SpaceListView _spacesListView;
         private ContentListView _contentListView;
         private AfterSignInView _afterSignInView;
         private BeforeSignInView _beforeSignInView;
         private OAuthVerifierConfirmationView _oAuthVerifierConfirmationView;
+
+        private WritableSettingsStore _userSettingsStore;
 
         private OleMenuCommandService _service;
 
@@ -39,6 +45,11 @@ namespace ConfluenceEX.ViewModel
             this._historyNavigator = new HistoryNavigator();
 
             _service = ConfluencePackage.Mcs;
+
+            this._oAuthService = new OAuthService();
+
+            SettingsManager settingsManager = new ShellSettingsManager(ServiceProvider.GlobalProvider);
+            this._userSettingsStore = settingsManager.GetWritableSettingsStore(SettingsScope.UserSettings);
 
             InitializeCommands(_service);
         }
@@ -118,11 +129,19 @@ namespace ConfluenceEX.ViewModel
 
         public void ShowConnection(object sender, EventArgs e)
         {
-            if (ConfluenceToolWindow.AuthenticatedUser != null)
+            try
             {
-                ShowAfterSignIn();
+                string accessToken = this.ReadFromUserSettings("AccessToken");
+                string accessTokenSecret = this.ReadFromUserSettings("AccessTokenSecret");
+
+                if (accessToken != null && accessTokenSecret != null)
+                {
+                    this._oAuthService.ReinitializeOAuthSessionAccessToken(accessToken, accessTokenSecret);
+
+                    ShowAfterSignIn();
+                }
             }
-            else
+            catch (Exception ex)
             {
                 ShowBeforeSignIn();
             }
@@ -175,6 +194,14 @@ namespace ConfluenceEX.ViewModel
                 service.AddCommand(onToolbarMenuCommandConnectionClick);
                 service.AddCommand(onToolbarMenuCommandRefreshClick);
             }
+        }
+
+        //TODO refactor extract to Helper class
+        private string ReadFromUserSettings(string propertyName)
+        {
+            string ret = this._userSettingsStore.GetString("External Tools", propertyName);
+
+            return ret;
         }
 
         private void GoBack(object sender, EventArgs e)

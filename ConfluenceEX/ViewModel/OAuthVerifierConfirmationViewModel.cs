@@ -50,6 +50,7 @@ namespace ConfluenceEX.ViewModel
                 IToken accessToken = await this._oAuthService.ExchangeRequestTokenForAccessToken(this._requestToken, OAuthVerificationCode);
 
                 this.WriteToUserSettings("AccessToken", accessToken.Token);
+                this.WriteToUserSettings("AccessTokenSecret", accessToken.TokenSecret);
 
                 this._parent.ShowAfterSignIn();
             }
@@ -59,6 +60,7 @@ namespace ConfluenceEX.ViewModel
             }
         }
 
+        //TODO refactor extract to Helper class
         private void WriteToUserSettings(string propertyName, string value)
         {
             this._userSettingsStore.SetString("External Tools", propertyName, value);
