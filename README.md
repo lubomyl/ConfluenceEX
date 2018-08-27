@@ -21,7 +21,11 @@ After project start-up goto and click on `Tool|Confluence` if the Confluence Too
 New ToolWindow with ToolBar should show up  
   
 Before successful sign-in:  
-- Fill in credentials for Basic authentication *(credentials are not stored after application shutdown)*  
+- ~~Fill in credentials for Basic authentication *(credentials are not stored after application shutdown)*  ~~
+- If not already signed-in with oauth_access_token from registry User Settings Store click on `Redirect`
+- By Signing-in and clicking on `Allow/Přijmout` give ConfluenceEX rights to make rest api calls with your identity
+- Copy generated *(oauth_verifier (ověřovací kód))* and navigate back to ConfluenceEX
+- Paste copied oauth *(oauth_verifier (ověřovací kód))* and click on `Sign-in`
 
 After successful sign-in:  
 - On ToolBar click on `Connect` to check authentication state
@@ -34,4 +38,5 @@ After successful sign-in:
 - ConfluenceRESTClient *(class library)*
 
 ## Dependencies
-- RestSharp 106.2.1
+- RestSharp 106.2.1: currently not in use *(no support for OAuth with RSA)*
+- DevDefined.OAuth 0.2.0
