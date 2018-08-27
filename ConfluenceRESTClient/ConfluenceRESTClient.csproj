@@ -76,8 +76,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Service\BaseService.cs" />
-    <Compile Include="Service\BaseService2.cs" />
+    <Compile Include="Service\Base\Implementation\RestSharpBaseService.cs" />
+    <Compile Include="Service\Base\Implementation\DevDefinedBaseService.cs" />
+    <Compile Include="Service\Base\IBaseService.cs" />
     <Compile Include="Service\Implementation\OAuthService.cs" />
     <Compile Include="Service\IOAuthService.cs" />
     <Compile Include="Service\IUserService.cs" />

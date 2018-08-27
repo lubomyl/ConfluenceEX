@@ -24,7 +24,7 @@ namespace ConfluenceEX.ViewModel
         private string _password;
 
         private bool _isAuthenticated;
-        private bool _badSignInCredentials;
+        private string _errorMessage;
 
         public DelegateCommand SignInCommand { get; private set; }
         public DelegateCommand SignInOAuthCommand { get; private set; }
@@ -33,7 +33,6 @@ namespace ConfluenceEX.ViewModel
         {
             this._parent = parent;
             this._isAuthenticated = false;
-            this._badSignInCredentials = false;
 
             this.SignInCommand = new DelegateCommand(SignIn);
             this.SignInOAuthCommand = new DelegateCommand(SignInOAuth);
@@ -53,7 +52,7 @@ namespace ConfluenceEX.ViewModel
             {
                 ConfluenceToolWindow.AuthenticatedUser = await this._userService.GetAuthenticatedUserAsync();
                 this._isAuthenticated = _userService.IsAuthenticated(ConfluenceToolWindow.AuthenticatedUser);
-                this.BadSignInCredentials = !this._isAuthenticated;
+                //this.ErrorMessage = !this._isAuthenticated;
             }
             else
             {
@@ -71,12 +70,26 @@ namespace ConfluenceEX.ViewModel
         {
             this._oAuthService = new OAuthService();
 
-            IToken requestToken = await this._oAuthService.GetRequestToken();
-            string authorizationUrl = await this._oAuthService.GetUserAuthorizationUrlForToken(requestToken);
+            IToken requestToken;
+            string authorizationUrl;
 
-            System.Diagnostics.Process.Start(authorizationUrl);
+            try
+            {
+                this._oAuthService.InitializeOAuthSession();
+                requestToken = await this._oAuthService.GetRequestToken();
+                authorizationUrl = await this._oAuthService.GetUserAuthorizationUrlForToken(requestToken);
 
-            this._parent.ShowOAuthVerificationConfirmation(null, null, requestToken);
+                System.Diagnostics.Process.Start(authorizationUrl);
+                this._parent.ShowOAuthVerificationConfirmation(null, null, requestToken);
+            }
+            catch(OAuthException ex)
+            {
+                this.ErrorMessage = ex.Message;
+            } 
+            catch(SecurityException ex)
+            {
+                this.ErrorMessage = ex.Message;
+            }
         }
 
         private void GetPassword(object parameter)
@@ -144,16 +157,16 @@ namespace ConfluenceEX.ViewModel
             }
         }
 
-        public bool BadSignInCredentials
+        public string ErrorMessage
         {
             get
             {
-                return this._badSignInCredentials;
+                return this._errorMessage;
             }
             set
             {
-                this._badSignInCredentials = value;
-                OnPropertyChanged("BadSignInCredentials");
+                this._errorMessage = value;
+                OnPropertyChanged("ErrorMessage");
             }
         }
 

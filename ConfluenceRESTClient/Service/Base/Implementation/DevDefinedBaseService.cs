@@ -10,20 +10,19 @@ using System.Threading.Tasks;
 
 namespace ConfluenceRESTClient.Service
 {
-    public class BaseService2
+    public class DevDefinedBaseService : IBaseService
     {
         private OAuthSession _session;
 
-        private static BaseService2 _instance = null;
+        private static DevDefinedBaseService _instance = null;
 
         private const string REST_URL = "https://lubomyl3.atlassian.net/wiki/rest/api/";
 
-        private BaseService2()
+        private DevDefinedBaseService()
         {
-            this.PrepareOAuthSession();
         }
 
-        public void PrepareOAuthSession()
+        public void InitializeOAuthSession()
         {
             X509Certificate2 certificate = new X509Certificate2(Properties.Settings.Default.CertificatePath, Properties.Settings.Default.CertificateSecret);
 
@@ -43,7 +42,18 @@ namespace ConfluenceRESTClient.Service
             this._session = new OAuthSession(consumerContext, requestTokenUrl, userAuthorizeTokenUrl, accessTokenUrl);
         }
 
-        public T Get2<T>(string resource) where T : new()
+        public void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret)
+        {
+            this.InitializeOAuthSession();
+
+            IToken accessToken = new TokenBase();
+            accessToken.Token = token;
+            accessToken.TokenSecret = tokenSecret;
+
+            this._session.AccessToken = accessToken;
+        }
+
+        public T Get<T>(string resource) where T : new()
         {
             var response = this._session.Request().Get().ForUrl(REST_URL + resource).ReadBody();
 
@@ -57,13 +67,13 @@ namespace ConfluenceRESTClient.Service
                 }
         }
 
-        public static BaseService2 Instance
+        public static DevDefinedBaseService Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new BaseService2();
+                    _instance = new DevDefinedBaseService();
                 }
 
                 return _instance;

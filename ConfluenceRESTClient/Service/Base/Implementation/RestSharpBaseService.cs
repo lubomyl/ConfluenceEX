@@ -10,7 +10,7 @@ namespace ConfluenceRESTClient.Service
 {
 
     //TODO implement error logging
-    public class BaseService : RestSharp.RestClient
+    public class RestSharpBaseService : RestSharp.RestClient, IBaseService
     {
 
         private string _username = string.Empty;
@@ -18,12 +18,12 @@ namespace ConfluenceRESTClient.Service
 
         private const string RestUrl = "https://lubomyl3.atlassian.net/wiki/rest/api";
 
-        public BaseService()
+        public RestSharpBaseService()
         {
             this.BaseUrl = new Uri(RestUrl);
         }
 
-        public BaseService(string username, string password)
+        public RestSharpBaseService(string username, string password)
         {
             this.BaseUrl = new Uri(RestUrl);
             this._username = username;
@@ -32,8 +32,10 @@ namespace ConfluenceRESTClient.Service
             this.Authenticator = new HttpBasicAuthenticator(_username, _password);
         }
 
-        public T Get<T> (IRestRequest request) where T : new()
+        public T Get<T> (string resource) where T : new()
         {
+            var request = new RestRequest(resource);
+
             var response = Execute<T>(request);
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)

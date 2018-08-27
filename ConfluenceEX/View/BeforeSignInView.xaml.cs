@@ -20,7 +20,7 @@ namespace ConfluenceEX.View
     /// <summary>
     /// Interaction logic for TestView.xaml
     /// </summary>
-    public partial class BeforeSignInView : UserControl, IHavePassword
+    public partial class BeforeSignInView : UserControl
     {
 
         private BeforeSignInViewModel _viewModel;
@@ -31,14 +31,6 @@ namespace ConfluenceEX.View
 
             _viewModel = new BeforeSignInViewModel(parent);
             this.DataContext = _viewModel;
-        }
-
-        public System.Security.SecureString Password
-        {
-            get
-            {
-                return UserPassword.SecurePassword;
-            }
         }
     }
 }

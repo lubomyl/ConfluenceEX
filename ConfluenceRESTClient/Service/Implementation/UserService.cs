@@ -12,11 +12,11 @@ namespace ConfluenceRESTClient.Service.Implementation
     public class UserService : IUserService
     {
 
-        private BaseService2 _baseService;
+        private DevDefinedBaseService _baseService;
 
         public UserService()
         {
-            _baseService = BaseService2.Instance;
+            _baseService = DevDefinedBaseService.Instance;
         }
 
         public Task<AuthenticatedUser> GetAuthenticatedUserAsync()
@@ -24,7 +24,7 @@ namespace ConfluenceRESTClient.Service.Implementation
             return Task.Run(() => {
                 var resource = "user/current";
 
-                return this._baseService.Get2<AuthenticatedUser>(resource);
+                return this._baseService.Get<AuthenticatedUser>(resource);
             });
         }
 

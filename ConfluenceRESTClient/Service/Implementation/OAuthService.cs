@@ -11,11 +11,21 @@ namespace ConfluenceRESTClient.Service.Implementation
 {
     public class OAuthService : IOAuthService
     {
-        private BaseService2 _baseService;
+        private DevDefinedBaseService _baseService;
 
         public OAuthService()
         {
-            this._baseService = BaseService2.Instance;
+            this._baseService = DevDefinedBaseService.Instance;
+        }
+
+        public void InitializeOAuthSession()
+        {
+            this._baseService.InitializeOAuthSession();
+        }
+
+        public void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret)
+        {
+            this._baseService.ReinitializeOAuthSessionAccessToken(token, tokenSecret);
         }
 
         public Task<IToken> GetRequestToken()
@@ -23,6 +33,7 @@ namespace ConfluenceRESTClient.Service.Implementation
             return Task.Run(() =>
             {
                 IToken requestToken = this._baseService.Session.GetRequestToken("POST");
+                
                 return requestToken;
             });
         }
