@@ -23,8 +23,8 @@ New ToolWindow with ToolBar should show up
 Before successful sign-in:  
 - If not already signed-in with oauth_access_token from registry User Settings Store click on `Redirect`
 - By Signing-in and clicking on `Allow/Přijmout` give ConfluenceEX rights to make rest api calls with your identity
-- Copy generated *(oauth_verifier (ověřovací kód))* and navigate back to ConfluenceEX
-- Paste copied oauth *(oauth_verifier (ověřovací kód))* and click on `Sign-in`
+- Copy generated oauth_verifier (ověřovací kód) and navigate back to ConfluenceEX
+- Paste copied oauth oauth_verifier (ověřovací kód) and click on `Sign-in`
 
 After successful sign-in:  
 - On ToolBar click on `Connect` to check authentication state
