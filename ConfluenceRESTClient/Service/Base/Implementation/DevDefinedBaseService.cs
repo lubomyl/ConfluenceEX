@@ -11,6 +11,12 @@ using System.Threading.Tasks;
 
 namespace ConfluenceRESTClient.Service
 {
+
+
+    /// <summary>
+    /// DevDefined.OAuth library concrete implementation of IBaseService.
+    /// Singleton class pattern used to not to reinitialize OAuth session on every application start.
+    /// </summary>
     public class DevDefinedBaseService : IBaseService<IToken>
     {
         private OAuthSession _session;
@@ -23,6 +29,10 @@ namespace ConfluenceRESTClient.Service
         {
         }
 
+
+        /// <summary>
+        /// Initializes OAtuh session object with parameters needed like requestTokenUrl, userAuthorieUrl, accessTokenUrl, consumerKey, privateKey, signatureMethod or consumerSecret 
+        /// </summary>
         public void InitializeOAuthSession()
         {
             X509Certificate2 certificate = new X509Certificate2(Properties.Settings.Default.CertificatePath, Properties.Settings.Default.CertificateSecret);
@@ -43,6 +53,12 @@ namespace ConfluenceRESTClient.Service
             this._session = new OAuthSession(consumerContext, requestTokenUrl, userAuthorizeTokenUrl, accessTokenUrl);
         }
 
+
+        /// <summary>
+        /// Reinitializes OAuth session object with provided access token properties. Used on restart of application. Important for remember me like function.
+        /// </summary>
+        /// <param name="token">Access token string.</param>
+        /// <param name="tokenSecret">Access token secret string.</param>
         public void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret)
         {
             this.InitializeOAuthSession();
