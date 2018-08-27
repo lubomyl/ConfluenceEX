@@ -22,6 +22,26 @@ namespace ConfluenceRESTClient.Service
         {
         }
 
+        public void InitializeOAuthSession()
+        {
+            X509Certificate2 certificate = new X509Certificate2(Properties.Settings.Default.CertificatePath, Properties.Settings.Default.CertificateSecret);
+
+            string requestTokenUrl = "https://lubomyl3.atlassian.net/wiki/plugins/servlet/oauth/request-token";
+            string userAuthorizeTokenUrl = "https://lubomyl3.atlassian.net/wiki/plugins/servlet/oauth/authorize";
+            string accessTokenUrl = "https://lubomyl3.atlassian.net/wiki/plugins/servlet/oauth/access-token";
+
+            var consumerContext = new OAuthConsumerContext
+            {
+                ConsumerKey = Properties.Settings.Default.ConsumerKey,
+                ConsumerSecret = Properties.Settings.Default.ConsumerSecret,
+                SignatureMethod = SignatureMethod.RsaSha1,
+                Key = certificate.PrivateKey,
+                UseHeaderForOAuthParameters = true
+            };
+
+            this._session = new OAuthSession(consumerContext, requestTokenUrl, userAuthorizeTokenUrl, accessTokenUrl);
+        }
+
         public T Get<T>(string resource) where T : new()
         {
             var response = this._session.Request().Get().ForUrl(REST_URL + resource).ReadBody();
@@ -55,7 +75,7 @@ namespace ConfluenceRESTClient.Service
             {
                 return this._session;
             }
-            set
+            private set
             {
                 this._session = value;
             }

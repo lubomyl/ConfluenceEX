@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.Settings;
+using Microsoft.VisualStudio.Shell.Settings;
+using Microsoft.VisualStudio.Shell;
 
 namespace ConfluenceEX.ViewModel
 {
@@ -21,6 +24,8 @@ namespace ConfluenceEX.ViewModel
 
         private string _errorMessage;
 
+        private WritableSettingsStore _userSettingsStore;
+
         public DelegateCommand SignInCommand { get; private set; }
 
         public OAuthVerifierConfirmationViewModel(ConfluenceToolWindowNavigatorViewModel parent, IToken requestToken)
@@ -28,6 +33,9 @@ namespace ConfluenceEX.ViewModel
             this._parent = parent;
 
             this._requestToken = requestToken;
+
+            SettingsManager settingsManager = new ShellSettingsManager(ServiceProvider.GlobalProvider);
+            this._userSettingsStore = settingsManager.GetWritableSettingsStore(SettingsScope.UserSettings);
 
             this.SignInCommand = new DelegateCommand(SignIn);
         }
@@ -40,12 +48,20 @@ namespace ConfluenceEX.ViewModel
             try
             {
                 IToken accessToken = await this._oAuthService.ExchangeRequestTokenForAccessToken(this._requestToken, OAuthVerificationCode);
+
+                this.WriteToUserSettings("AccessToken", accessToken.Token);
+
                 this._parent.ShowAfterSignIn();
             }
             catch (OAuthException ex)
             {
                 this.ErrorMessage = ex.Message;
             }
+        }
+
+        private void WriteToUserSettings(string propertyName, string value)
+        {
+            this._userSettingsStore.SetString("External Tools", propertyName, value);
         }
 
         public string OAuthVerificationCode

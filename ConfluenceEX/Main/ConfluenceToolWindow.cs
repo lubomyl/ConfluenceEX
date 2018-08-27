@@ -49,7 +49,7 @@ namespace ConfluenceEX.Main
                 this._navigator.ShowBeforeSignIn();
             }
             */
-            _oAuthService.CreateOAuthSession();
+            _oAuthService.InitializeOAuthSession();
 
             this._view = new ConfluenceToolWindowNavigator(this._navigator);
             base.Content = _view;
