@@ -11,6 +11,7 @@ namespace ConfluenceRESTClient.Model
 
         public string Type { get; set; }
         public string Username { get; set; }
+        public string DisplayName { get; set; }
 
     }
 }
