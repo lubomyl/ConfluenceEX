@@ -21,6 +21,7 @@
     <Grid Margin="20">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -31,8 +32,10 @@
 
         <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource PlainText}" Margin="0,0,0,10">Paste generated oauth_verifier code:</TextBlock>
 
-        <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding OAuthVerificationCode}" Margin="0,0,0,10"/>
+        <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding OAuthVerificationCode}" Margin="0,0,10,10"/>
 
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding RequestTokenExpirationTime}" Margin="0,0,0,10" Style="{StaticResource PlainText}"/>
+        
         <Button Command="{Binding SignInCommand}" CommandParameter="{Binding ElementName=This}" Content="Sign in" Grid.Column="0" 
                 Grid.Row="2" Height="25" x:Name="SignIn" Width="75" Margin="0,0,0,10"/>
 
