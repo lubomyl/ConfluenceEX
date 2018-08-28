@@ -2,6 +2,12 @@
 
 Visual Studio extension integrating Atlassian Confluence.
 
+##### Testing with own Confluence instance
+See: [Wiki - How to configure ConfluenceEX as consumer](https://github.com/lubomyl/ConfluenceEX/wiki/How-to-configure-ConfluenceEX-as-consumer)
+
+##### Missing ignored settings file
+See: [Wiki - Ignored setting file](https://github.com/lubomyl/ConfluenceEX/wiki/Ignored-settings-file)
+
 ##### How to debug
 - Mark `ConfluenceEX` as StartUp Project  
 - Set Debug mode  
@@ -30,7 +36,8 @@ After successful sign-in:
 - On ToolBar click on `Connect` to check authentication state
 - On ToolBar click on `Home` icon to show list of available Spaces
 - Click on specific `Space` link to see list of content available under this space
-- Click on specific `Content` link to open new Visual Studio built-in browser tab
+- Click on specific `Content` link to see details
+- Click on `Open in build-in/external tab...` to open link in new Visual Studio built-in browser tab or external browser tab
 
 ## Solution structure
 - ConfluenceEX *(main)*
