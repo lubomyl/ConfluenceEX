@@ -101,7 +101,7 @@ namespace ConfluenceEX.ViewModel.Navigation
 
         private bool IsSameAsPrevious(UserControl view)
         {
-            if(this._viewStack.Count > 0 && view.GetType() == this._viewStack.Last().GetType())
+            if(this._viewStack.Count > 0 && view == this._viewStack.Last())
             {
                 return true;
             }
