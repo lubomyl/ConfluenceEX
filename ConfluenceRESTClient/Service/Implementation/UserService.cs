@@ -10,6 +10,11 @@ using System.Threading.Tasks;
 
 namespace ConfluenceRESTClient.Service.Implementation
 {
+
+    /// <summary>
+    /// Concrete implementation of IUserService utilizing <see cref="DevDefinedBaseService"/> as <see cref="IBaseService{T}"/>.
+    /// <see cref="IUserService"/>
+    /// </summary>
     public class UserService : IUserService
     {
 
@@ -20,6 +25,9 @@ namespace ConfluenceRESTClient.Service.Implementation
             _baseService = DevDefinedBaseService.Instance;
         }
 
+        /// <summary>
+        /// <see cref="IUserService.GetAuthenticatedUserAsync"/>
+        /// </summary>
         public Task<AuthenticatedUser> GetAuthenticatedUserAsync()
         {
             return Task.Run(() => {

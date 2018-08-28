@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 
 namespace ConfluenceRESTClient.Service.Implementation
 {
+
+    /// <summary>
+    /// Concrete implementation of IOAuthService utilizing <see cref="DevDefinedBaseService"/> as <see cref="IBaseService{T}"/>.
+    /// <see cref="IContentService"/>
+    /// </summary>
     public class OAuthService : IOAuthService
     {
         private IBaseService<IToken> _baseService;
@@ -18,16 +23,25 @@ namespace ConfluenceRESTClient.Service.Implementation
             this._baseService = DevDefinedBaseService.Instance;
         }
 
+        /// <summary>
+        /// <see cref="IOAuthService.InitializeOAuthSession"/>
+        /// </summary>
         public void InitializeOAuthSession()
         {
             ((DevDefinedBaseService)this._baseService).InitializeOAuthSession();
         }
 
+        /// <summary>
+        /// <see cref="IOAuthService.ReinitializeOAuthSessionAccessToken(string, string)"/>
+        /// </summary>
         public void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret)
         {
             ((DevDefinedBaseService)this._baseService).ReinitializeOAuthSessionAccessToken(token, tokenSecret);
         }
 
+        /// <summary>
+        /// <see cref="IOAuthService.GetRequestToken"/>
+        /// </summary>
         public Task<IToken> GetRequestToken()
         {
             return Task.Run(() =>
@@ -38,6 +52,9 @@ namespace ConfluenceRESTClient.Service.Implementation
             });
         }
 
+        /// <summary>
+        /// <see cref="IOAuthService.GetUserAuthorizationUrlForToken(IToken)"/>
+        /// </summary>
         public Task<string> GetUserAuthorizationUrlForToken(IToken requestToken)
         {
             return Task.Run(() => {
@@ -46,6 +63,9 @@ namespace ConfluenceRESTClient.Service.Implementation
             });
         }
 
+        /// <summary>
+        /// <see cref="IOAuthService.ExchangeRequestTokenForAccessToken(IToken, string)"/>
+        /// </summary>
         public Task<IToken> ExchangeRequestTokenForAccessToken(IToken requestToken, string oAuthVerificationCode)
         {
             return Task.Run(() =>

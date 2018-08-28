@@ -7,22 +7,44 @@ using System.Threading.Tasks;
 
 namespace ConfluenceRESTClient.Service
 {
+
+    /// <summary>
+    /// Interface providing methods to (Re)Initialize OAuth session with all necessary parameters needed in HTTP request for successfull OAuth process.
+    /// </summary>
     public interface IOAuthService
     {
 
-        //Initializing communication session - requestTokenUrl, authorizeUrl, accessTokenUrl, consumerContext{ consumerKey, consumerSecret, signatureMethod, certificate }
+        /// <summary>
+        /// Method to initialize communication session.
+        /// </summary>
         void InitializeOAuthSession();
 
-        //Reinitializing communication session - accessToken, accessTokenSecret
+        /// <summary>
+        /// Method to reinitialize communication session with accessToken and accessTokenSecret. Used for rememberme-like function implementation.
+        /// </summary>
+        /// <param name="token">AccessToken obtained after successfull <see cref="ExchangeRequestTokenForAccessToken(IToken, string)"/> method call.</param>
+        /// <param name="tokenSecret">AccessTokenSecret obtained after successfull <see cref="ExchangeRequestTokenForAccessToken(IToken, string)"/> method call.</param>
         void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret);
 
-        //Step 1 - Get Request token to be able to generate authorization url for user
+        /// <summary>
+        /// OAuth1.0 (STEP 1) - Async method to get temporary request token needed for further steps of authentication.
+        /// </summary>
+        /// <returns>Task containing <see cref="IToken"/> object containting oauth_token, oauth_token_secret strings.</returns>
         Task<IToken> GetRequestToken();
 
-        //Step 2 - Get authorization url by provided requestToken - used to redirect user on authorization page with oauth_verification code
+        /// <summary>
+        /// OAuth1.0 (STEP 2) - Async method to get url needed to be presented to real user. Used for token authorization/access grant. 
+        /// </summary>
+        /// <returns>Task containing string representing url.</returns>
+        /// <param name="requestToken"><see cref="IToken"/> object representing requestToken from STEP1. (<see cref="GetRequestToken"/>)</param>
         Task<string> GetUserAuthorizationUrlForToken(IToken requestToken);
 
-        //Step 3 - Get Access token by provided requestToken and oauth_verification code - used to access resources on api
+        /// <summary>
+        /// OAuth1.0 (STEP 3) - Async method to get accessToken in exchange for authorized reuqestToken from STEP1 (<see cref="GetRequestToken"/>) and oauth_verifier manually pasted by real user.
+        /// </summary>
+        /// <returns>Task containing <see cref="IToken"/> object representing aceessToken used for api calls for resources.</returns>
+        /// <param name="requestToken"><see cref="IToken"/> object representing requestToken from STEP1. (<see cref="GetRequestToken"/>)</param>
+        /// <param name="oAuthVerificationCode">Code generated on successfull STEP2 (<see cref="GetUserAuthorizationUrlForToken(IToken)"/>) verification. Provided manually by user.</param>
         Task<IToken> ExchangeRequestTokenForAccessToken(IToken requestToken, string oAuthVerificationCode);
 
     }

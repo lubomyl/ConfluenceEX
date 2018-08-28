@@ -10,6 +10,12 @@ using DevDefined.OAuth.Framework;
 
 namespace ConfluenceRestClient.Service.Implementation
 {
+
+
+    /// <summary>
+    /// Concrete implementation of IContentService utilizing <see cref="DevDefinedBaseService"/> as <see cref="IBaseService{T}"/>.
+    /// <see cref="IContentService"/>
+    /// </summary>
     public class ContentService : IContentService
     {
 
@@ -20,11 +26,17 @@ namespace ConfluenceRestClient.Service.Implementation
             _baseService = DevDefinedBaseService.Instance;
         }
 
+        /// <summary>
+        /// <see cref="IContentService.CreateContent(Content)"/>
+        /// </summary>
         public void CreateContent(Content content)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// <see cref="IContentService.GetAllContentAsync"/>
+        /// </summary>
         public Task<ContentList> GetAllContentAsync()
         {
             return Task.Run(() => {
@@ -34,6 +46,9 @@ namespace ConfluenceRestClient.Service.Implementation
             });
         }
 
+        /// <summary>
+        /// <see cref="IContentService.GetContentBySpaceKeyAsync(string)"/>
+        /// </summary>
         public Task<ContentList> GetContentBySpaceKeyAsync(string spaceKey)
         {
             return Task.Run(() => {

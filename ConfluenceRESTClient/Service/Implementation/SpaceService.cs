@@ -9,6 +9,11 @@ using DevDefined.OAuth.Framework;
 
 namespace ConfluenceRESTClient.Service.Implementation
 {
+
+    /// <summary>
+    /// Concrete implementation of ISpaceService utilizing <see cref="DevDefinedBaseService"/> as <see cref="IBaseService{T}"/>.
+    /// <see cref="ISpaceService"/>
+    /// </summary>
     public class SpaceService : ISpaceService
     {
         private IBaseService<IToken> _baseService;
@@ -18,11 +23,17 @@ namespace ConfluenceRESTClient.Service.Implementation
             this._baseService = DevDefinedBaseService.Instance;
         }
 
+        /// <summary>
+        /// <see cref="ISpaceService.CreateSpaceAsync(Space)"/>
+        /// </summary>
         public void CreateSpaceAsync(Space space)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// <see cref="ISpaceService.GetAllSpacesAsync"/>
+        /// </summary>
         public Task<SpaceList> GetAllSpacesAsync()
         {
             return Task.Run(() => {
@@ -32,6 +43,9 @@ namespace ConfluenceRESTClient.Service.Implementation
             });
         }
 
+        /// <summary>
+        /// <see cref="ISpaceService.GetSpaceByNameAsync(string)"/>
+        /// </summary>
         public Task<Space> GetSpaceByNameAsync(string name)
         {
             throw new NotImplementedException();
