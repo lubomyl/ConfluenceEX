@@ -41,7 +41,7 @@ namespace ConfluenceEX.ViewModel
 
         private async void GetContentBySpaceKeyAsync(string spaceKey)
         {
-            System.Threading.Tasks.Task<ContentList> contentTask = this._contentService.GetContentBySpaceKeyAsync(spaceKey);
+            System.Threading.Tasks.Task<ContentList> contentTask = this._contentService.GetAllContentBySpaceKeyAsync(spaceKey);
 
             var contentList = await contentTask as ContentList;
 
