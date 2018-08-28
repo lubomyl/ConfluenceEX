@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConfluenceRESTClient.Model
 {
-    public class AuthenticatedUser
+    public class User
     {
 
         public string Type { get; set; }

@@ -21,7 +21,7 @@ namespace ConfluenceEX.ViewModel
 
         private ConfluenceToolWindowNavigatorViewModel _parent;
 
-        private AuthenticatedUser _authenticatedUser;
+        private User _authenticatedUser;
 
         private IUserService _userService;
 
@@ -44,9 +44,9 @@ namespace ConfluenceEX.ViewModel
 
         private async void GetAuthenticatedUserAsync()
         {
-            System.Threading.Tasks.Task<AuthenticatedUser> authenticatedUserTask = this._userService.GetAuthenticatedUserAsync();
+            System.Threading.Tasks.Task<User> authenticatedUserTask = this._userService.GetAuthenticatedUserAsync();
 
-            this.AuthenticatedUser = await authenticatedUserTask as AuthenticatedUser;
+            this.AuthenticatedUser = await authenticatedUserTask as User;
         }
 
         private void SignOut(object parameter)
@@ -63,7 +63,7 @@ namespace ConfluenceEX.ViewModel
             this._userSettingsStore.DeleteProperty("External Tools", propertyName);
         }
 
-        public AuthenticatedUser AuthenticatedUser
+        public User AuthenticatedUser
         {
             get
             {
