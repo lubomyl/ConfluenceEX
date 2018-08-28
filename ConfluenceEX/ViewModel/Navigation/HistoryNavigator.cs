@@ -79,21 +79,36 @@ namespace ConfluenceEX.ViewModel.Navigation
 
         public void AddView(UserControl view)
         {
-            if (this._index != this._viewStack.Count - 1)
+            if (!IsSameAsPrevious(view))
             {
-                for (int i = _index + STEP; i < this._viewStack.Count; i++)
+                if (this._index != this._viewStack.Count - 1)
                 {
-                    this._viewStack.RemoveAt(i);
+                    for (int i = _index + STEP; i < this._viewStack.Count; i++)
+                    {
+                        this._viewStack.RemoveAt(i);
+                    }
                 }
-            }
 
-            if(this._index == STACK_SIZE)
+                if (this._index == STACK_SIZE)
+                {
+                    ShiftStackLeft();
+                }
+
+                this._viewStack.Add(view);
+                this._index++;
+            }
+        }
+
+        private bool IsSameAsPrevious(UserControl view)
+        {
+            if(this._viewStack.Count > 0 && view.GetType() == this._viewStack.Last().GetType())
             {
-                ShiftStackLeft();
+                return true;
             }
-
-            this._viewStack.Add(view);
-            this._index++;
+            else
+            {
+                return false;
+            }
         }
 
         private void ShiftStackLeft()
