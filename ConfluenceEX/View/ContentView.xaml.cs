@@ -1,5 +1,5 @@
-﻿using ConfluenceEX.Common;
-using ConfluenceEX.ViewModel;
+﻿using ConfluenceEX.ViewModel;
+using ConfluenceRestClient.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,18 +18,18 @@ using System.Windows.Shapes;
 namespace ConfluenceEX.View
 {
     /// <summary>
-    /// Interaction logic for TestView.xaml
+    /// Interaction logic for ContentView.xaml
     /// </summary>
-    public partial class BeforeSignInView : UserControl
+    public partial class ContentView : UserControl
     {
 
-        private BeforeSignInViewModel _viewModel;
+        private ContentViewModel _viewModel;
 
-        public BeforeSignInView(ConfluenceToolWindowNavigatorViewModel parent)
+        public ContentView(int contentId)
         {
             InitializeComponent();
 
-            this._viewModel = new BeforeSignInViewModel(parent);
+            this._viewModel = new ContentViewModel(contentId);
             this.DataContext = this._viewModel;
         }
     }

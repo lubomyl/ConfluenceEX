@@ -29,8 +29,8 @@ namespace ConfluenceEX.View
         {
             InitializeComponent();
 
-            _viewModel = new OAuthVerifierConfirmationViewModel(parent, requestToken);
-            this.DataContext = _viewModel;
+            this._viewModel = new OAuthVerifierConfirmationViewModel(parent, requestToken);
+            this.DataContext = this._viewModel;
         }
     }
 }

@@ -27,7 +27,7 @@ namespace ConfluenceEX.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public ContentListViewModel(string username, string password, Space space)
+        public ContentListViewModel(Space space)
         {
             string spaceKey = space.Key;
 
