@@ -47,9 +47,9 @@ namespace ConfluenceRestClient.Service.Implementation
         }
 
         /// <summary>
-        /// <see cref="IContentService.GetContentBySpaceKeyAsync(string)"/>
+        /// <see cref="IContentService.GetAllContentBySpaceKeyAsync(string)"/>
         /// </summary>
-        public Task<ContentList> GetContentBySpaceKeyAsync(string spaceKey)
+        public Task<ContentList> GetAllContentBySpaceKeyAsync(string spaceKey)
         {
             return Task.Run(() => {
                 var resource = $"content?spaceKey={spaceKey}";
@@ -58,5 +58,16 @@ namespace ConfluenceRestClient.Service.Implementation
             });
         }
 
+        /// <summary>
+        /// <see cref="IContentService.GetContentByIdAsync(int)"/>
+        /// </summary>
+        public Task<Content> GetContentByIdAsync(int contentId)
+        {
+            return Task.Run(() => {
+                var resource = $"content/{contentId}";
+
+                return this._baseService.Get<Content>(resource);
+            });
+        }
     }
 }

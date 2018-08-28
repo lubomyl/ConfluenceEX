@@ -58,9 +58,13 @@
     <Compile Include="Theme\TeamFoundationColors.cs" />
     <Compile Include="Theme\ThemeColorId.cs" />
     <Compile Include="Theme\ThemeColors.cs" />
+    <Compile Include="ViewModel\ContentViewModel.cs" />
     <Compile Include="ViewModel\Navigation\HistoryNavigator.cs" />
     <Compile Include="ViewModel\OAuthVerifierConfirmationViewModel.cs" />
     <Compile Include="ViewModel\Validation\EmptyOrWhitespaceRule.cs" />
+    <Compile Include="View\ContentView.xaml.cs">
+      <DependentUpon>ContentView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Navigation\ConfluenceToolWindowNavigator.xaml.cs">
       <DependentUpon>ConfluenceToolWindowNavigator.xaml</DependentUpon>
     </Compile>
@@ -242,6 +246,10 @@
     <Page Include="Main\VisualStudioThemeResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Navigation\ConfluenceToolWindowNavigator.xaml">
       <SubType>Designer</SubType>

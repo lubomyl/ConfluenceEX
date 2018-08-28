@@ -29,8 +29,8 @@ namespace ConfluenceEX.View
         {
             InitializeComponent();
 
-            _viewModel = new AfterSignInViewModel(parent, SignedInUser.Username, SignedInUser.Password);
-            this.DataContext = _viewModel;
+            this._viewModel = new AfterSignInViewModel(parent);
+            this.DataContext = this._viewModel;
         }
     }
 }

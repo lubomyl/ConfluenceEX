@@ -29,7 +29,7 @@ namespace ConfluenceEX.ViewModel
 
         public DelegateCommand SignOutCommand { get; private set; }
 
-        public AfterSignInViewModel(ConfluenceToolWindowNavigatorViewModel parent, string username, string password)
+        public AfterSignInViewModel(ConfluenceToolWindowNavigatorViewModel parent)
         {
             this._parent = parent;
 

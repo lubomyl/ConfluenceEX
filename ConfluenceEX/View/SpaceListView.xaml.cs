@@ -16,8 +16,8 @@ namespace ConfluenceEX.View
         {
             InitializeComponent();
 
-            _viewModel = new SpaceListViewModel(SignedInUser.Username, SignedInUser.Password, parent);
-            this.DataContext = _viewModel;
+            this._viewModel = new SpaceListViewModel(parent);
+            this.DataContext = this._viewModel;
         }
     }
 }
