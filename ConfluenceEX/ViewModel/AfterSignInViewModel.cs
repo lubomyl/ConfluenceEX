@@ -4,6 +4,7 @@ using ConfluenceRestClient.Model;
 using ConfluenceRESTClient.Model;
 using ConfluenceRESTClient.Service;
 using ConfluenceRESTClient.Service.Implementation;
+using DevDefined.OAuth.Framework;
 using Microsoft.VisualStudio.Settings;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Settings;
@@ -25,6 +26,8 @@ namespace ConfluenceEX.ViewModel
 
         private IUserService _userService;
 
+        private OAuthService _oauthService;
+
         private WritableSettingsStore _userSettingsStore;
 
         public DelegateCommand SignOutCommand { get; private set; }
@@ -33,6 +36,7 @@ namespace ConfluenceEX.ViewModel
         {
             this._parent = parent;
 
+            this._oauthService = new OAuthService();
             this._userService = new UserService();
             this.GetAuthenticatedUserAsync();
 
@@ -44,15 +48,23 @@ namespace ConfluenceEX.ViewModel
 
         private async void GetAuthenticatedUserAsync()
         {
-            System.Threading.Tasks.Task<User> authenticatedUserTask = this._userService.GetAuthenticatedUserAsync();
+            try
+            {
+                System.Threading.Tasks.Task<User> authenticatedUserTask = this._userService.GetAuthenticatedUserAsync();
 
-            this.AuthenticatedUser = await authenticatedUserTask as User;
+                this.AuthenticatedUser = await authenticatedUserTask as User;
+            } catch (OAuthException ex)
+            {
+                this._parent.ShowBeforeSignIn();
+            }
         }
 
         private void SignOut(object parameter)
         {
             this.DeletePropertyFromUserSettings("AccessToken");
             this.DeletePropertyFromUserSettings("AccessTokenSecret");
+
+            this._oauthService.cancelToken();
 
             this._parent.ShowBeforeSignIn();
         }

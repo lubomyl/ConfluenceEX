@@ -139,7 +139,7 @@ namespace ConfluenceEX.ViewModel
                 {
                     this._oAuthService.ReinitializeOAuthSessionAccessToken(accessToken, accessTokenSecret);
 
-                    ShowAfterSignIn();
+                    this.ShowAfterSignIn();
                 }
             }
             catch (Exception ex)
