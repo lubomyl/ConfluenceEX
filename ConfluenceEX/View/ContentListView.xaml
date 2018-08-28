@@ -26,14 +26,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <CheckBox IsChecked="{Binding OpenInExternalBrowser}" Grid.Column="0" Grid.Row="0">Open in external browser</CheckBox>
-
-        <Label Grid.Column="0" Grid.Row="1">Content list:</Label>
+        <Label Grid.Column="0" Grid.Row="0">Content list:</Label>
         
-        <ItemsControl Grid.Column="0" Grid.Row="2" Name="icSpaceContentsList" ItemsSource="{Binding SpaceContentList}">
+        <ItemsControl Grid.Column="0" Grid.Row="1" Name="icSpaceContentsList" ItemsSource="{Binding SpaceContentList}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,0,0,5">

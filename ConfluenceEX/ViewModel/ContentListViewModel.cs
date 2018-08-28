@@ -22,8 +22,6 @@ namespace ConfluenceEX.ViewModel
 
         private ObservableCollection<Content> _spaceContentList;
 
-        private bool _openInExternalBrowser;
-
         public DelegateCommand SpaceContentSelectedCommand { get; private set; }
 
         /// <summary>
@@ -65,12 +63,6 @@ namespace ConfluenceEX.ViewModel
         {
             get { return this._spaceContentList; }
             set { this._spaceContentList = value; }
-        }
-
-        public bool OpenInExternalBrowser
-        {
-            get { return this._openInExternalBrowser; }
-            set { this._openInExternalBrowser = value; }
         }
     }
 }
