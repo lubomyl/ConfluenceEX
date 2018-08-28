@@ -18,6 +18,8 @@ namespace ConfluenceEX.ViewModel
     {
         private IContentService _contentService;
 
+        private ConfluenceToolWindowNavigatorViewModel _parent;
+
         private ObservableCollection<Content> _spaceContentList;
 
         private bool _openInExternalBrowser;
@@ -27,9 +29,10 @@ namespace ConfluenceEX.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public ContentListViewModel(Space space)
+        public ContentListViewModel(Space space, ConfluenceToolWindowNavigatorViewModel parent)
         {
             string spaceKey = space.Key;
+            this._parent = parent;
 
             this._contentService = new ContentService();
             this.SpaceContentList = new ObservableCollection<Content>();
@@ -55,17 +58,7 @@ namespace ConfluenceEX.ViewModel
         {
             Content content = sender as Content;
 
-            if (this._openInExternalBrowser)
-            {
-                System.Diagnostics.Process.Start("https://lubomyl3.atlassian.net/wiki" + content._Links.Webui);
-            }
-            else
-            {
-                IVsWindowFrame ppFrame;
-                var service = Package.GetGlobalService(typeof(IVsWebBrowsingService)) as IVsWebBrowsingService;
-
-                service.Navigate("https://lubomyl3.atlassian.net/wiki" + content._Links.Webui, 0, out ppFrame);
-            }
+            this._parent.ShowContentView(content.Id);
         }
 
         public ObservableCollection<Content> SpaceContentList

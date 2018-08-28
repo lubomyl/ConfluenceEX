@@ -27,7 +27,7 @@ namespace ConfluenceEX.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public SpaceListViewModel(string username, string password, ConfluenceToolWindowNavigatorViewModel parent)
+        public SpaceListViewModel(ConfluenceToolWindowNavigatorViewModel parent)
         {
             this._spaceService = new SpaceService();
 

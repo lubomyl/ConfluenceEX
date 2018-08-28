@@ -30,6 +30,26 @@ namespace ConfluenceEX.ViewModel
             this.Content = await contentTask as Content;
         }
 
+        //TODO implement on link click
+        /*
+        private void OnItemSelected(object sender)
+        {
+            Content content = sender as Content;
+
+            if (this._openInExternalBrowser)
+            {
+                System.Diagnostics.Process.Start("https://lubomyl3.atlassian.net/wiki" + content._Links.Webui);
+            }
+            else
+            {
+                IVsWindowFrame ppFrame;
+                var service = Package.GetGlobalService(typeof(IVsWebBrowsingService)) as IVsWebBrowsingService;
+
+                service.Navigate("https://lubomyl3.atlassian.net/wiki" + content._Links.Webui, 0, out ppFrame);
+            }
+        }
+        */
+
         public Content Content
         {
             get

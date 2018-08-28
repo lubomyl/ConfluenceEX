@@ -121,7 +121,7 @@ namespace ConfluenceEX.ViewModel
             _parent.Caption = "Confluence " + space.Name + " Content";
             this.EnableCommand(false, _service, Guids.COMMAND_REFRESH_ID);
 
-            this._contentListView = new ContentListView(space);
+            this._contentListView = new ContentListView(space, this);
             this._historyNavigator.AddView(this._contentListView);
 
             SelectedView = this._contentListView;
