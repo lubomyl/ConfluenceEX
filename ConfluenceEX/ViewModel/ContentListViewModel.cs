@@ -58,7 +58,7 @@ namespace ConfluenceEX.ViewModel
         {
             Content content = sender as Content;
 
-            this._parent.ShowContentView(content.Id);
+            this._parent.ShowContent(content.Id);
         }
 
         public ObservableCollection<Content> SpaceContentList

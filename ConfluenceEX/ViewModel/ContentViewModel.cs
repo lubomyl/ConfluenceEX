@@ -25,7 +25,7 @@ namespace ConfluenceEX.ViewModel
 
         private async void GetContentAsync(int contentId)
         {
-            Task<Content> contentTask = this._contentService.GetContentByIdAsync(contentId);
+            System.Threading.Tasks.Task<Content> contentTask = this._contentService.GetContentByIdAsync(contentId);
 
             this.Content = await contentTask as Content;
         }

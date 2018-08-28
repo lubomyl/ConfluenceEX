@@ -32,6 +32,7 @@ namespace ConfluenceEX.ViewModel
         private AfterSignInView _afterSignInView;
         private BeforeSignInView _beforeSignInView;
         private OAuthVerifierConfirmationView _oAuthVerifierConfirmationView;
+        private ContentView _contentView;
 
         private WritableSettingsStore _userSettingsStore;
 
@@ -159,6 +160,19 @@ namespace ConfluenceEX.ViewModel
             this.EnableCommand(false, _service, Guids.COMMAND_HOME_ID);
             this.EnableCommand(false, _service, Guids.COMMAND_REFRESH_ID);
             this.EnableCommand(false, _service, Guids.COMMAND_BACK_ID);
+        }
+
+        public void ShowContent(int contentId)
+        {
+            _parent.Caption = "Confluence Content page";
+
+            this._contentView = new ContentView(contentId);
+
+            SelectedView = this._contentView;
+
+            this._historyNavigator.AddView(this._contentView);
+
+            this.EnableCommand(false, _service, Guids.COMMAND_REFRESH_ID);
         }
 
         private void EnableCommand(bool enable, OleMenuCommandService service, int commandGuid)
