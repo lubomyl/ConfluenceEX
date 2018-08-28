@@ -1,6 +1,9 @@
-﻿using ConfluenceRestClient.Model;
+﻿using ConfluenceEX.Command;
+using ConfluenceRestClient.Model;
 using ConfluenceRestClient.Service;
 using ConfluenceRestClient.Service.Implementation;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace ConfluenceEX.ViewModel
 {
+
     public class ContentViewModel : ViewModelBase
     {
 
@@ -16,11 +20,17 @@ namespace ConfluenceEX.ViewModel
 
         private IContentService _contentService;
 
+        public DelegateCommand OpenContentInBuildInTabCommand { get; private set; }
+        public DelegateCommand OpenContentInExternalTabCommand { get; private set; }
+
         public ContentViewModel(int contentId)
         {
             this._contentService = new ContentService();
 
             this.GetContentAsync(contentId);
+
+            this.OpenContentInBuildInTabCommand = new DelegateCommand(OpenContentInBuildInTab);
+            this.OpenContentInExternalTabCommand = new DelegateCommand(OpenContentInExternalTab);
         }
 
         private async void GetContentAsync(int contentId)
@@ -30,25 +40,22 @@ namespace ConfluenceEX.ViewModel
             this.Content = await contentTask as Content;
         }
 
-        //TODO implement on link click
-        /*
-        private void OnItemSelected(object sender)
+        private void OpenContentInBuildInTab(object sender)
         {
-            Content content = sender as Content;
+            string contentUrl = sender as string;
 
-            if (this._openInExternalBrowser)
-            {
-                System.Diagnostics.Process.Start("https://lubomyl3.atlassian.net/wiki" + content._Links.Webui);
-            }
-            else
-            {
-                IVsWindowFrame ppFrame;
-                var service = Package.GetGlobalService(typeof(IVsWebBrowsingService)) as IVsWebBrowsingService;
+            IVsWindowFrame ppFrame;
+            var service = Package.GetGlobalService(typeof(IVsWebBrowsingService)) as IVsWebBrowsingService;
 
-                service.Navigate("https://lubomyl3.atlassian.net/wiki" + content._Links.Webui, 0, out ppFrame);
-            }
+            service.Navigate("https://lubomyl3.atlassian.net/wiki" + contentUrl, 0, out ppFrame);
         }
-        */
+
+        private void OpenContentInExternalTab(object sender)
+        {
+            string contentUrl = sender as string;
+
+            System.Diagnostics.Process.Start("https://lubomyl3.atlassian.net/wiki" + contentUrl);
+        }
 
         public Content Content
         {

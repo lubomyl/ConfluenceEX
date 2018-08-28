@@ -26,6 +26,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Label Grid.Column="0" Grid.Row="0" >Id:</Label>
@@ -34,5 +36,18 @@
         <Label Grid.Column="0" Grid.Row="1" >Title:</Label>
         <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Content.Title}" Style="{StaticResource PlainText}"/>
 
+        <TextBlock Grid.Column="0" Grid.Row="2" Style="{StaticResource PlainText}">
+            <Hyperlink Command="{Binding Path=OpenContentInBuildInTabCommand}"
+                        CommandParameter="{Binding Content._Links.Webui}">
+                <TextBlock Text="Open in build-in tab..."/>
+            </Hyperlink>
+        </TextBlock>
+
+        <TextBlock Grid.Column="0" Grid.Row="3" Style="{StaticResource PlainText}">
+            <Hyperlink Command="{Binding Path=OpenContentInExternalTabCommand}"
+                        CommandParameter="{Binding Content._Links.Webui}">
+                <TextBlock Text="Open in external tab..."/>
+            </Hyperlink>
+        </TextBlock>
     </Grid>
 </UserControl>
