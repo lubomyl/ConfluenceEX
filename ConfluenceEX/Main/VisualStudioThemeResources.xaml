@@ -109,18 +109,22 @@
 	<Style x:Key="NotificationText" TargetType="{x:Type TextBlock}">
 		<Setter Property="TextBlock.Background" Value="{StaticResource NotificationBrushKey}" />
 		<Setter Property="TextBlock.Foreground" Value="{StaticResource NotificationTextBrushKey}" />
-	</Style>
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
 	<Style x:Key="PlainText" TargetType="{x:Type TextBlock}">
 		<Setter Property="TextBlock.Foreground" Value="{StaticResource ToolWindowTextBrushKey}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
 	</Style>
 	<Style x:Key="ShadedText" TargetType="{x:Type TextBlock}">
 		<Setter Property="TextBlock.Background" Value="{StaticResource ItemSelectedNotFocusedBrushKey}" />
 		<Setter Property="TextBlock.Foreground" Value="{StaticResource ItemSelectedTextNotFocusedBrushKey}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
 	</Style>
 	<Style x:Key="TitleText" TargetType="{x:Type TextBlock}">
 		<Setter Property="TextBlock.FontWeight" Value="Bold" />
 		<Setter Property="TextBlock.FontSize" Value="15" />
 		<Setter Property="TextBlock.Foreground" Value="{StaticResource ToolWindowTextBrushKey}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
 	</Style>
 
 	<!-- General controls -->
