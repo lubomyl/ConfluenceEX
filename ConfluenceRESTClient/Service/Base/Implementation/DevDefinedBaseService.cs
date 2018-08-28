@@ -1,4 +1,5 @@
-﻿using DevDefined.OAuth.Consumer;
+﻿using ConfluenceRESTClient.Service;
+using DevDefined.OAuth.Consumer;
 using DevDefined.OAuth.Framework;
 using Newtonsoft.Json;
 using System;
@@ -10,7 +11,13 @@ using System.Threading.Tasks;
 
 namespace ConfluenceRESTClient.Service
 {
-    public class DevDefinedBaseService : IBaseService
+
+
+    /// <summary>
+    /// DevDefined.OAuth library concrete implementation of IBaseService.
+    /// Singleton class pattern used to not to reinitialize OAuth session on every reference of this class.
+    /// </summary>
+    public class DevDefinedBaseService : IBaseService<IToken>
     {
         private OAuthSession _session;
 
@@ -22,6 +29,10 @@ namespace ConfluenceRESTClient.Service
         {
         }
 
+
+        /// <summary>
+        /// Initializes OAtuh session object with parameters needed like requestTokenUrl, userAuthorieUrl, accessTokenUrl, consumerKey, privateKey, signatureMethod or consumerSecret 
+        /// </summary>
         public void InitializeOAuthSession()
         {
             X509Certificate2 certificate = new X509Certificate2(Properties.Settings.Default.CertificatePath, Properties.Settings.Default.CertificateSecret);
@@ -42,6 +53,12 @@ namespace ConfluenceRESTClient.Service
             this._session = new OAuthSession(consumerContext, requestTokenUrl, userAuthorizeTokenUrl, accessTokenUrl);
         }
 
+
+        /// <summary>
+        /// Reinitializes OAuth session object with provided access token properties. Used on restart of application. Important for remember me like function.
+        /// </summary>
+        /// <param name="token">Access token string.</param>
+        /// <param name="tokenSecret">Access token secret string.</param>
         public void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret)
         {
             this.InitializeOAuthSession();
@@ -53,18 +70,53 @@ namespace ConfluenceRESTClient.Service
             this._session.AccessToken = accessToken;
         }
 
-        public T Get<T>(string resource) where T : new()
+
+        /// <summary>
+        /// <see cref="IBaseService{T}.Get{K}(string)"/>
+        /// </summary>
+        public K Get<K>(string resource) where K : new()
         {
             var response = this._session.Request().Get().ForUrl(REST_URL + resource).ReadBody();
 
                 if (response != null)
                 {
-                    return JsonConvert.DeserializeObject<T>(response);
+                    return JsonConvert.DeserializeObject<K>(response);
                 }
                 else
                 {
-                    return default(T);
+                    return default(K);
                 }
+        }
+
+        /// <summary>
+        /// <see cref="IBaseService{T}.GetRequestToken"/>
+        /// </summary>
+        public IToken GetRequestToken()
+        {
+            IToken ret = this._session.GetRequestToken("POST");
+
+            return ret;
+        }
+
+        /// <summary>
+        /// <see cref="IBaseService{T}.GetUserAuthorizationUrlForToken(T)"/>
+        /// </summary>
+        public string GetUserAuthorizationUrlForToken(IToken requestToken)
+        {
+            string ret = this._session.GetUserAuthorizationUrlForToken(requestToken);
+
+            return ret;
+        }
+
+        /// <summary>
+        /// <see cref="IBaseService{T}.ExchangeRequestTokenForAccessToken(T, string)"/>
+        /// </summary>
+        public IToken ExchangeRequestTokenForAccessToken(IToken requestToken, string verificationCode)
+        {
+
+            IToken ret = this._session.ExchangeRequestTokenForAccessToken(requestToken, "POST", verificationCode);
+
+            return ret;
         }
 
         public static DevDefinedBaseService Instance
@@ -79,18 +131,5 @@ namespace ConfluenceRESTClient.Service
                 return _instance;
             }
         }
-
-        public OAuthSession Session
-        {
-            get
-            {
-                return this._session;
-            }
-            private set
-            {
-                this._session = value;
-            }
-        }
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ConfluenceRESTClient.Model;
+using DevDefined.OAuth.Framework;
 using RestSharp;
 using RestSharp.Authenticators;
 using System;
@@ -9,16 +10,24 @@ using System.Threading.Tasks;
 
 namespace ConfluenceRESTClient.Service.Implementation
 {
+
+    /// <summary>
+    /// Concrete implementation of IUserService utilizing <see cref="DevDefinedBaseService"/> as <see cref="IBaseService{T}"/>.
+    /// <see cref="IUserService"/>
+    /// </summary>
     public class UserService : IUserService
     {
 
-        private DevDefinedBaseService _baseService;
+        private IBaseService<IToken> _baseService;
 
         public UserService()
         {
             _baseService = DevDefinedBaseService.Instance;
         }
 
+        /// <summary>
+        /// <see cref="IUserService.GetAuthenticatedUserAsync"/>
+        /// </summary>
         public Task<AuthenticatedUser> GetAuthenticatedUserAsync()
         {
             return Task.Run(() => {

@@ -10,7 +10,7 @@ namespace ConfluenceRESTClient.Service
 {
 
     //TODO implement error logging
-    public class RestSharpBaseService : RestSharp.RestClient, IBaseService
+    public class RestSharpBaseService : RestSharp.RestClient, IBaseService<Object>
     {
 
         private string _username = string.Empty;
@@ -56,6 +56,22 @@ namespace ConfluenceRESTClient.Service
                 taskCompletionSource.SetResult(response.Data));
 
             return taskCompletionSource.Task;
+        }
+
+        //Doesn't support RSA with separate certificate yet https://github.com/restsharp/RestSharp/issues/1088
+        public Object GetRequestToken()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetUserAuthorizationUrlForToken(Object requestToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Object ExchangeRequestTokenForAccessToken(Object requestToken, string verificationCode)
+        {
+            throw new NotImplementedException();
         }
 
         #region BaseService Members
