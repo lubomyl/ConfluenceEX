@@ -23,7 +23,7 @@ Need to sign-in at [My testing Confluence server](https://lubomyl3.atlassian.net
 
 ##### What does it demonstrate?
 REST Client integrated into ToolWindow  
-After project start-up goto and click on `Tool|Confluence` if the Confluence Toolbar is not already shown    
+After project start-up goto and click on `View|Confluence` if the Confluence Toolbar is not already shown    
 New ToolWindow with ToolBar should show up  
   
 Before successful sign-in:  
