@@ -16,12 +16,12 @@ namespace ConfluenceRESTClient.Service
 
 
         /// <summary>
-        /// Async method to get <see cref="AuthenticatedUser"/> resources like username or displayName.
+        /// Async method to get <see cref="User"/> resources like username or displayName.
         /// </summary>
-        /// <returns>Task containing deserialized <see cref="AuthenticatedUser"/> model class object.</returns>
-        Task<AuthenticatedUser> GetAuthenticatedUserAsync();
+        /// <returns>Task containing deserialized <see cref="User"/> model class object.</returns>
+        Task<User> GetAuthenticatedUserAsync();
 
         //TODO refactor extract to ?Helper? class. Find any other implementation? Basic authentication.
-        bool IsAuthenticated(AuthenticatedUser authenticatedUser);
+        bool IsAuthenticated(User authenticatedUser);
     }
 }

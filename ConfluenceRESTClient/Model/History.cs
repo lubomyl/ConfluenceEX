@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace ConfluenceRESTClient.Model
 {
-    public class AuthenticatedUser
+    public class History
     {
 
-        public string Type { get; set; }
-        public string Username { get; set; }
-        public string DisplayName { get; set; }
+        public User CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
 
     }
 }

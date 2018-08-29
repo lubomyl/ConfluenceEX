@@ -28,16 +28,16 @@ namespace ConfluenceRESTClient.Service.Implementation
         /// <summary>
         /// <see cref="IUserService.GetAuthenticatedUserAsync"/>
         /// </summary>
-        public Task<AuthenticatedUser> GetAuthenticatedUserAsync()
+        public Task<User> GetAuthenticatedUserAsync()
         {
             return Task.Run(() => {
                 var resource = "user/current";
 
-                return this._baseService.Get<AuthenticatedUser>(resource);
+                return this._baseService.Get<User>(resource);
             });
         }
 
-        public bool IsAuthenticated(AuthenticatedUser authenticatedUser)
+        public bool IsAuthenticated(User authenticatedUser)
         {
             bool ret = false;
 

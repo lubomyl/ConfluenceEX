@@ -11,8 +11,8 @@
       <Menu guid="guidConfluencePackage" id="ConfluenceToolbar" type="ToolWindowToolbar">
         <CommandFlag>DefaultDocked</CommandFlag>
         <Strings>
-          <ButtonText>Test Toolbar</ButtonText>
-          <CommandName>Test Toolbar</CommandName>
+          <ButtonText>Confluence Toolbar</ButtonText>
+          <CommandName>Confluence Toolbar</CommandName>
         </Strings>
       </Menu>
     </Menus>
@@ -28,6 +28,7 @@
       </Group>
     </Groups>
 
+    <!-- VS menu main button to show Tool Window -->
     <Buttons>
       <Button guid="guidConfluenceCommand" id="ConfluenceCommand" priority="0x0100" type="Button">
         <Parent guid="guidConfluenceMenuGroup" id="ConfluenceMenuGroup" />

@@ -20,7 +20,7 @@ namespace ConfluenceEX.Main
         private ConfluenceToolWindowNavigatorViewModel _navigator;
         private bool _isAuthenticated;
 
-        private static AuthenticatedUser _authenticatedUser;
+        private static User _authenticatedUser;
 
         private IUserService _userService;
 
@@ -71,7 +71,7 @@ namespace ConfluenceEX.Main
             private set { this._isAuthenticated = value; }
         }
 
-        public static AuthenticatedUser AuthenticatedUser
+        public static User AuthenticatedUser
         {
             get { return _authenticatedUser; }
             set { _authenticatedUser = value; }

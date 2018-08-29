@@ -16,7 +16,7 @@
         <ResourceDictionary x:Key="style">
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary x:Uid="VisualStudioThemeResources"
-					Source="pack://application:,,,/ConfluenceEX;component/Main/VisualStudioThemeResources.xaml" />
+					Source="pack://application:,,,/ConfluenceEX;component/Theme/VisualStudioThemeResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>

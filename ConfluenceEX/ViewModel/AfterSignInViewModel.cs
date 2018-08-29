@@ -4,6 +4,7 @@ using ConfluenceRestClient.Model;
 using ConfluenceRESTClient.Model;
 using ConfluenceRESTClient.Service;
 using ConfluenceRESTClient.Service.Implementation;
+using DevDefined.OAuth.Framework;
 using Microsoft.VisualStudio.Settings;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Settings;
@@ -21,9 +22,11 @@ namespace ConfluenceEX.ViewModel
 
         private ConfluenceToolWindowNavigatorViewModel _parent;
 
-        private AuthenticatedUser _authenticatedUser;
+        private User _authenticatedUser;
 
         private IUserService _userService;
+
+        private OAuthService _oauthService;
 
         private WritableSettingsStore _userSettingsStore;
 
@@ -33,6 +36,7 @@ namespace ConfluenceEX.ViewModel
         {
             this._parent = parent;
 
+            this._oauthService = new OAuthService();
             this._userService = new UserService();
             this.GetAuthenticatedUserAsync();
 
@@ -44,9 +48,15 @@ namespace ConfluenceEX.ViewModel
 
         private async void GetAuthenticatedUserAsync()
         {
-            System.Threading.Tasks.Task<AuthenticatedUser> authenticatedUserTask = this._userService.GetAuthenticatedUserAsync();
+            try
+            {
+                System.Threading.Tasks.Task<User> authenticatedUserTask = this._userService.GetAuthenticatedUserAsync();
 
-            this.AuthenticatedUser = await authenticatedUserTask as AuthenticatedUser;
+                this.AuthenticatedUser = await authenticatedUserTask as User;
+            } catch (OAuthException ex)
+            {
+                this._parent.ShowBeforeSignIn();
+            }
         }
 
         private void SignOut(object parameter)
@@ -63,7 +73,7 @@ namespace ConfluenceEX.ViewModel
             this._userSettingsStore.DeleteProperty("External Tools", propertyName);
         }
 
-        public AuthenticatedUser AuthenticatedUser
+        public User AuthenticatedUser
         {
             get
             {
