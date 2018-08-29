@@ -64,8 +64,6 @@ namespace ConfluenceEX.ViewModel
             this.DeletePropertyFromUserSettings("AccessToken");
             this.DeletePropertyFromUserSettings("AccessTokenSecret");
 
-            this._oauthService.cancelToken();
-
             this._parent.ShowBeforeSignIn();
         }
 
