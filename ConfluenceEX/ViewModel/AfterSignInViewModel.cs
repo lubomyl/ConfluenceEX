@@ -67,12 +67,6 @@ namespace ConfluenceEX.ViewModel
             this._parent.ShowBeforeSignIn();
         }
 
-        //TODO refactor extract to Helper class
-        private void DeletePropertyFromUserSettings(string propertyName)
-        {
-            this._userSettingsStore.DeleteProperty("External Tools", propertyName);
-        }
-
         public User AuthenticatedUser
         {
             get

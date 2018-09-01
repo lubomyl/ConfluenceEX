@@ -70,12 +70,6 @@ namespace ConfluenceEX.ViewModel
             }
         }
 
-        //TODO refactor extract to Helper class
-        private void WriteToUserSettings(string propertyName, string value)
-        {
-            this._userSettingsStore.SetString("External Tools", propertyName, value);
-        }
-
         public string OAuthVerificationCode
         {
             get

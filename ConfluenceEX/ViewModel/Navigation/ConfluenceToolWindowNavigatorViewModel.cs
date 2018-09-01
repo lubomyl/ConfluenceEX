@@ -211,14 +211,6 @@ namespace ConfluenceEX.ViewModel
             }
         }
 
-        //TODO refactor extract to Helper class
-        private string ReadFromUserSettings(string propertyName)
-        {
-            string ret = this._userSettingsStore.GetString("External Tools", propertyName);
-
-            return ret;
-        }
-
         private void GoBack(object sender, EventArgs e)
         {
             if (this._historyNavigator.CanGoBack())
