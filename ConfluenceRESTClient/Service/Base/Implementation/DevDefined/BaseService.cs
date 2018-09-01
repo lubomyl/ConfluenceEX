@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConfluenceRESTClient.Service
+namespace ConfluenceRESTClient.Service.DevDefined
 {
 
 
@@ -17,29 +17,30 @@ namespace ConfluenceRESTClient.Service
     /// DevDefined.OAuth library concrete implementation of IBaseService.
     /// Singleton class pattern used to not to reinitialize OAuth session on every reference of this class.
     /// </summary>
-    public class DevDefinedBaseService : IBaseService<IToken>
+    public class BaseService : IBaseService<IToken>
     {
         private OAuthSession _session;
 
-        private static DevDefinedBaseService _instance = null;
+        private static BaseService _instance = null;
 
-        private const string REST_URL = "https://lubomyl3.atlassian.net/wiki/rest/api/";
+        private string _baseUrl;
 
-        private DevDefinedBaseService()
+        private BaseService()
         {
         }
-
 
         /// <summary>
         /// Initializes OAtuh session object with parameters needed like requestTokenUrl, userAuthorieUrl, accessTokenUrl, consumerKey, privateKey, signatureMethod or consumerSecret 
         /// </summary>
-        public void InitializeOAuthSession()
+        public void InitializeOAuthSession(string baseUrl)
         {
+            this._baseUrl = baseUrl;
+
             X509Certificate2 certificate = new X509Certificate2(Properties.Settings.Default.CertificatePath, Properties.Settings.Default.CertificateSecret);
 
-            string requestTokenUrl = "https://lubomyl3.atlassian.net/wiki/plugins/servlet/oauth/request-token";
-            string userAuthorizeTokenUrl = "https://lubomyl3.atlassian.net/wiki/plugins/servlet/oauth/authorize";
-            string accessTokenUrl = "https://lubomyl3.atlassian.net/wiki/plugins/servlet/oauth/access-token";
+            string requestTokenUrl = this._baseUrl + "/wiki/plugins/servlet/oauth/request-token";
+            string userAuthorizeTokenUrl = this._baseUrl + "/wiki/plugins/servlet/oauth/authorize";
+            string accessTokenUrl = this._baseUrl + "/wiki/plugins/servlet/oauth/access-token";
 
             var consumerContext = new OAuthConsumerContext
             {
@@ -59,9 +60,9 @@ namespace ConfluenceRESTClient.Service
         /// </summary>
         /// <param name="token">Access token string.</param>
         /// <param name="tokenSecret">Access token secret string.</param>
-        public void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret)
+        public void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret, string baseUrl)
         {
-            this.InitializeOAuthSession();
+            this.InitializeOAuthSession(baseUrl);
 
             IToken accessToken = new TokenBase();
             accessToken.Token = token;
@@ -76,7 +77,7 @@ namespace ConfluenceRESTClient.Service
         /// </summary>
         public K Get<K>(string resource) where K : new()
         {
-            var response = this._session.Request().Get().ForUrl(REST_URL + resource).ReadBody();
+            var response = this._session.Request().Get().ForUrl(_baseUrl + "/wiki/rest/api/" + resource).ReadBody();
 
                 if (response != null)
                 {
@@ -119,13 +120,13 @@ namespace ConfluenceRESTClient.Service
             return ret;
         }
 
-        public static DevDefinedBaseService Instance
+        public static BaseService Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new DevDefinedBaseService();
+                    _instance = new BaseService();
                 }
 
                 return _instance;

@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConfluenceRESTClient.Service
+namespace ConfluenceRESTClient.Service.RestSharp
 {
 
     //TODO implement error logging
-    public class RestSharpBaseService : RestSharp.RestClient, IBaseService<Object>
+    public class BaseService : RestClient, IBaseService<Object>
     {
 
         private string _username = string.Empty;
@@ -18,12 +18,12 @@ namespace ConfluenceRESTClient.Service
 
         private const string RestUrl = "https://lubomyl3.atlassian.net/wiki/rest/api";
 
-        public RestSharpBaseService()
+        public BaseService()
         {
             this.BaseUrl = new Uri(RestUrl);
         }
 
-        public RestSharpBaseService(string username, string password)
+        public BaseService(string username, string password)
         {
             this.BaseUrl = new Uri(RestUrl);
             this._username = username;

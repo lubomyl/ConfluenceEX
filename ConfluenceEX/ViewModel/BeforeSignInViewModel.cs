@@ -1,9 +1,13 @@
 ﻿using ConfluenceEX.Command;
 using ConfluenceEX.Common;
+using ConfluenceEX.Helper;
 using ConfluenceEX.Main;
 using ConfluenceRESTClient.Service;
 using ConfluenceRESTClient.Service.Implementation;
 using DevDefined.OAuth.Framework;
+using Microsoft.VisualStudio.Settings;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Settings;
 using System;
 using System.Runtime.InteropServices;
 using System.Security;
@@ -25,6 +29,9 @@ namespace ConfluenceEX.ViewModel
 
         private bool _isAuthenticated;
         private string _errorMessage;
+        private string _baseUrl;
+
+        private WritableSettingsStore _userSettingsStore;
 
         public DelegateCommand SignInCommand { get; private set; }
         public DelegateCommand SignInOAuthCommand { get; private set; }
@@ -34,10 +41,14 @@ namespace ConfluenceEX.ViewModel
             this._parent = parent;
             this._isAuthenticated = false;
 
-            this.SignInCommand = new DelegateCommand(SignIn);
+            SettingsManager settingsManager = new ShellSettingsManager(ServiceProvider.GlobalProvider);
+            this._userSettingsStore = settingsManager.GetWritableSettingsStore(SettingsScope.UserSettings);
+
+            //this.SignInCommand = new DelegateCommand(SignIn);
             this.SignInOAuthCommand = new DelegateCommand(SignInOAuth);
         }
 
+        /* Basic authentication
         private async void SignIn(object parameter)
         {
             this._username = this.Username;
@@ -56,8 +67,8 @@ namespace ConfluenceEX.ViewModel
             }
             else
             {
-                /*BindingExpression be = Username.GetBindingExpression(TextBox.TextProperty);
-                be.UpdateSource();*/
+                BindingExpression be = Username.GetBindingExpression(TextBox.TextProperty);
+                be.UpdateSource();
             }
 
             if (this._isAuthenticated)
@@ -65,6 +76,7 @@ namespace ConfluenceEX.ViewModel
                 this._parent.ShowAfterSignIn();
             }
         }
+        */
 
         private async void SignInOAuth(object parameter)
         {
@@ -75,7 +87,10 @@ namespace ConfluenceEX.ViewModel
 
             try
             {
-                this._oAuthService.InitializeOAuthSession();
+                this._oAuthService.InitializeOAuthSession(this.BaseUrl);
+
+                UserSettingsHelper.WriteToUserSettings("BaseUrl", this.BaseUrl);
+
                 requestToken = await this._oAuthService.GetRequestToken();
                 authorizationUrl = await this._oAuthService.GetUserAuthorizationUrlForToken(requestToken);
 
@@ -87,6 +102,10 @@ namespace ConfluenceEX.ViewModel
                 this.ErrorMessage = ex.Message;
             } 
             catch(SecurityException ex)
+            {
+                this.ErrorMessage = ex.Message;
+            }
+            catch(Exception ex)
             {
                 this.ErrorMessage = ex.Message;
             }
@@ -167,6 +186,19 @@ namespace ConfluenceEX.ViewModel
             {
                 this._errorMessage = value;
                 OnPropertyChanged("ErrorMessage");
+            }
+        }
+
+        public string BaseUrl
+        {
+            get
+            {
+                return this._baseUrl;
+            }
+            set
+            {
+                this._baseUrl = value;
+                OnPropertyChanged("BaseUrl");
             }
         }
 

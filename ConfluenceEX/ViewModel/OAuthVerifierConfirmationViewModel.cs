@@ -12,6 +12,7 @@ using Microsoft.VisualStudio.Shell.Settings;
 using Microsoft.VisualStudio.Shell;
 using System.Windows.Threading;
 using System.Windows;
+using ConfluenceEX.Helper;
 
 namespace ConfluenceEX.ViewModel
 {
@@ -58,8 +59,8 @@ namespace ConfluenceEX.ViewModel
             {
                 IToken accessToken = await this._oAuthService.ExchangeRequestTokenForAccessToken(this._requestToken, OAuthVerificationCode);
 
-                this.WriteToUserSettings("AccessToken", accessToken.Token);
-                this.WriteToUserSettings("AccessTokenSecret", accessToken.TokenSecret);
+                UserSettingsHelper.WriteToUserSettings("AccessToken", accessToken.Token);
+                UserSettingsHelper.WriteToUserSettings("AccessTokenSecret", accessToken.TokenSecret);
 
                 this._parent.ShowAfterSignIn();
                 this._timer.Stop();
@@ -68,12 +69,6 @@ namespace ConfluenceEX.ViewModel
             {
                 this.ErrorMessage = ex.Message;
             }
-        }
-
-        //TODO refactor extract to Helper class
-        private void WriteToUserSettings(string propertyName, string value)
-        {
-            this._userSettingsStore.SetString("External Tools", propertyName, value);
         }
 
         public string OAuthVerificationCode

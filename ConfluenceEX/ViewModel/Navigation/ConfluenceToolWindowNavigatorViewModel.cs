@@ -1,4 +1,5 @@
 ﻿using ConfluenceEX.Common;
+using ConfluenceEX.Helper;
 using ConfluenceEX.Main;
 using ConfluenceEX.View;
 using ConfluenceEX.ViewModel.Navigation;
@@ -132,19 +133,20 @@ namespace ConfluenceEX.ViewModel
         {
             try
             {
-                string accessToken = this.ReadFromUserSettings("AccessToken");
-                string accessTokenSecret = this.ReadFromUserSettings("AccessTokenSecret");
+                string accessToken = UserSettingsHelper.ReadFromUserSettings("AccessToken");
+                string accessTokenSecret = UserSettingsHelper.ReadFromUserSettings("AccessTokenSecret");
+                string baseUrl = UserSettingsHelper.ReadFromUserSettings("BaseUrl");
 
-                if (accessToken != null && accessTokenSecret != null)
+                if (accessToken != null && accessTokenSecret != null && baseUrl != null)
                 {
-                    this._oAuthService.ReinitializeOAuthSessionAccessToken(accessToken, accessTokenSecret);
+                    this._oAuthService.ReinitializeOAuthSessionAccessToken(accessToken, accessTokenSecret, baseUrl);
 
                     this.ShowAfterSignIn();
                 }
             }
             catch (Exception ex)
             {
-                ShowBeforeSignIn();
+                this.ShowBeforeSignIn();
             }
         }
 
@@ -208,14 +210,6 @@ namespace ConfluenceEX.ViewModel
                 service.AddCommand(onToolbarMenuCommandConnectionClick);
                 service.AddCommand(onToolbarMenuCommandRefreshClick);
             }
-        }
-
-        //TODO refactor extract to Helper class
-        private string ReadFromUserSettings(string propertyName)
-        {
-            string ret = this._userSettingsStore.GetString("External Tools", propertyName);
-
-            return ret;
         }
 
         private void GoBack(object sender, EventArgs e)

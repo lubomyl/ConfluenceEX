@@ -1,4 +1,5 @@
 ﻿using ConfluenceRESTClient.Model;
+using ConfluenceRESTClient.Service.DevDefined;
 using DevDefined.OAuth.Framework;
 using RestSharp;
 using RestSharp.Authenticators;
@@ -12,7 +13,7 @@ namespace ConfluenceRESTClient.Service.Implementation
 {
 
     /// <summary>
-    /// Concrete implementation of IUserService utilizing <see cref="DevDefinedBaseService"/> as <see cref="IBaseService{T}"/>.
+    /// Concrete implementation of IUserService utilizing <see cref="BaseService"/> as <see cref="IBaseService{T}"/>.
     /// <see cref="IUserService"/>
     /// </summary>
     public class UserService : IUserService
@@ -22,7 +23,7 @@ namespace ConfluenceRESTClient.Service.Implementation
 
         public UserService()
         {
-            _baseService = DevDefinedBaseService.Instance;
+            _baseService = BaseService.Instance;
         }
 
         /// <summary>

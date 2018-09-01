@@ -17,14 +17,16 @@ namespace ConfluenceRESTClient.Service
         /// <summary>
         /// Method to initialize communication session.
         /// </summary>
-        void InitializeOAuthSession();
+        /// <param name="baseUrl">Base url used to make api calls. (e. g. https://confluencetest.atlassian.net)</param>
+        void InitializeOAuthSession(string baseUrl);
 
         /// <summary>
         /// Method to reinitialize communication session with accessToken and accessTokenSecret. Used for rememberme-like function implementation.
         /// </summary>
         /// <param name="token">AccessToken obtained after successfull <see cref="ExchangeRequestTokenForAccessToken(IToken, string)"/> method call.</param>
         /// <param name="tokenSecret">AccessTokenSecret obtained after successfull <see cref="ExchangeRequestTokenForAccessToken(IToken, string)"/> method call.</param>
-        void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret);
+        /// <param name="baseUrl">Base url used to make api calls. (e. g. https://confluencetest.atlassian.net)</param>
+        void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret, string baseUrl);
 
         /// <summary>
         /// OAuth1.0 (STEP 1) - Async method to get temporary request token needed for further steps of authentication.

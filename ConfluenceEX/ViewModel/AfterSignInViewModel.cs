@@ -1,5 +1,6 @@
 ﻿using ConfluenceEX.Command;
 using ConfluenceEX.Common;
+using ConfluenceEX.Helper;
 using ConfluenceRestClient.Model;
 using ConfluenceRESTClient.Model;
 using ConfluenceRESTClient.Service;
@@ -61,16 +62,10 @@ namespace ConfluenceEX.ViewModel
 
         private void SignOut(object parameter)
         {
-            this.DeletePropertyFromUserSettings("AccessToken");
-            this.DeletePropertyFromUserSettings("AccessTokenSecret");
+            UserSettingsHelper.DeletePropertyFromUserSettings("AccessToken");
+            UserSettingsHelper.DeletePropertyFromUserSettings("AccessTokenSecret");
 
             this._parent.ShowBeforeSignIn();
-        }
-
-        //TODO refactor extract to Helper class
-        private void DeletePropertyFromUserSettings(string propertyName)
-        {
-            this._userSettingsStore.DeleteProperty("External Tools", propertyName);
         }
 
         public User AuthenticatedUser
