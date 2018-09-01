@@ -1,4 +1,5 @@
-﻿using DevDefined.OAuth.Consumer;
+﻿using ConfluenceRESTClient.Service.DevDefined;
+using DevDefined.OAuth.Consumer;
 using DevDefined.OAuth.Framework;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace ConfluenceRESTClient.Service.Implementation
 {
 
     /// <summary>
-    /// Concrete implementation of IOAuthService utilizing <see cref="DevDefinedBaseService"/> as <see cref="IBaseService{T}"/>.
+    /// Concrete implementation of IOAuthService utilizing <see cref="BaseService"/> as <see cref="IBaseService{T}"/>.
     /// <see cref="IContentService"/>
     /// </summary>
     public class OAuthService : IOAuthService
@@ -20,7 +21,7 @@ namespace ConfluenceRESTClient.Service.Implementation
 
         public OAuthService()
         {
-            this._baseService = DevDefinedBaseService.Instance;
+            this._baseService = BaseService.Instance;
         }
 
         /// <summary>
@@ -28,7 +29,7 @@ namespace ConfluenceRESTClient.Service.Implementation
         /// </summary>
         public void InitializeOAuthSession()
         {
-            ((DevDefinedBaseService)this._baseService).InitializeOAuthSession();
+            ((BaseService)this._baseService).InitializeOAuthSession();
         }
 
         /// <summary>
@@ -36,7 +37,7 @@ namespace ConfluenceRESTClient.Service.Implementation
         /// </summary>
         public void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret)
         {
-            ((DevDefinedBaseService)this._baseService).ReinitializeOAuthSessionAccessToken(token, tokenSecret);
+            ((BaseService)this._baseService).ReinitializeOAuthSessionAccessToken(token, tokenSecret);
         }
 
         /// <summary>

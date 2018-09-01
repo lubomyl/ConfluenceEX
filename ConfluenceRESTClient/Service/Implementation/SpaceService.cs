@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using ConfluenceRestClient.Model;
 using RestSharp;
 using DevDefined.OAuth.Framework;
+using ConfluenceRESTClient.Service.DevDefined;
 
 namespace ConfluenceRESTClient.Service.Implementation
 {
 
     /// <summary>
-    /// Concrete implementation of ISpaceService utilizing <see cref="DevDefinedBaseService"/> as <see cref="IBaseService{T}"/>.
+    /// Concrete implementation of ISpaceService utilizing <see cref="BaseService"/> as <see cref="IBaseService{T}"/>.
     /// <see cref="ISpaceService"/>
     /// </summary>
     public class SpaceService : ISpaceService
@@ -20,7 +21,7 @@ namespace ConfluenceRESTClient.Service.Implementation
 
         public SpaceService()
         {
-            this._baseService = DevDefinedBaseService.Instance;
+            this._baseService = BaseService.Instance;
         }
 
         /// <summary>

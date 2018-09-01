@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConfluenceRESTClient.Service
+namespace ConfluenceRESTClient.Service.DevDefined
 {
 
 
@@ -17,15 +17,15 @@ namespace ConfluenceRESTClient.Service
     /// DevDefined.OAuth library concrete implementation of IBaseService.
     /// Singleton class pattern used to not to reinitialize OAuth session on every reference of this class.
     /// </summary>
-    public class DevDefinedBaseService : IBaseService<IToken>
+    public class BaseService : IBaseService<IToken>
     {
         private OAuthSession _session;
 
-        private static DevDefinedBaseService _instance = null;
+        private static BaseService _instance = null;
 
         private const string REST_URL = "https://lubomyl3.atlassian.net/wiki/rest/api/";
 
-        private DevDefinedBaseService()
+        private BaseService()
         {
         }
 
@@ -119,13 +119,13 @@ namespace ConfluenceRESTClient.Service
             return ret;
         }
 
-        public static DevDefinedBaseService Instance
+        public static BaseService Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new DevDefinedBaseService();
+                    _instance = new BaseService();
                 }
 
                 return _instance;

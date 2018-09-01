@@ -7,13 +7,14 @@ using ConfluenceRestClient.Model;
 using RestSharp;
 using ConfluenceRESTClient.Service;
 using DevDefined.OAuth.Framework;
+using ConfluenceRESTClient.Service.DevDefined;
 
 namespace ConfluenceRestClient.Service.Implementation
 {
 
 
     /// <summary>
-    /// Concrete implementation of IContentService utilizing <see cref="DevDefinedBaseService"/> as <see cref="IBaseService{T}"/>.
+    /// Concrete implementation of IContentService utilizing <see cref="BaseService"/> as <see cref="IBaseService{T}"/>.
     /// <see cref="IContentService"/>
     /// </summary>
     public class ContentService : IContentService
@@ -23,7 +24,7 @@ namespace ConfluenceRestClient.Service.Implementation
 
         public ContentService()
         {
-            _baseService = DevDefinedBaseService.Instance;
+            _baseService = BaseService.Instance;
         }
 
         /// <summary>
