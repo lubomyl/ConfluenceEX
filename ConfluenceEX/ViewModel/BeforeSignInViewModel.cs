@@ -1,5 +1,6 @@
 ﻿using ConfluenceEX.Command;
 using ConfluenceEX.Common;
+using ConfluenceEX.Helper;
 using ConfluenceEX.Main;
 using ConfluenceRESTClient.Service;
 using ConfluenceRESTClient.Service.Implementation;
@@ -43,7 +44,7 @@ namespace ConfluenceEX.ViewModel
             SettingsManager settingsManager = new ShellSettingsManager(ServiceProvider.GlobalProvider);
             this._userSettingsStore = settingsManager.GetWritableSettingsStore(SettingsScope.UserSettings);
 
-            this.SignInCommand = new DelegateCommand(SignIn);
+            //this.SignInCommand = new DelegateCommand(SignIn);
             this.SignInOAuthCommand = new DelegateCommand(SignInOAuth);
         }
 
@@ -88,7 +89,7 @@ namespace ConfluenceEX.ViewModel
             {
                 this._oAuthService.InitializeOAuthSession(this.BaseUrl);
 
-                this.WriteToUserSettings("BaseUrl", this.BaseUrl);
+                UserSettingsHelper.WriteToUserSettings("BaseUrl", this.BaseUrl);
 
                 requestToken = await this._oAuthService.GetRequestToken();
                 authorizationUrl = await this._oAuthService.GetUserAuthorizationUrlForToken(requestToken);

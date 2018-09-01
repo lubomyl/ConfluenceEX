@@ -1,4 +1,5 @@
 ﻿using ConfluenceEX.Common;
+using ConfluenceEX.Helper;
 using ConfluenceEX.Main;
 using ConfluenceEX.View;
 using ConfluenceEX.ViewModel.Navigation;
@@ -132,9 +133,9 @@ namespace ConfluenceEX.ViewModel
         {
             try
             {
-                string accessToken = this.ReadFromUserSettings("AccessToken");
-                string accessTokenSecret = this.ReadFromUserSettings("AccessTokenSecret");
-                string baseUrl = this.ReadFromUserSettings("BaseUrl");
+                string accessToken = UserSettingsHelper.ReadFromUserSettings("AccessToken");
+                string accessTokenSecret = UserSettingsHelper.ReadFromUserSettings("AccessTokenSecret");
+                string baseUrl = UserSettingsHelper.ReadFromUserSettings("BaseUrl");
 
                 if (accessToken != null && accessTokenSecret != null && baseUrl != null)
                 {
