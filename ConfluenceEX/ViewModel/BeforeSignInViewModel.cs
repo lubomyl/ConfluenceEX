@@ -105,6 +105,10 @@ namespace ConfluenceEX.ViewModel
             {
                 this.ErrorMessage = ex.Message;
             }
+            catch(Exception ex)
+            {
+                this.ErrorMessage = ex.Message;
+            }
         }
 
         private void GetPassword(object parameter)

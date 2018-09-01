@@ -77,7 +77,7 @@ namespace ConfluenceRESTClient.Service.DevDefined
         /// </summary>
         public K Get<K>(string resource) where K : new()
         {
-            var response = this._session.Request().Get().ForUrl(_baseUrl + resource).ReadBody();
+            var response = this._session.Request().Get().ForUrl(_baseUrl + "/wiki/rest/api/" + resource).ReadBody();
 
                 if (response != null)
                 {
