@@ -23,23 +23,24 @@ namespace ConfluenceRESTClient.Service.DevDefined
 
         private static BaseService _instance = null;
 
-        private const string REST_URL = "https://lubomyl3.atlassian.net/wiki/rest/api/";
+        private string _baseUrl;
 
         private BaseService()
         {
         }
 
-
         /// <summary>
         /// Initializes OAtuh session object with parameters needed like requestTokenUrl, userAuthorieUrl, accessTokenUrl, consumerKey, privateKey, signatureMethod or consumerSecret 
         /// </summary>
-        public void InitializeOAuthSession()
+        public void InitializeOAuthSession(string baseUrl)
         {
+            this._baseUrl = baseUrl;
+
             X509Certificate2 certificate = new X509Certificate2(Properties.Settings.Default.CertificatePath, Properties.Settings.Default.CertificateSecret);
 
-            string requestTokenUrl = "https://lubomyl3.atlassian.net/wiki/plugins/servlet/oauth/request-token";
-            string userAuthorizeTokenUrl = "https://lubomyl3.atlassian.net/wiki/plugins/servlet/oauth/authorize";
-            string accessTokenUrl = "https://lubomyl3.atlassian.net/wiki/plugins/servlet/oauth/access-token";
+            string requestTokenUrl = this._baseUrl + "/wiki/plugins/servlet/oauth/request-token";
+            string userAuthorizeTokenUrl = this._baseUrl + "/wiki/plugins/servlet/oauth/authorize";
+            string accessTokenUrl = this._baseUrl + "/wiki/plugins/servlet/oauth/access-token";
 
             var consumerContext = new OAuthConsumerContext
             {
@@ -59,9 +60,9 @@ namespace ConfluenceRESTClient.Service.DevDefined
         /// </summary>
         /// <param name="token">Access token string.</param>
         /// <param name="tokenSecret">Access token secret string.</param>
-        public void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret)
+        public void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret, string baseUrl)
         {
-            this.InitializeOAuthSession();
+            this.InitializeOAuthSession(baseUrl);
 
             IToken accessToken = new TokenBase();
             accessToken.Token = token;
@@ -76,7 +77,7 @@ namespace ConfluenceRESTClient.Service.DevDefined
         /// </summary>
         public K Get<K>(string resource) where K : new()
         {
-            var response = this._session.Request().Get().ForUrl(REST_URL + resource).ReadBody();
+            var response = this._session.Request().Get().ForUrl(_baseUrl + resource).ReadBody();
 
                 if (response != null)
                 {

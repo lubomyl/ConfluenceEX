@@ -136,9 +136,9 @@ namespace ConfluenceEX.ViewModel
                 string accessTokenSecret = this.ReadFromUserSettings("AccessTokenSecret");
                 string baseUrl = this.ReadFromUserSettings("BaseUrl");
 
-                if (accessToken != null && accessTokenSecret != null)
+                if (accessToken != null && accessTokenSecret != null && baseUrl != null)
                 {
-                    this._oAuthService.ReinitializeOAuthSessionAccessToken(accessToken, accessTokenSecret);
+                    this._oAuthService.ReinitializeOAuthSessionAccessToken(accessToken, accessTokenSecret, baseUrl);
 
                     this.ShowAfterSignIn();
                 }

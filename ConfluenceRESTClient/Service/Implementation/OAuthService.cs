@@ -27,17 +27,17 @@ namespace ConfluenceRESTClient.Service.Implementation
         /// <summary>
         /// <see cref="IOAuthService.InitializeOAuthSession"/>
         /// </summary>
-        public void InitializeOAuthSession()
+        public void InitializeOAuthSession(string baseUrl)
         {
-            ((BaseService)this._baseService).InitializeOAuthSession();
+            ((BaseService)this._baseService).InitializeOAuthSession(baseUrl);
         }
 
         /// <summary>
-        /// <see cref="IOAuthService.ReinitializeOAuthSessionAccessToken(string, string)"/>
+        /// <see cref="IOAuthService.ReinitializeOAuthSessionAccessToken(string, string, string)"/>
         /// </summary>
-        public void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret)
+        public void ReinitializeOAuthSessionAccessToken(string token, string tokenSecret, string baseUrl)
         {
-            ((BaseService)this._baseService).ReinitializeOAuthSessionAccessToken(token, tokenSecret);
+            ((BaseService)this._baseService).ReinitializeOAuthSessionAccessToken(token, tokenSecret, baseUrl);
         }
 
         /// <summary>
