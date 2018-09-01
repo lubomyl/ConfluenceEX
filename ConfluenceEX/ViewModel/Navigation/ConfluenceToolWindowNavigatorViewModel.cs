@@ -134,6 +134,7 @@ namespace ConfluenceEX.ViewModel
             {
                 string accessToken = this.ReadFromUserSettings("AccessToken");
                 string accessTokenSecret = this.ReadFromUserSettings("AccessTokenSecret");
+                string baseUrl = this.ReadFromUserSettings("BaseUrl");
 
                 if (accessToken != null && accessTokenSecret != null)
                 {
@@ -144,7 +145,7 @@ namespace ConfluenceEX.ViewModel
             }
             catch (Exception ex)
             {
-                ShowBeforeSignIn();
+                this.ShowBeforeSignIn();
             }
         }
 

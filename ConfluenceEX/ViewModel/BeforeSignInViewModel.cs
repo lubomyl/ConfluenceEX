@@ -25,6 +25,7 @@ namespace ConfluenceEX.ViewModel
 
         private bool _isAuthenticated;
         private string _errorMessage;
+        private string _baseUrl;
 
         public DelegateCommand SignInCommand { get; private set; }
         public DelegateCommand SignInOAuthCommand { get; private set; }
@@ -75,7 +76,7 @@ namespace ConfluenceEX.ViewModel
 
             try
             {
-                this._oAuthService.InitializeOAuthSession();
+                this._oAuthService.InitializeOAuthSession(this.BaseUrl);
                 requestToken = await this._oAuthService.GetRequestToken();
                 authorizationUrl = await this._oAuthService.GetUserAuthorizationUrlForToken(requestToken);
 
@@ -167,6 +168,19 @@ namespace ConfluenceEX.ViewModel
             {
                 this._errorMessage = value;
                 OnPropertyChanged("ErrorMessage");
+            }
+        }
+
+        public string BaseUrl
+        {
+            get
+            {
+                return this._baseUrl;
+            }
+            set
+            {
+                this._baseUrl = value;
+                OnPropertyChanged("BaseUrl");
             }
         }
 
