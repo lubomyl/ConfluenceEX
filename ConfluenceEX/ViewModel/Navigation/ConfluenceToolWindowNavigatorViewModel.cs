@@ -133,9 +133,9 @@ namespace ConfluenceEX.ViewModel
         {
             try
             {
-                string accessToken = UserSettingsHelper.ReadFromUserSettings("AccessToken");
-                string accessTokenSecret = UserSettingsHelper.ReadFromUserSettings("AccessTokenSecret");
-                string baseUrl = UserSettingsHelper.ReadFromUserSettings("BaseUrl");
+                string accessToken = UserSettingsHelper.ReadFromUserSettings("ConfluenceAccessToken");
+                string accessTokenSecret = UserSettingsHelper.ReadFromUserSettings("ConfluenceAccessTokenSecret");
+                string baseUrl = UserSettingsHelper.ReadFromUserSettings("ConfluenceBaseUrl");
 
                 if (accessToken != null && accessTokenSecret != null && baseUrl != null)
                 {

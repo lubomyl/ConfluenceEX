@@ -48,14 +48,14 @@ namespace ConfluenceEX.ViewModel
             IVsWindowFrame ppFrame;
             var service = Package.GetGlobalService(typeof(IVsWebBrowsingService)) as IVsWebBrowsingService;
 
-            service.Navigate((UserSettingsHelper.ReadFromUserSettings("BaseUrl")) + "/wiki" + contentUrl, 0, out ppFrame);
+            service.Navigate((UserSettingsHelper.ReadFromUserSettings("ConfluenceBaseUrl")) + "/wiki" + contentUrl, 0, out ppFrame);
         }
 
         private void OpenContentInExternalTab(object sender)
         {
             string contentUrl = sender as string;
 
-            System.Diagnostics.Process.Start((UserSettingsHelper.ReadFromUserSettings("BaseUrl")) + "/wiki" + contentUrl);
+            System.Diagnostics.Process.Start((UserSettingsHelper.ReadFromUserSettings("ConfluenceBaseUrl")) + "/wiki" + contentUrl);
         }
 
         public Content Content

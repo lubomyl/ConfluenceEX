@@ -90,7 +90,7 @@ namespace ConfluenceEX.ViewModel
 
                 this._oAuthService.InitializeOAuthSession(this.BaseUrl);
 
-                UserSettingsHelper.WriteToUserSettings("BaseUrl", this.BaseUrl);
+                UserSettingsHelper.WriteToUserSettings("ConfluenceBaseUrl", this.BaseUrl);
 
                 requestToken = await this._oAuthService.GetRequestToken();
                 authorizationUrl = await this._oAuthService.GetUserAuthorizationUrlForToken(requestToken);
