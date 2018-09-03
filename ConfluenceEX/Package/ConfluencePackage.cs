@@ -43,7 +43,9 @@ namespace ConfluenceEX
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(Guids.GUID_CONFLUENCE_PACKAGE_STRING)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
-    [ProvideToolWindow(typeof(ConfluenceToolWindow))]
+    [ProvideToolWindow(typeof(ConfluenceToolWindow),
+        Style = Microsoft.VisualStudio.Shell.VsDockStyle.Tabbed,
+        Window = "3ae79031-e1bc-11d0-8f78-00a0c9110057")]
     public sealed class ConfluencePackage : Package
     {
 
@@ -65,7 +67,7 @@ namespace ConfluenceEX
             // initialization is the Initialize method.
         }
 
-        private void ShowContentListToolWindow(object sender, EventArgs e)
+        private void ShowConfluenceListToolWindow(object sender, EventArgs e)
         {
             ConfluenceToolWindow toolWindow = (ConfluenceToolWindow) this.FindToolWindow(typeof(ConfluenceToolWindow), 0, true);
 
@@ -89,7 +91,7 @@ namespace ConfluenceEX
             {
                 CommandID menuCommandID = new CommandID(Guids.guidConfluenceCommand, Guids.CONFLUENCE_COMMAND_ID);
 
-                MenuCommand onMenuCommandClickShowToolWindow = new MenuCommand(ShowContentListToolWindow, menuCommandID);
+                MenuCommand onMenuCommandClickShowToolWindow = new MenuCommand(ShowConfluenceListToolWindow, menuCommandID);
 
                 _mcs.AddCommand(onMenuCommandClickShowToolWindow);
             }

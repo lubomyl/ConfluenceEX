@@ -1,4 +1,5 @@
 ﻿using ConfluenceEX.Command;
+using ConfluenceEX.Helper;
 using ConfluenceRestClient.Model;
 using ConfluenceRestClient.Service;
 using ConfluenceRestClient.Service.Implementation;
@@ -47,14 +48,14 @@ namespace ConfluenceEX.ViewModel
             IVsWindowFrame ppFrame;
             var service = Package.GetGlobalService(typeof(IVsWebBrowsingService)) as IVsWebBrowsingService;
 
-            service.Navigate("https://lubomyl3.atlassian.net/wiki" + contentUrl, 0, out ppFrame);
+            service.Navigate((UserSettingsHelper.ReadFromUserSettings("ConfluenceBaseUrl")) + "/wiki" + contentUrl, 0, out ppFrame);
         }
 
         private void OpenContentInExternalTab(object sender)
         {
             string contentUrl = sender as string;
 
-            System.Diagnostics.Process.Start("https://lubomyl3.atlassian.net/wiki" + contentUrl);
+            System.Diagnostics.Process.Start((UserSettingsHelper.ReadFromUserSettings("ConfluenceBaseUrl")) + "/wiki" + contentUrl);
         }
 
         public Content Content

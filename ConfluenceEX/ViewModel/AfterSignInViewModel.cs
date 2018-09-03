@@ -62,8 +62,9 @@ namespace ConfluenceEX.ViewModel
 
         private void SignOut(object parameter)
         {
-            UserSettingsHelper.DeletePropertyFromUserSettings("AccessToken");
-            UserSettingsHelper.DeletePropertyFromUserSettings("AccessTokenSecret");
+            UserSettingsHelper.DeletePropertyFromUserSettings("ConfluenceAccessToken");
+            UserSettingsHelper.DeletePropertyFromUserSettings("ConfluenceAccessTokenSecret");
+            UserSettingsHelper.DeletePropertyFromUserSettings("ConfluenceBaseUrl");
 
             this._parent.ShowBeforeSignIn();
         }

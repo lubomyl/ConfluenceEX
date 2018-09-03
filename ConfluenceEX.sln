@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfluenceEX", "ConfluenceE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfluenceRESTClient", "ConfluenceRESTClient\ConfluenceRESTClient.csproj", "{5AC3F6EA-6E18-44E0-84A7-7C0ED50B5DC0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtlassianConnector", "..\AtlassianOAuthConnector\AtlassianOAuthConnector\AtlassianConnector.csproj", "{BD9DD1A3-1667-4EC4-9519-8D86E4157F78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5AC3F6EA-6E18-44E0-84A7-7C0ED50B5DC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AC3F6EA-6E18-44E0-84A7-7C0ED50B5DC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AC3F6EA-6E18-44E0-84A7-7C0ED50B5DC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD9DD1A3-1667-4EC4-9519-8D86E4157F78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD9DD1A3-1667-4EC4-9519-8D86E4157F78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD9DD1A3-1667-4EC4-9519-8D86E4157F78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD9DD1A3-1667-4EC4-9519-8D86E4157F78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

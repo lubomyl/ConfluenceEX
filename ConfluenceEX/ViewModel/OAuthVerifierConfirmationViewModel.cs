@@ -59,8 +59,8 @@ namespace ConfluenceEX.ViewModel
             {
                 IToken accessToken = await this._oAuthService.ExchangeRequestTokenForAccessToken(this._requestToken, OAuthVerificationCode);
 
-                UserSettingsHelper.WriteToUserSettings("AccessToken", accessToken.Token);
-                UserSettingsHelper.WriteToUserSettings("AccessTokenSecret", accessToken.TokenSecret);
+                UserSettingsHelper.WriteToUserSettings("ConfluenceAccessToken", accessToken.Token);
+                UserSettingsHelper.WriteToUserSettings("ConfluenceAccessTokenSecret", accessToken.TokenSecret);
 
                 this._parent.ShowAfterSignIn();
                 this._timer.Stop();

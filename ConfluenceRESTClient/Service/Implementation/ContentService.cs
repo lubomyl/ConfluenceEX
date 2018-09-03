@@ -7,7 +7,8 @@ using ConfluenceRestClient.Model;
 using RestSharp;
 using ConfluenceRESTClient.Service;
 using DevDefined.OAuth.Framework;
-using ConfluenceRESTClient.Service.DevDefined;
+using AtlassianConnector.Service;
+using AtlassianConnector.Base.Implementation.DevDefined;
 
 namespace ConfluenceRestClient.Service.Implementation
 {
