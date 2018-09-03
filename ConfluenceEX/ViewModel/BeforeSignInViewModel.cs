@@ -19,7 +19,6 @@ namespace ConfluenceEX.ViewModel
     public class BeforeSignInViewModel : ViewModelBase
     {
 
-        private IUserService _userService;
         private IOAuthService _oAuthService;
 
         private ConfluenceToolWindowNavigatorViewModel _parent;
@@ -87,6 +86,8 @@ namespace ConfluenceEX.ViewModel
 
             try
             {
+                this._baseUrl = this.ProcessBaseUrlInput(this.BaseUrl);
+
                 this._oAuthService.InitializeOAuthSession(this.BaseUrl);
 
                 UserSettingsHelper.WriteToUserSettings("BaseUrl", this.BaseUrl);
@@ -109,6 +110,18 @@ namespace ConfluenceEX.ViewModel
             {
                 this.ErrorMessage = ex.Message;
             }
+        }
+
+        private string ProcessBaseUrlInput(string baseUrl)
+        {
+            string ret = baseUrl;
+            string https = "https://";
+
+            if(!baseUrl.Substring(0, 8).Equals("https://")){
+                ret = https + ret; 
+            }
+
+            return ret;
         }
 
         private void GetPassword(object parameter)
