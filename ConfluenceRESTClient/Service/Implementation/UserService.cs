@@ -1,5 +1,6 @@
-﻿using ConfluenceRESTClient.Model;
-using ConfluenceRESTClient.Service.DevDefined;
+﻿using AtlassianConnector.Base.Implementation.DevDefined;
+using AtlassianConnector.Service;
+using ConfluenceRESTClient.Model;
 using DevDefined.OAuth.Framework;
 using RestSharp;
 using RestSharp.Authenticators;

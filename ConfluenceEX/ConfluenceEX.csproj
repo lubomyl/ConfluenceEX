@@ -90,9 +90,6 @@
     <Compile Include="View\SpaceListView.xaml.cs">
       <DependentUpon>SpaceListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Main\App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Main\ConfluenceToolWindow.cs" />
     <Compile Include="Main\Guids.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -265,10 +262,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SpaceListView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Main\App.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

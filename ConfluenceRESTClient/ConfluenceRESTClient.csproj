@@ -72,14 +72,6 @@
     <Compile Include="Model\Space.cs" />
     <Compile Include="Model\SpaceList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="Service\Base\Implementation\RestSharp\BaseService.cs" />
-    <Compile Include="Service\Base\Implementation\DevDefined\BaseService.cs" />
-    <Compile Include="Service\Base\IBaseService.cs" />
     <Compile Include="Service\Implementation\OAuthService.cs" />
     <Compile Include="Service\IOAuthService.cs" />
     <Compile Include="Service\IUserService.cs" />
@@ -90,13 +82,14 @@
     <Compile Include="Service\ISpaceService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Key.snk" />
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AtlassianOAuthConnector\AtlassianOAuthConnector\AtlassianConnector.csproj">
+      <Project>{bd9dd1a3-1667-4ec4-9519-8d86e4157f78}</Project>
+      <Name>AtlassianConnector</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

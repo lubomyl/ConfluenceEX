@@ -1,4 +1,5 @@
-﻿using ConfluenceRESTClient.Service.DevDefined;
+﻿using AtlassianConnector.Base.Implementation.DevDefined;
+using AtlassianConnector.Service;
 using DevDefined.OAuth.Consumer;
 using DevDefined.OAuth.Framework;
 using System;
