@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace ConfluenceEX.ViewModel
 {
-    class AfterSignInViewModel : ViewModelBase
+    public class AfterSignInViewModel : ViewModelBase
     {
 
         private ConfluenceToolWindowNavigatorViewModel _parent;

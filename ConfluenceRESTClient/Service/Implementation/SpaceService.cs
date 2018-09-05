@@ -22,7 +22,7 @@ namespace ConfluenceRESTClient.Service.Implementation
 
         public SpaceService()
         {
-            this._baseService = BaseService.Instance;
+            this._baseService = BaseService.ConfluenceInstance;
         }
 
         /// <summary>

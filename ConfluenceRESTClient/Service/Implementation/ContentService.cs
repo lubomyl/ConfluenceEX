@@ -25,7 +25,7 @@ namespace ConfluenceRestClient.Service.Implementation
 
         public ContentService()
         {
-            _baseService = BaseService.Instance;
+            _baseService = BaseService.ConfluenceInstance;
         }
 
         /// <summary>
