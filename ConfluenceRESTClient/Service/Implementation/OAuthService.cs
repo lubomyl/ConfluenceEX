@@ -22,7 +22,7 @@ namespace ConfluenceRESTClient.Service.Implementation
 
         public OAuthService()
         {
-            this._baseService = BaseService.Instance;
+            this._baseService = BaseService.ConfluenceInstance;
         }
 
         /// <summary>

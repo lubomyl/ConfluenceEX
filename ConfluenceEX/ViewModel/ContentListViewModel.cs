@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace ConfluenceEX.ViewModel
 {
-    class ContentListViewModel : ViewModelBase
+    public class ContentListViewModel : ViewModelBase
     {
         private IContentService _contentService;
 
