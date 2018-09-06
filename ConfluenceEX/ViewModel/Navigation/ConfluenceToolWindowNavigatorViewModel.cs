@@ -59,6 +59,7 @@ namespace ConfluenceEX.ViewModel
         public void ShowAfterSignIn()
         {     
             _parent.Caption = "Confluence - Signed-in";
+
             this.EnableCommand(true, _service, Guids.COMMAND_HOME_ID);
             this.EnableCommand(false, _service, Guids.COMMAND_REFRESH_ID);
 
@@ -100,7 +101,7 @@ namespace ConfluenceEX.ViewModel
 
         public void ShowSpaces(object sender, EventArgs e)
         {
-            _parent.Caption = "Confluence Spaces";
+            _parent.Caption = "Confluence - Spaces";
             this.EnableCommand(true, _service, Guids.COMMAND_REFRESH_ID);
 
             if (this._spacesListView == null)
@@ -120,7 +121,7 @@ namespace ConfluenceEX.ViewModel
 
         public void ShowSpaceContent(Space space)
         {
-            _parent.Caption = "Confluence " + space.Name + " Content";
+            _parent.Caption = "Confluence - " + space.Name + " Content";
             this.EnableCommand(false, _service, Guids.COMMAND_REFRESH_ID);
 
             this._contentListView = new ContentListView(space, this);
@@ -152,7 +153,7 @@ namespace ConfluenceEX.ViewModel
 
         public void ShowOAuthVerificationConfirmation(object sender, EventArgs e, IToken requestToken)
         {
-            _parent.Caption = "Confirm OAuth Verification Code";
+            _parent.Caption = "Confluence - Confirm OAuth Verification Code";
 
             this._oAuthVerifierConfirmationView = new OAuthVerifierConfirmationView(this, requestToken);
 
@@ -166,7 +167,7 @@ namespace ConfluenceEX.ViewModel
 
         public void ShowContent(int contentId)
         {
-            _parent.Caption = "Confluence Content page";
+            _parent.Caption = "Confluence - Content page";
 
             this._contentView = new ContentView(contentId);
 
