@@ -21,7 +21,7 @@ namespace ConfluenceRestClient.Service.Implementation
     public class ContentService : IContentService
     {
 
-        private IBaseService<IToken> _baseService;
+        private ConfluenceService _baseService;
 
         public ContentService()
         {
@@ -44,7 +44,7 @@ namespace ConfluenceRestClient.Service.Implementation
             return Task.Run(() => {
                 var resource = "content";
 
-                return this._baseService.Get<ContentList>(resource);
+                return this._baseService.GetResource<ContentList>(resource);
             });
         }
 
@@ -56,7 +56,7 @@ namespace ConfluenceRestClient.Service.Implementation
             return Task.Run(() => {
                 var resource = $"content?spaceKey={spaceKey}";
 
-                return this._baseService.Get<ContentList>(resource);
+                return this._baseService.GetResource<ContentList>(resource);
             });
         }
 
@@ -68,7 +68,7 @@ namespace ConfluenceRestClient.Service.Implementation
             return Task.Run(() => {
                 var resource = $"content/{contentId}";
 
-                return this._baseService.Get<Content>(resource);
+                return this._baseService.GetResource<Content>(resource);
             });
         }
     }

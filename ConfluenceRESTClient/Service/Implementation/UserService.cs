@@ -20,7 +20,7 @@ namespace ConfluenceRESTClient.Service.Implementation
     public class UserService : IUserService
     {
 
-        private IBaseService<IToken> _baseService;
+        private ConfluenceService _baseService;
 
         public UserService()
         {
@@ -35,7 +35,7 @@ namespace ConfluenceRESTClient.Service.Implementation
             return Task.Run(() => {
                 var resource = "user/current";
 
-                return this._baseService.Get<User>(resource);
+                return this._baseService.GetResource<User>(resource);
             });
         }
 
